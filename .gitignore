@@ -1,5 +1,6 @@
 
 blockchain/artifacts/
 blockchain/cache/
-blockchain/node_modules/
+*/node_modules/
 blockchain/typechain-types
+.idea/
