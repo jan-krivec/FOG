@@ -3,7 +3,7 @@ import {UserDTO} from "./user.model";
 
 
 @Controller('/user')
-export class AppController {
+export class UserController {
     constructor() {}
 
     @Get('/getUser/:id')

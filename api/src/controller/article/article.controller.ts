@@ -4,7 +4,7 @@ import {ArticleService} from "./article.service";
 
 
 @Controller('/article')
-export class AppController {
+export class ArticleController {
     constructor(private articleService: ArticleService) {}
 
     @Get('/getArticle/:id')
