@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 
 async function main() {
   const Token = await ethers.getContractFactory("DapoToken");
-  const DapoToken = await Token.deploy("DapoToken", "DAPOTKN", 1000000);
+  const DapoToken = await Token.deploy("DapoToken", "DAPOTKN", 100000000);
 
   await DapoToken.deployed();
 
@@ -15,7 +15,7 @@ async function main() {
 
   console.log(`Faucet deployed to ${Faucet.address}`);
 
-  await DapoToken.transfer(Faucet.address, 100000);
+  await DapoToken.transfer(Faucet.address, ethers.utils.parseEther('1000000'));
   const faucetBalance = await Faucet.getBalance();
 
   console.log(`Faucet initial supply set to ${faucetBalance} DapoTokens`);

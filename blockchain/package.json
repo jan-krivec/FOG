@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@openzeppelin/contracts": "^4.8.2"
+    "@alch/alchemy-web3": "^1.4.7",
+    "@openzeppelin/contracts": "^4.8.2",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",

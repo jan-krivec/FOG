@@ -1,0 +1,11 @@
+{
+    "description": "NFT given to Authors",
+    "image": "ipfs://QmWd7rTroGVXrSDgGGxSr4BdxaN8DgUbbEqgJsidbkK8bd",
+    "name": "DAPO Author badge",
+    "properties": {
+        "address": "0xIss8a2...",
+        "did": "did:method:1234567890ab",
+        "role": "Author"
+    }
+}
+  

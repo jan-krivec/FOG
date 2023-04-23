@@ -1,0 +1,22 @@
+{
+    "description": "The world's most scientific journal",
+    "image": "ipfs://QmRkYgYE4HdsXLLxpasRHTTAgpF8NtyZRECq3k9cgxizDY",
+    "name": "Journal Name",
+    "properties": {
+        "type": "journal",
+        "field": "Computer Science",
+        "origin": "ipfs://bafybeieh4gpvatp32iqaacs6xqxqitla4drrkyyzq6dshqqsilkk3fqmti/blog/post/2021-11-30-hello-world-nft-storage/",
+        "authors": [
+            "0xc87s90...",
+            "0x9sad2s..."
+        ],
+        "reviewers": [
+            "0xc87s90...",
+            "0xp12ok3...",
+            "0xsFa92d...",
+            "0xdsdF01..."
+        ],
+        "editor": "0xWms91..."
+    }
+}
+  
