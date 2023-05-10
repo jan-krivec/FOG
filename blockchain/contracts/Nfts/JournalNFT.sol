@@ -11,17 +11,32 @@ contract JournalNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+    struct Journal {
+        string title;
+        string description;
+        string[] keywords;
+        address[] authors;
+        address[] reviewers;
+        address editor;
+        mapping(address => bool) votes;
+        bool published;
+    }
+
+    mapping(uint256 => Journal) private _journals;
+
     constructor() ERC721("JournalNFT", "JournalNFT") {}
 
     function mintNFT(
-        address recipient,
+        string memory title,
+        string memory description,
+        string[] memory keywords,
+        address[] memory authors,
         string memory tokenURI
-    ) public onlyOwner returns (uint256) {
+    ) public returns (uint256) {
         _tokenIds.increment();
-
         uint256 newItemId = _tokenIds.current();
-        _mint(recipient, newItemId);
-        _setTokenURI(newItemId, tokenURI);
+        _mint(msg.sender, newItemId);
+        _setTokenUri(newItemId, tokenURI);
 
         return newItemId;
     }
