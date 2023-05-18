@@ -6,7 +6,7 @@ export class IpfsService {
     private readonly ipfs: any;
 
     constructor() {
-        this.ipfs = create(); // Create IPFS client
+        this.ipfs = create({ url: "http://127.0.0.1:5002/" }); // Create IPFS client
     }
 
     async addFile(): Promise<string> {
