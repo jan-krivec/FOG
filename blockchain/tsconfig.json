@@ -8,6 +8,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["./contracts", "./scripts"],
+  "include": ["./contracts", "./scripts", "./test"],
   "files": ["./hardhat.config.ts"],
 }

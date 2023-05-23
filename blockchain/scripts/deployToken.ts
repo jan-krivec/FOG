@@ -15,7 +15,7 @@ async function main() {
 
   console.log(`Faucet deployed to ${Faucet.address}`);
 
-  await DapoToken.transfer(Faucet.address, ethers.utils.parseEther('1000000'));
+  await DapoToken.transfer(Faucet.address, ethers.utils.parseEther("1000000"));
   const faucetBalance = await Faucet.getBalance();
 
   console.log(`Faucet initial supply set to ${faucetBalance} DapoTokens`);
