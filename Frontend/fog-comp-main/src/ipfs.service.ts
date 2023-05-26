@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from "@angular/core";
 import { create } from 'ipfs-http-client'
 
 @Injectable()
@@ -6,12 +6,16 @@ export class IpfsService {
     private readonly ipfs: any;
 
     constructor() {
-        this.ipfs = create({ url: "http://127.0.0.1:5002/" }); // Create IPFS client
+        this.ipfs = create({
+          host: '127.0.0.1',
+          port: 5002,
+          protocol: 'http',
+        })
     }
 
-    async addFile(): Promise<string> {
-        const { cid } = await this.ipfs.add("data"); // Add file to IPFS and get CID
-        return cid.toString();
+    async addFileToIPFS(): Promise<string> {
+      const addedFile = await this.ipfs.add("TEST");
+      return addedFile.cid.toString();
     }
 
     async getFile(cid: string): Promise<Buffer> {
