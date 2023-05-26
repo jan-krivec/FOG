@@ -1,0 +1,107 @@
+header {
+  display: flex;
+  height: 30px;
+}
+
+header > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 5px;
+}
+
+header .header-logo img {
+  height: 90%;
+  width: 100%;
+}
+
+header .header-profile img {
+  height: 90%;
+}
+
+header .buttons button,
+header .header-wallet button {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+header .header-wallet button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .header-wallet button img {
+  margin-right: 5px;
+}
+
+header .header-search form,
+header .header-buttons {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Added this property to make the form span the remaining width */
+  margin-right: 50px;
+}
+
+header .header-search {
+  flex-basis: 30%; /* Set the width of the search bar */
+}
+
+header .header-search input {
+  width: 90%; /* Set the input width to 90% */
+}
+
+.search-button {
+  width: 10%; /* Set the button width to 10% */
+}
+
+.search-input {
+  width: 100%; /* Make sure the input spans the whole form */
+}
+
+/* Add styling to the buttons */
+header .buttons button {
+  background-color: #21007a;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+header .header-wallet button {
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+header .buttons button,
+header .header-wallet button {
+  background-color: white; /* Set the background color to white */
+  font-size: 13px; /* Set the font size to 14px */
+  color: gray;
+}
+
+header .buttons button:hover,
+header .header-wallet button:hover {
+  color: #3552d3;
+}
+
+input {
+  min-width: 200px;
+}
+
+button {
+  min-width: 40px;
+}
