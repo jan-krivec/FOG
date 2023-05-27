@@ -11,37 +11,62 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0x7E2882e56971b5BF577e8B0936Efe05f46B0D877';
+  contractAddress: string = '0x213Db790d7541316aD722e7AD0e3a0226e724525';
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
       this.web3 = new Web3(window.ethereum);
       window.ethereum.enable(); // Request user permission to connect to Metamask
       this.contract = new this.web3.eth.Contract(journalContract.abi, this.contractAddress);
+
+      const event = this.contract.events.JournalSubmitted({
+        fromBlock: 'latest'
+      });
+
+      event.on('data', (eventData: any) => {
+        console.log('JournalSubmitted event received:', eventData.returnValues);
+      });
     } else {
       console.log('Metamask not detected. Please install Metamask extension.');
     }
   }
 
-  async getAllReviewingJournals() {
-    this.contract.methods.getAllReviewingJournals().call((error: any, result: any) => {
-      if (error) {
-        console.error('Error:', error);
-      } else {
-        console.log('Value:', result);
+  async getAllReviewingArticles() {
+    const articles: ArticleDTO[] = [];
+    try {
+      const result = await this.contract.methods.getAllReviewingJournals().call();
+      for(let i=0; i<result.length; i++) {
+        articles.push(this.mapArticleData(new ArticleDTO(), result[i]));
       }
-    });
+      return articles;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
   }
 
   async submitArticle(article: ArticleDTO, reviewers: string[], editor: string) {
-    this.contract.methods.submitJournal(
-      article.title,
-      article.description,
-      article.ipfsLink,
-      article.keywords,
-      reviewers,
-      editor
-    )
+    this.web3.eth.getAccounts().then((accounts: any) => {
+      const account = accounts[0];
+      console.log(account);
+      this.contract.methods.submitJournal(
+        article.title,
+        article.description,
+        article.ipfsLink,
+        article.keywords,
+        reviewers,
+        editor
+      ).send({ from: account })
+        .on('transactionHash', (hash: any) => {
+          console.log('Transaction hash:', hash);
+        })
+        .on('receipt', (receipt: any) => {
+          console.log('Transaction receipt:', receipt);
+        })
+        .on('error', (error: any) => {
+          console.error('Error:', error);
+        });
+    });
   }
 
   async getArticle(articleId: number): Promise<ArticleDTO> {

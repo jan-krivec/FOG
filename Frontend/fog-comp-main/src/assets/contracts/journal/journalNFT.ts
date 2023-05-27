@@ -1,5 +1,5 @@
 export const journalContract = {
-    contractAdress: "0x1bbDc0ACCFc19F5b22A51951223c83a6d3e02626",
+    contractAdress: "0x213Db790d7541316aD722e7AD0e3a0226e724525",
     abi: [
       {
         "anonymous": false,
@@ -162,6 +162,11 @@ export const journalContract = {
         "name": "_journals",
         "outputs": [
           {
+            "internalType": "uint256",
+            "name": "journalId",
+            "type": "uint256"
+          },
+          {
             "internalType": "string",
             "name": "title",
             "type": "string"
@@ -239,6 +244,11 @@ export const journalContract = {
           {
             "components": [
               {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "title",
                 "type": "string"
@@ -285,6 +295,67 @@ export const journalContract = {
       {
         "inputs": [
           {
+            "internalType": "uint256",
+            "name": "journalId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getJournal",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "keywords",
+                "type": "string[]"
+              },
+              {
+                "internalType": "string",
+                "name": "ipfsLink",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "author",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "published",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "denied",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct JournalContract.Journal",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "author",
             "type": "address"
@@ -294,6 +365,11 @@ export const journalContract = {
         "outputs": [
           {
             "components": [
+              {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
               {
                 "internalType": "string",
                 "name": "title",
@@ -351,6 +427,11 @@ export const journalContract = {
           {
             "components": [
               {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "title",
                 "type": "string"
@@ -407,6 +488,11 @@ export const journalContract = {
           {
             "components": [
               {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "title",
                 "type": "string"
@@ -456,6 +542,11 @@ export const journalContract = {
         "outputs": [
           {
             "components": [
+              {
+                "internalType": "uint256",
+                "name": "journalId",
+                "type": "uint256"
+              },
               {
                 "internalType": "string",
                 "name": "title",
