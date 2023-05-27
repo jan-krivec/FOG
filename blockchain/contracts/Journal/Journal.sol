@@ -34,6 +34,7 @@ contract JournalContract {
     );
 
     struct Journal {
+        uint256 journalId;
         string title;
         string description;
         string[] keywords;
@@ -78,6 +79,7 @@ contract JournalContract {
         journalsCounter++;
 
         Journal storage journal = _journals[journalId];
+        journal.journalId = journalId;
         journal.title = _title;
         journal.description = _description;
         journal.keywords = _keywords;
@@ -149,6 +151,12 @@ contract JournalContract {
 
             emit JournalDenied(journalId, msg.sender, journal.title);
         }
+    }
+
+    function getJournal(uint256 journalId) public view returns (Journal memory) {
+        require(_exists(journalId), "Journal does not exist");
+        Journal storage journal = _journals[journalId];
+        return journal;
     }
 
     function reviewJournal(
@@ -232,9 +240,9 @@ contract JournalContract {
             address reviewer = reviewData.reviewers[i];
 
             reviewDataDisplay[i] = ReviewDataDisplay({
-                reviewer: reviewer,
-                score: reviewData.scores[reviewer],
-                comment: reviewData.comments[reviewer]
+            reviewer: reviewer,
+            score: reviewData.scores[reviewer],
+            comment: reviewData.comments[reviewer]
             });
         }
 
