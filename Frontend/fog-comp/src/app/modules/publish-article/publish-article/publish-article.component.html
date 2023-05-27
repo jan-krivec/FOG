@@ -1,0 +1,135 @@
+<body>
+  <app-header>Header content</app-header>
+  <main>
+    <section class="section" style="height: auto !important;">
+      <h1 class="section__title">Create new article</h1>
+    </section>
+
+    <section class="section" style="height: auto !important;">
+      <b>Upload Article</b>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <div class="drop-zone" ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label>
+          <mat-icon>cloud_download</mat-icon>
+          <p>Drag & drop your files here</p>
+          <p>OR</p>
+          <p>Click here to select files</p>
+        </ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </div>
+    </section>
+
+    <section class="section" style="margin-top: 50px; height: 20vh;">
+      <b>Name<span class="required">*</span></b>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <input type="text" name="name" placeholder="Enter Name" class="customTextField">
+    </section>
+    <section class="section">
+      <b>Description</b>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <textarea placeholder="Input decription" class="description"></textarea>
+    </section>
+
+    <section class="section">
+      <b>Collection</b>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <select id="collection" name="collection" class="dropdown">
+        <option *ngFor="let collection of collection" [value]="collection">{{ collection }}</option>
+      </select>
+      <hr class="separator">
+    </section>
+
+    <section class="section" style="margin-bottom:5vh; height: auto !important;">
+      <div class="unlocable-content">
+        <b>Properties</b>
+        <button class="middle-button ikone" style="background-color:#f2f3fd!important; color:#6b73eb">
+          <span class="align-icon">
+            <mat-icon>add</mat-icon>
+          </span>
+          <span>Add</span>
+        </button>
+      </div>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+    </section>
+
+    <section class="section" style="margin-bottom:5vh; height: auto !important;">
+      <div class="unlocable-content">
+        <b>Level</b>
+        <button class="middle-button ikone" style="background-color:#f2f3fd!important; color:#6b73eb">
+          <span class="align-icon">
+            <mat-icon>add</mat-icon>
+          </span>
+          <span>Add</span>
+        </button>
+      </div>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+    </section>
+
+    <section class="section" style="margin-bottom:5vh; height: auto !important;">
+      <div class="unlocable-content">
+        <b>Stats</b>
+        <button class="middle-button ikone" style="background-color:#f2f3fd!important; color:#6b73eb">
+          <span class="align-icon">
+            <mat-icon>add</mat-icon>
+          </span>
+          <span>Add</span>
+        </button>
+      </div>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+    </section>
+
+    <section class="section">
+      <div class="unlocable-content">
+        <b>Unlockable content</b>
+        <mat-slide-toggle
+          [(ngModel)]="checked"
+          class="ikone"
+          color="primary"
+          (change)="changed()">
+        </mat-slide-toggle>
+      </div>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <textarea placeholder="Input text" class="description"></textarea>
+      <hr class="separator">
+    </section>
+
+    <section class="section" style="height: 20vh; margin-top:10px;">
+      <b>Supply</b>
+      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <input type="text" name="supply" placeholder="Enter supply" class="customTextField">
+    </section>
+
+    <section class="section" style="height:27vh;">
+      <div>
+        <b>Blockchain</b>
+        <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+
+        <div class="radio-container">
+          <div class="radio-item" [class.selected]="isSelectedFirst">
+            <input type="radio" name="option" value="diamond" id="option1" (click)="toggleSelection('first')">
+            <label for="option1" [class.selected]="isSelectedFirst" (click)="toggleSelection('first')">
+              <mat-icon style="margin-right: 8px;">diamond</mat-icon>
+              <span>Diamond</span>
+            </label>
+          </div>
+
+          <div class="radio-item" [class.selected]="isSelectedSecond">
+            <input type="radio" name="option" value="triangle" id="option2" (click)="toggleSelection('second')">
+            <label for="option2" (click)="toggleSelection('second')">
+              <span class="checkmark"></span>
+              <mat-icon style="margin-right: 8px;">change_history</mat-icon>
+              <span>Triangle</span>
+            </label>
+          </div>
+        </div>
+        <hr class="separator">
+      </div>
+    </section>
+    <section class="section" style="height:auto; margin-bottom:50px;">
+      <button class="middle-button">Create</button>
+    </section>
+  </main>
+  <app-footer>Footer content</app-footer>
+</body>

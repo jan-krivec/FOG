@@ -1,0 +1,176 @@
+<body>
+    <app-header>Header content</app-header>
+    <main>
+        <div class ="leftOnes">
+          <section class="section1">
+              <div class="author-info">
+                  <div class="profile-picture">
+                      <mat-icon class="large-icon">account_circle</mat-icon>
+                  </div>
+                  <div class="author-details">
+                      <h2 class="author-name">{{ author.name }}</h2>
+                      <p class="author-role">{{ author.role }}</p>
+                      <p class="location-time"> <mat-icon class="location-time1"> location_on</mat-icon> {{ author.location }}, {{ author.time }}</p>
+                      <div class="author-buttons">
+                          <button *ngIf="author.role == 'Author/Editor' || author.role == 'Author'" class="author-button">Author</button>
+                          <button *ngIf="author.role == 'Author/Editor' || author.role == 'Editor'" class="editor-button">Editor</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="overview">
+                  <h3 class="overview-title">Overview</h3>
+                  <p class="author-overview">{{ author.overview }}</p>
+              </div>
+              <div class="author-stats">
+                <div class="rating-box">
+                  <p class="rating">Rating</p>
+                  <p class="rating-rating">{{ author.rating }}</p>
+                </div>
+                <div class="review-box">
+                  <p class="reviews">Reviews</p>
+                  <p class="reviews-reviews">{{ author.reviews }}</p>
+                </div>
+                <div class="courses-box">
+                  <p class="courses">Courses</p>
+                  <p class="courses-courses">{{ author.courses }}</p>
+                </div>
+                <div class="edits-box">
+                  <p class="edits">Edits</p>
+                  <p class="edits-edits">{{ author.edits }}</p>
+                </div>
+              </div>
+          </section>
+          <section class="section2">
+            <div class="title-section2">
+              <div class="title-article">
+                <h1>Articles</h1>
+              </div>
+              <div class="sort-select">
+                <mat-form-field>
+                  <mat-label>Sort by: </mat-label>
+                  <mat-select>
+                    <mat-option value="option1">Newest</mat-option>
+                    <mat-option value="option2">Oldest</mat-option>
+                    <mat-option value="option3">Best rating</mat-option>
+                    <mat-option value="option4">Worst rating</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>            
+            <div class="first-article">
+              <div class="title-article1">
+                <h5>{{ authorData.articles[firstShown].title }}</h5>
+              </div>
+              <div class="data-article1">
+                <p class="article-date">{{ monthNames[authorData.articles[firstShown].date.getMonth()]}}</p>
+                <p class="article-date">{{ authorData.articles[firstShown].date.getFullYear() }}</p>
+                <rating  class="star-rating"  [(ngModel)]="authorData.articles[firstShown].rating" [max]="max" [readonly]="isReadonly">
+                </rating>
+              </div>
+              <div class="actual-article">
+                <div class="article-image">
+                  <img [src]="authorData.articles[firstShown].imageUrl" alt="Article image" class="article-image1">
+                </div>
+                <div class="article-text">
+                  <p class="article-text1">{{ authorData.articles[firstShown].summary }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="second-article">
+              <div class="title-article1">
+                <h5>{{ authorData.articles[secondShown].title }}</h5>
+              </div>
+              <div class="data-article1">
+                <p class="article-date">{{ monthNames[authorData.articles[secondShown].date.getMonth()]}}</p>
+                <p class="article-date">{{ authorData.articles[secondShown].date.getFullYear() }}</p>
+                <rating  class="star-rating"  [(ngModel)]="authorData.articles[secondShown].rating" [max]="max" [readonly]="isReadonly">
+                </rating>
+              </div>
+              <div class="actual-article">
+                <div class="article-image">
+                  <img [src]="authorData.articles[secondShown].imageUrl" alt="Article image" class="article-image1">
+                </div>
+                <div class="article-text">
+                  <p class="article-text1">{{ authorData.articles[secondShown].summary }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-div">
+              <button (click)="goToArticles(author.id)" class="view-all">Show all articles</button>
+            </div>
+          </section>
+        </div>
+        <div class = "rightOne">
+          <section class="section4">
+
+            <div class="two-buttons">
+              <button class="button1" [disabled]="isFollowed(author.id)" (click)="followAuthor(author.id)">
+                {{ isFollowed(author.id) ? 'Followed' : 'Follow' }}
+              </button>
+              
+              
+              <button class="button2" (click)="openTextField()">Message</button>
+
+            </div>
+
+            <div class="all-ratings">
+              <div class="left-rating">
+                <div class="rating-number">
+                  {{ author.rating }}/5
+                </div>
+                <div class="rating-text">
+                  ({{ author.reviews }} reviews)
+                </div>
+                <div class="rating-stars">
+                  <rating  class="star-rating1"  [(ngModel)]="author.rating" [max]="max" [readonly]="isReadonly">
+                  </rating>
+                </div>
+              </div>
+              <div class="right-ratings">
+                <div class="five-star">
+                  <mat-progress-bar color="primary" mode="determinate" [value]="numbers[4]"></mat-progress-bar>
+                  <div style="margin-left: 5px;">5</div>
+                </div>
+                <div class="four-star">
+                  <mat-progress-bar color="primary" mode="determinate" [value]="numbers[3]"></mat-progress-bar>
+                  <div style="margin-left: 5px;">4</div>
+                </div>
+                <div class="three-star">
+                  <mat-progress-bar color="primary" mode="determinate" [value]="numbers[2]"></mat-progress-bar>
+                  <div style="margin-left: 5px;">3</div>
+                </div>
+                <div class="two-star">
+                  <mat-progress-bar color="primary" mode="determinate" [value]="numbers[1]"></mat-progress-bar>
+                  <div style="margin-left: 5px;">2</div>
+                </div>
+                <div class="one-star">
+                  <mat-progress-bar color="primary" mode="determinate" [value]="numbers[0]"></mat-progress-bar>
+                  <div style="margin-left: 5px;">1</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="response">
+              <div>Response time</div>
+              <div class="bottom-text">{{ author.responseTime }}</div>
+            </div>
+
+            <div class="certificates">
+              <div>Certificates</div>
+              <div class="bottom-text">{{ author.certificates }}</div>
+            </div>
+
+            <div class="profile-link">
+              <div>Profile link</div>
+              <div class="link-button-container">
+                <button class="link-button" [disabled]="true" #linkButton>
+                  <div class="link-button-container">{{ author.profileLink }}</div>
+                </button>
+              </div>
+              <div class="copy-link" (click)="copyLink(linkButton)">Copy link</div>
+            </div>
+          </section>
+        </div>
+    </main>
+    <app-footer>Footer content</app-footer>
+</body>

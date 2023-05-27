@@ -1,0 +1,25 @@
+<body>
+    <app-header>Header content</app-header>
+    <main>
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section__title">All recommended articles</h2>
+        </div>
+        <div class="article-box-container">
+          <div class="article-box" *ngFor="let article of allRecommendedArticles">
+            <img [src]="article.imageUrl" alt="Article image" class="article-image">
+            <div class="article-details">
+              <p class="article-category">{{ article.category }}</p>
+              <h3 class="article-title">{{ article.title }}</h3>
+              <div class="ratings">
+                <mat-icon class="star-style">star</mat-icon>
+                <p class="article-rating">{{ article.rating }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <app-footer>Footer content</app-footer>
+  </body>
+
