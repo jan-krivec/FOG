@@ -308,6 +308,9 @@ export class ArticleDetailsComponent {
     relatedArticles: Articles[];
 
     currentArticle: any;
+    currentArticleReviewes: any;
+
+
     currentArticleReviewes: any = this.reviews[0];
 
     constructor(private route: ActivatedRoute) {

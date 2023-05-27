@@ -18,6 +18,7 @@ export class PublishArticleComponent {
     console.log(this.checked)
   }
 
+
   constructor( private articleContractService: ArticleContractService) { }
 
   toggleSelection(item: string) {
