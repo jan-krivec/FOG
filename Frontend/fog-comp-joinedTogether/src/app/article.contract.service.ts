@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import { journalContract } from '../assets/contracts/journal/Journal';
 import { ArticleDTO } from './interfaces/article.model';
-import { environment } from 'environment';
+import { environment } from '../../environment.example';
+
 
 declare let window: any;
 
