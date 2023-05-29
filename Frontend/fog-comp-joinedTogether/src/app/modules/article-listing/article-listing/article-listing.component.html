@@ -1,65 +1,64 @@
 <body>
-    <app-header>Header content</app-header>
-    <main>
-      <section class="section">
-        <div class="section-header">
-          <h2 class="section__title">Recommended articles</h2>
-          <div class="linkic">
-            <a routerLink="/article-listing/recommended" class="view-all">View all</a>
-            <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
-          </div>
+  <app-header>Header content</app-header>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section__title">Recommended articles</h2>
+        <div class="linkic">
+          <a routerLink="/article-listing/recommended" class="view-all">View all</a>
+          <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
-        <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of recommendedArticles">
-            <img [src]="article.imageUrl" alt="Article image" class="article-image">
-            <div class="article-details">
-              <p class="article-category">{{ article.category }}</p>
-              <h3 class="article-title">{{ article.title }}</h3>
-              <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ article.rating }}</p>
-              </div>
+      </div>
+      <div class="article-box-container">
+        <div class="article-box" *ngFor="let article of recommendedArticles" (click)="navigateToSelectedArticle(article.id)">
+          <img [src]="article.imageUrl" alt="Article image" class="article-image">
+          <div class="article-details">
+            <p class="article-category">{{ article.category }}</p>
+            <h3 class="article-title">{{ article.title }}</h3>
+            <div class="ratings">
+              <mat-icon class="star-style">star</mat-icon>
+              <p class="article-rating">{{ article.rating }}</p>
             </div>
           </div>
         </div>
-      </section>
-  
-      <section class="sectionMiddle">
-        <div class="left-side">
-            <div class="left-sideCenter">
-                <h1 class="middle-title">{{ currentArticle.title }}</h1>
-                <p class="middle-description"> {{currentArticle.summary}}</p>
-                <button class="middle-button">Explore more</button>
-            </div>
+      </div>
+    </section>
+
+    <section class="sectionMiddle">
+      <div class="left-side">
+          <div class="left-sideCenter">
+              <h1 class="middle-title">{{ currentArticle.title }}</h1>
+              <p class="middle-description"> {{currentArticle.summary}}</p>
+              <button class="middle-button">Explore more</button>
+          </div>
+      </div>
+      <div class="right-side">
+          <img [src]="currentArticle.imageUrl" alt="Article image" class="middle-image">
+      </div>    
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section__title">Popular articles</h2>
+        <div class="linkic">
+          <a routerLink="/article-listing/popular"  class="view-all">View all</a>
+          <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
-        <div class="right-side">
-            <img [src]="currentArticle.imageUrl" alt="Article image" class="middle-image">
-        </div>    
-      </section>
-  
-      <section class="section">
-        <div class="section-header">
-          <h2 class="section__title">Popular articles</h2>
-          <div class="linkic">
-            <a routerLink="/article-listing/popular"  class="view-all">View all</a>
-            <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
+      </div>
+      <div class="article-box-container">
+        <div class="article-box" *ngFor="let article of popularArticles">
+          <img [src]="article.imageUrl" alt="Article image" class="article-image">
+          <div class="article-details">
+            <h3 class="article-title">{{ article.title }}</h3>
+            <p class="article-category">{{ article.category }}</p>
+            <div class="ratings">
+              <mat-icon class="star-style">star</mat-icon>
+              <p class="article-rating">{{ article.rating }}</p>
+            </div>
           </div>
         </div>
-        <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of popularArticles">
-            <img [src]="article.imageUrl" alt="Article image" class="article-image">
-            <div class="article-details">
-              <h3 class="article-title">{{ article.title }}</h3>
-              <p class="article-category">{{ article.category }}</p>
-              <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ article.rating }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-    <app-footer>Footer content</app-footer>
-  </body>
-  
+      </div>
+    </section>
+  </main>
+  <app-footer>Footer content</app-footer>
+</body>

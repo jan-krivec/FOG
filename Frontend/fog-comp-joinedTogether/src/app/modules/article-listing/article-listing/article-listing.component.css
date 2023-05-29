@@ -50,6 +50,7 @@ footer {
   background-color: white; /* Set the background color to white */
   min-width: 370px;
   min-height: 380px;
+  cursor: pointer;
 }
 
 .article-image {
