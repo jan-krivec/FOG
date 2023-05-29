@@ -5,3 +5,4 @@ blockchain/.env
 */node_modules/
 blockchain/typechain-types
 .idea/
+Frontend/fog-comp-joinedTogether/environment.ts
