@@ -68,6 +68,7 @@ export class ArticleContractService {
     }
   }
 
+  // get all articles that are in the review process
   async getAllReviewingArticles() {
     const articles: ArticleDTO[] = [];
     try {
@@ -84,6 +85,7 @@ export class ArticleContractService {
     }
   }
 
+  // get all articles that are published
   async getPublishedJournals() {
     const articles: ArticleDTO[] = [];
     try {
@@ -98,6 +100,7 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by author adress
   async getAuthorsJournals(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -114,6 +117,7 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by editor adress
   async getJournalsByEditor(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -130,6 +134,7 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by reviewer adress
   async getJournalsByReviewer(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -146,6 +151,7 @@ export class ArticleContractService {
     }
   }
 
+  // review article with articleId
   async reviewJournal(articleId: number, score: number, comment: string) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -153,6 +159,7 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // editor approves or disaproves article
   async editorReview(articleId: number, approve: boolean) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -160,6 +167,7 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // author updates the article (new ipfs link)
   async journalRevision(articleId: number, ipfsLink: string) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -167,6 +175,7 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // function for submiting the article by author
   async submitArticle(
     article: ArticleDTO,
     reviewers: string[],
@@ -197,6 +206,7 @@ export class ArticleContractService {
     });
   }
 
+  // function for retrieving articcle by articleId
   async getArticle(articleId: number): Promise<ArticleDTO> {
     let article = new ArticleDTO();
     try {
