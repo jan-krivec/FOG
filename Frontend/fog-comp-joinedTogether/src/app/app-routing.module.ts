@@ -10,6 +10,7 @@ import { PublishArticleComponent } from './modules/publish-article/publish-artic
 import { ArticleListingPopularComponent } from './modules/article-listing/article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './modules/article-listing/article-listing-recommended/article-listing-recommended.component';
 import { AuthorsProfileRoutingModule } from './modules/authors-profile/authors-profile-routing.module';
+import { ArticleListingRelatedComponent } from './modules/article-listing/article-listing-related/article-listing-related.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'article-listing', component: ArticleListingComponent },
   { path: 'article-listing/recommended', component: ArticleListingRecommendedComponent },
   { path: 'article-listing/popular', component: ArticleListingPopularComponent },
+  { path: 'article-listing/related', component: ArticleListingRelatedComponent},
   { path: 'authors-profile/:id', component: AuthorsProfileComponent },
   { path: 'edit-article', component: EditArticleComponent },
   { path: 'publish-article', component: PublishArticleComponent },

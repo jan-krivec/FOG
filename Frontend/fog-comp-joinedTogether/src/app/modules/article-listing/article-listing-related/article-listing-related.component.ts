@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
 import { Article } from '../../../interfaces/article';
-import { Review } from 'src/app/interfaces/review';
-import { ActivatedRoute } from '@angular/router';
-import { ArticleContractService } from 'src/app/article.contract.service';
-import { ArticleDTO } from 'src/app/interfaces/article.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-article-details',
-  templateUrl: './article-details.component.html',
-  styleUrls: ['./article-details.component.css']
+  selector: 'app-article-listing-related',
+  templateUrl: './article-listing-related.component.html',
+  styleUrls: ['./article-listing-related.component.css']
 })
-
-export class ArticleDetailsComponent {
+export class ArticleListingRelatedComponent {
   articles: Article[] = [
     {
       title: 'The Thrill of Victory: The Best Moments in Sports History',
@@ -376,71 +371,41 @@ export class ArticleDetailsComponent {
     }      
 ];
 
-    reviews: Review[] = [
-      {
-        rating: 4.9,
-        author: 'Klara Weaver',
-        authorImage: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
-        review: 'Electric fish are some of the most unique creatures on the planet. With the ability to generate and sense electric fields, these fish have adapted to life in low-light or murky environments and use their electric sense to navigate, communicate, and hunt for prey.'
+allRelatedArticles: Article[];
+
+currentArticle: any = this.articles[0];
+currentIndex = 0;
+
+nrOfStars : number = 5;
+
+constructor(private router: Router) {
+  this.allRelatedArticles = this.getRandomArticles(12);
+
+  //bi blo kao še kul če se nardi da niso isti čeprov zakaj pa ne,
+  //recommended bi pomoje dalo glede na keywords popular pa z najvišjim ratingom??
+}
+
+  ngOnInit() {
+    setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.articles.length;
+      this.currentArticle = this.articles[this.currentIndex];
+    }, 10000);
+
+  }
+
+  getRandomArticles(numArticles: number): Article[] {
+    const randomArticles: Article[] = [];
+    while (randomArticles.length < numArticles) {
+      const randomIndex = Math.floor(Math.random() * this.articles.length);
+      const randomArticle = this.articles[randomIndex];
+      if (!randomArticles.includes(randomArticle)) {
+        randomArticles.push(randomArticle);
       }
-    ];
-
-    authorId! : number
-    articleObject! : ArticleDTO;
-
-    relatedArticles: Article[];
-
-    currentArticle: any;
-    articleDescData = "This article very nice"
-    //currentArticleReviewes: any;
-
-
-    currentArticleReviewes: any = this.reviews[0];
-
-    constructor(private route: ActivatedRoute, private articleContractService: ArticleContractService, private router: Router) {
-      this.relatedArticles = this.getRandomArticles(4);
     }
-
-    ngOnInit() {
-      this.route.params.subscribe(params => {
-        this.authorId = +params['id'];
-      });
-
-      this.currentArticle = this.articles[this.authorId];
-      this.currentArticleReviewes = this.reviews[0];
-
-      this.articleContractService.getArticle(this.authorId).then((article) => {
-        this.articleObject = article;
-        console.log("KURAC")
-        console.log(this.articleObject)
-      }).catch((error) => {
-        console.error("Error: ", error);
-      });
-
-    }
-
-    getRandomArticles(numArticles: number): Article[] {
-      const randomArticles: Article[] = [];
-      while (randomArticles.length < numArticles) {
-        const randomIndex = Math.floor(Math.random() * this.articles.length);
-        const randomArticle = this.articles[randomIndex];
-        if (!randomArticles.includes(randomArticle)) {
-          randomArticles.push(randomArticle);
-        }
-      }
-      return randomArticles;
-    }
-
-  public tabHeaderText : Object[] = [
-    {text : 'Article Description'},
-    {text : 'More from this author'}
-  ];
-  public tabContentText : string[] = [
-      "DESCRIPTION TEXT",
-      "MORE FROM THIS"
-  ];
+    return randomArticles;
+  }
 
   navigateToSelectedArticle(articleId: number) {
-    this.router.navigate(['article-details', articleId]).then(page => { window.location.reload() });
+    this.router.navigate(['article-details', articleId]);
   }
 }

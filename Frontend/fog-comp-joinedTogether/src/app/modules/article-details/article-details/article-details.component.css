@@ -55,6 +55,7 @@ footer {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: white; /* Set the background color to white */
+  cursor: pointer;
 }
 
 .article-image {

@@ -102,10 +102,10 @@
     <section class="section">
       <div class="section-header">
         <h2 class="section__title">Related articles</h2>
-        <a href="#" class="view-all">View all</a>
+        <a routerLink="/article-listing/related" class="view-all">View all</a>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of relatedArticles">
+        <div class="article-box" *ngFor="let article of relatedArticles" (click)="navigateToSelectedArticle(article.id)">
           <img [src]="article.imageUrl" alt="Article image" class="article-image">
           <div class="article-details">
             <h3 class="article-title">{{ article.title }}</h3>

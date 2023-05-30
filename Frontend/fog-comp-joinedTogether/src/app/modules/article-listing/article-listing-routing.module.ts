@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticleListingComponent } from './article-listing/article-listing.component';
 import { ArticleListingPopularComponent } from './article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './article-listing-recommended/article-listing-recommended.component';
+import { ArticleListingRelatedComponent } from './article-listing-related/article-listing-related.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'article-listing/popular',
     component: ArticleListingPopularComponent,
+  },
+  {
+    path: 'article-listing/related',
+    component: ArticleListingRelatedComponent,
   },
 ];
 

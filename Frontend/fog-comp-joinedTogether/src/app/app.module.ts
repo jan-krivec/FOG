@@ -9,6 +9,7 @@ import { ArticleDetailsComponent } from './modules/article-details/article-detai
 import { ArticleListingComponent } from './modules/article-listing/article-listing/article-listing.component';
 import { ArticleListingPopularComponent } from './modules/article-listing/article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './modules/article-listing/article-listing-recommended/article-listing-recommended.component';
+import { ArticleListingRelatedComponent } from './modules/article-listing/article-listing-related/article-listing-related.component';
 import { AuthorsProfileComponent } from './modules/authors-profile/authors-profile/authors-profile.component';
 import { AuthorsProfileArticlesComponent } from './modules/authors-profile/authors-profile-articles/authors-profile-articles.component';
 import { EditArticleComponent } from './modules/edit-article/edit-article/edit-article.component';
@@ -33,6 +34,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ArticleListingComponent,
     ArticleListingPopularComponent,
     ArticleListingRecommendedComponent,
+    ArticleListingRelatedComponent,
     ArticleDetailsComponent,
     AuthorsProfileComponent,
     AuthorsProfileArticlesComponent,
@@ -50,7 +52,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     RatingModule.forRoot(),
     MatProgressBarModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
   ],
   exports: [
     HeaderComponent,

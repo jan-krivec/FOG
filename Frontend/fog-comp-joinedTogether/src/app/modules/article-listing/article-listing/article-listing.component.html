@@ -29,7 +29,7 @@
           <div class="left-sideCenter">
               <h1 class="middle-title">{{ currentArticle.title }}</h1>
               <p class="middle-description"> {{currentArticle.summary}}</p>
-              <button class="middle-button">Explore more</button>
+              <button class="middle-button" (click)="navigateToSelectedArticle(currentArticle.id)">Explore more</button>
           </div>
       </div>
       <div class="right-side">
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of popularArticles">
+        <div class="article-box" *ngFor="let article of popularArticles" (click)="navigateToSelectedArticle(article.id)">
           <img [src]="article.imageUrl" alt="Article image" class="article-image">
           <div class="article-details">
             <h3 class="article-title">{{ article.title }}</h3>
