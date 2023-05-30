@@ -417,6 +417,8 @@ export class ArticleDetailsComponent {
         console.error("Error: ", error);
       });
 
+      console.log(this.articleObject)
+
     }
 
     getRandomArticles(numArticles: number): Article[] {
