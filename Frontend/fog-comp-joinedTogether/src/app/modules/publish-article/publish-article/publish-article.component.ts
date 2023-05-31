@@ -3,7 +3,6 @@ import { ArticleContractService } from '../../../article.contract.service';
 import { ArticleDTO } from '../../../interfaces/article.model';
 import { ReviewData } from '../../../interfaces/article.model';
 import { IpfsService } from 'src/app/services/ipfs.service';
-import { TextRazor } from 'textrazor';
 
 
 @Component({
@@ -16,9 +15,6 @@ export class PublishArticleComponent {
   isSelectedSecond = false;
 
   checked = false;
-
-  apiKey = '8a8496e5f9695ae68ba2254cbe2598c17c0cb8de356b7a0f19ed0f22';
-  client = new TextRazor(this.apiKey);
 
   changed() {
     console.log(this.checked);
