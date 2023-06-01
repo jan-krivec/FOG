@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorsProfileComponent } from './authors-profile/authors-profile.component';
 import { AuthorsProfileArticlesComponent } from './authors-profile-articles/authors-profile-articles.component';
+import { AuthorsProfileOwnComponent } from './authors-profile-own/authors-profile-own.component';
 
 const routes: Routes = [
   {

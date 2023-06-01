@@ -3,17 +3,15 @@
     <main>
       <section class="section">
         <div class="section-header">
-          <h2 class="section__title">This author's articles</h2>
+          <h2 class="section__title">Articles that you need to edit</h2>
         </div>
         <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of allPopularArticles">
-            <img [src]="article.imageUrl" alt="Article image" class="article-image">
+            <div class="article-box" *ngFor="let article of articlesToEdit" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">              
             <div class="article-details">
-              <p class="article-category">{{ article.category }}</p>
               <h3 class="article-title">{{ article.title }}</h3>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ article.rating }}</p>
+                <p class="article-rating">{{ 5 }}</p>
               </div>
             </div>
           </div>
@@ -22,3 +20,5 @@
     </main>
     <app-footer>Footer content</app-footer>
   </body>
+  
+  

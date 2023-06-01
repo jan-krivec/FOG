@@ -4,6 +4,8 @@ import { ArticleListingComponent } from './article-listing/article-listing.compo
 import { ArticleListingPopularComponent } from './article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './article-listing-recommended/article-listing-recommended.component';
 import { ArticleListingRelatedComponent } from './article-listing-related/article-listing-related.component';
+import { ArticleListingEditComponent } from './article-listing-edit/article-listing-edit.component';
+import { ArticleListingReviewComponent } from './article-listing-review/article-listing-review.component'
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: 'article-listing/related',
     component: ArticleListingRelatedComponent,
+  },
+  {
+    path: 'article-listing/edit:id',
+    component: ArticleListingEditComponent,
+  },
+  {
+    path: 'article-listing/review:id',
+    component: ArticleListingReviewComponent,
   },
 ];
 

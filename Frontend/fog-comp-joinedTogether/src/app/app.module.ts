@@ -10,7 +10,10 @@ import { ArticleListingComponent } from './modules/article-listing/article-listi
 import { ArticleListingPopularComponent } from './modules/article-listing/article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './modules/article-listing/article-listing-recommended/article-listing-recommended.component';
 import { ArticleListingRelatedComponent } from './modules/article-listing/article-listing-related/article-listing-related.component';
+import { ArticleListingEditComponent } from './modules/article-listing/article-listing-edit/article-listing-edit.component';
+import { ArticleListingReviewComponent } from './modules/article-listing/article-listing-review/article-listing-review.component';
 import { AuthorsProfileComponent } from './modules/authors-profile/authors-profile/authors-profile.component';
+import { AuthorsProfileOwnComponent } from './modules/authors-profile/authors-profile-own/authors-profile-own.component';
 import { AuthorsProfileArticlesComponent } from './modules/authors-profile/authors-profile-articles/authors-profile-articles.component';
 import { EditArticleComponent } from './modules/edit-article/edit-article/edit-article.component';
 import { PublishArticleComponent } from './modules/publish-article/publish-article/publish-article.component';
@@ -35,9 +38,12 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ArticleListingPopularComponent,
     ArticleListingRecommendedComponent,
     ArticleListingRelatedComponent,
+    ArticleListingEditComponent,
+    ArticleListingReviewComponent,
     ArticleDetailsComponent,
     AuthorsProfileComponent,
     AuthorsProfileArticlesComponent,
+    AuthorsProfileOwnComponent,
     PublishArticleComponent,
     EditArticleComponent
   ],

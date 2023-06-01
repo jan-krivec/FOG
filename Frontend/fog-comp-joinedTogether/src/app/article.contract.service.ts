@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0x15dc2DF949E7aFc73e71294425C5821949901b2f'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0xcb721F29451Eec033Fe9C5D164Eb736fE6d62987'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -100,7 +100,7 @@ export class ArticleContractService {
     }
   }
 
-  // get articles by author adress
+  // get articles by author adress -> s tem pokaži članke na author-profile!!!!!!
   async getAuthorsJournals(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -118,6 +118,7 @@ export class ArticleContractService {
   }
 
   // get articles by editor adress
+  // !
   async getJournalsByEditor(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -135,6 +136,7 @@ export class ArticleContractService {
   }
 
   // get articles by reviewer adress
+  // !
   async getJournalsByReviewer(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -206,7 +208,7 @@ export class ArticleContractService {
     });
   }
 
-  // function for retrieving articcle by articleId
+  // function for retrieving articcle by articleId -> ko klikneš na article!!!!!!!!!
   async getArticle(articleId: number): Promise<ArticleDTO> {
     let article = new ArticleDTO();
     try {
