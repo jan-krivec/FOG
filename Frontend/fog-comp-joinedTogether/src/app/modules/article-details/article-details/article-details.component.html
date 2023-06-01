@@ -7,7 +7,7 @@
       </div>
       <div class="prva-vrstica">
         <div class="ratings">
-          <p class="article-rating">{{ currentArticle.rating }} | {{ currentArticle.author }}</p>
+          <p class="article-rating">{{ currentArticle.rating }} | {{ articleObject.author }}</p>
         </div>
         <div class="buttonRight">
 
@@ -25,27 +25,11 @@
           </button>
         </div>
       </div>
-
-    </section>
-    <section class="sectionMiddle">
-      <div class="left-side">
-        <img [src]="currentArticle.imageUrl" alt="Article image" class="middle-image">
-      </div>
-      <div class="right-side">
-          <div class="slikice">
-            <div style="margin-bottom: 35px;">
-              <img src="../../assets/images/wallet.png"  alt="Image" />
-            </div>
-            <div>
-              <img src="../../assets/images/wallet.png"  alt="Image" />
-            </div>
-        </div>
-      </div>
     </section>
 
     <section class="section">
       <h1 class="middle-title">Article Description</h1>
-      <!--<p>{{ articleDescData }}</p>-->
+      <p>{{ articleObject.description }}</p>
     </section>
 
     <section class="section" style="height:auto !important; margin-bottom:100px;">
@@ -58,21 +42,21 @@
           <div class="prva-vrstica">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+              <b style="margin-top:10px;">{{articleReviews[0].author}}</b>
+              <p>{{articleReviews[0].score}}</p>
             </div>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p>{{articleReviews[0]].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
         <div class="square">
           <div class="prva-vrstica">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+              <b style="margin-top:10px;">{{articleReviews[1].author}}</b>
+              <p>{{articleReviews[1].score}}</p>
             </div>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p>{{articleReviews[1].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
       <div class="prva-vrstica">
@@ -80,21 +64,21 @@
           <div class="prva-vrstica">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+              <b style="margin-top:10px;">{{articleReviews[2].author}}</b>
+              <p>{{articleReviews[2].score}}</p>
             </div>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p>{{articleReviews[2].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
         <div class="square">
           <div class="prva-vrstica">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+              <b style="margin-top:10px;">{{articleReviews[3].author}}</b>
+              <p>{{articleReviews[3].score}}</p>
             </div>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p>{{articleReviews[3].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
     </section>

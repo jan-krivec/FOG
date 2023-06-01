@@ -3,6 +3,7 @@ import { ArticleContractService } from '../../../article.contract.service';
 import { ArticleDTO } from '../../../interfaces/article.model';
 import { ReviewData } from '../../../interfaces/article.model';
 import { IpfsService } from 'src/app/services/ipfs.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-publish-article',
@@ -10,36 +11,14 @@ import { IpfsService } from 'src/app/services/ipfs.service';
   styleUrls: ['./publish-article.component.css'],
 })
 export class PublishArticleComponent {
-  isSelectedFirst = false;
-  isSelectedSecond = false;
-
-  checked = false;
-
-  changed() {
-    console.log(this.checked);
-  }
-
   constructor(
     private articleContractService: ArticleContractService,
-    private ipfsService: IpfsService
+    private ipfsService: IpfsService,
+    private http: HttpClient
   ) {}
 
-  toggleSelection(item: string) {
-    if (item === 'first') {
-      this.clearSelection();
-      this.isSelectedFirst = !this.isSelectedFirst;
-    } else if (item === 'second') {
-      this.clearSelection();
-      this.isSelectedSecond = !this.isSelectedSecond;
-    }
-  }
-
-  clearSelection() {
-    this.isSelectedFirst = false;
-    this.isSelectedSecond = false;
-  }
-
-  collection = ['USA', 'Canada', 'UK'];
+  title!: string;
+  description!: string;
 
   files: File[] = [];
 
@@ -59,6 +38,10 @@ export class PublishArticleComponent {
     console.log(articles);
   }
 
+  getRandomWallets(numOfWallets: string, role: string){
+    return this.http.get<any[]>('http://64.226.85.227:8000/get_random_wallets/', { params: { role: role, number: numOfWallets } })
+  }
+
   async submitArticle() {
     if (!this.files) {
       alert('File not properly uploaded!');
@@ -68,23 +51,29 @@ export class PublishArticleComponent {
     const cid = await this.ipfsService.addFileToIPFS(this.files[0] as File);
 
     const article = new ArticleDTO();
-   
+
     article.articleId = Math.floor(Math.random()*1000000); //tukaj rabi nardit da daje neke random cifre drugace al je to kul?
-    article.title = this.files[0].name; //to je pomoje tisto ko maš name tko da iz name fielda vzameš vrednost
-    article.description = 'Desc'; //to je v description input fieldu tko da to iz tam uzameš
-    article.keywords = ['keyword1', 'keyword2', 'keyword3']; //tuki bi rabu še en input field za keywords? noro bi blo tuki nardit en ai model da pregleda keywordse
+    article.title = this.title; //to je pomoje tisto ko maï¿½ name tko da iz name fielda vzameï¿½ vrednost
+    article.description = this.description; //to je v description input fieldu tko da to iz tam uzameï¿½
+    article.keywords = ['keyword1', 'keyword2', 'keyword3']; //tuki bi rabu ï¿½e en input field za keywords? noro bi blo tuki nardit en ai model da pregleda keywordse
     article.ipfsLink = cid; //link do filea ki se ga download, nimam pojma kje je to shranjeno? probaj zvedet
-    article.author = '0x123123123...' //tuki uporabiš verjetno neko getaccount funkcijo iz web3 da dobiš trenutnega userja?
-    article.published = null; //ne daš se nic, to se spremeni potem
+    article.author = '0x123123123...' //tuki uporabiï¿½ verjetno neko getaccount funkcijo iz web3 da dobiï¿½ trenutnega userja?
+    article.published = null; //ne daï¿½ se nic, to se spremeni potem
     article.denied = null; //isto
     article.editor = '0x123123123...' //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
     article.reviews = []; //tuki se doda ko se nafila naslednji del
 
+    //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 3 reviewerjev
+    //http://64.226.85.227:8000/get_random_wallets/?role=20&number=5 <- klic za pridobit 5 editorjev
+
+    this.getRandomWallets("30","4");
+    this.getRandomWallets("20","5");
+
     const review = new ReviewData();
-    review.reviewer = '0x123123123...'; //tuki rabiš nek getReviewer funkcijo klicat da se doloci kdo bo reviewal
+    review.reviewer = '0x123123123...'; //tuki rabiï¿½ nek getReviewer funkcijo klicat da se doloci kdo bo reviewal
     review.score = null; //tuki da kasneje reviewer
     review.comment = null; //tuki da kasneje reviewer
-    
+
     // Fetch them
     const reviewers = ['0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE'];
 
