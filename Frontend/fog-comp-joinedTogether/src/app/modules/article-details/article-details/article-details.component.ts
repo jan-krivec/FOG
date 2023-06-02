@@ -421,6 +421,7 @@ export class ArticleDetailsComponent {
 
     }
 
+    //Poglej če je funkcija ki ti da random article
     getRandomArticles(numArticles: number): Article[] {
       const randomArticles: Article[] = [];
       while (randomArticles.length < numArticles) {

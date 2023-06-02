@@ -31,6 +31,11 @@
       <p>Write a short description of the article</p>
       <textarea [(ngModel)]="description" placeholder="Input decription" class="description"></textarea>
     </section>
+    <section class="section" style="margin-top: 50px; height: 20vh;">
+      <b>Keywords<span class="required">*</span></b>
+      <p>Input keywords seperated by ','</p>
+      <input type="text" name="keywords" [(ngModel)]="keywords" placeholder="Input keywords" class="customTextField">
+    </section>
 
     <section class="section" style="height:auto; margin-bottom:50px;">
       <button class="middle-button" (click)="this.submitArticle()">Publish</button>

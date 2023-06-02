@@ -178,6 +178,7 @@ export class ArticleContractService {
   }
 
   // function for submiting the article by author
+  //!
   async submitArticle(
     article: ArticleDTO,
     reviewers: string[],
@@ -209,6 +210,7 @@ export class ArticleContractService {
   }
 
   // function for retrieving articcle by articleId -> ko klikneš na article!!!!!!!!!
+  //!
   async getArticle(articleId: number): Promise<ArticleDTO> {
     let article = new ArticleDTO();
     try {

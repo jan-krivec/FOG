@@ -19,6 +19,7 @@ export class PublishArticleComponent {
 
   title!: string;
   description!: string;
+  keywords!: string;
 
   files: File[] = [];
 
@@ -55,7 +56,7 @@ export class PublishArticleComponent {
     article.articleId = Math.floor(Math.random()*1000000); //tukaj rabi nardit da daje neke random cifre drugace al je to kul?
     article.title = this.title; //to je pomoje tisto ko ma� name tko da iz name fielda vzame� vrednost
     article.description = this.description; //to je v description input fieldu tko da to iz tam uzame�
-    article.keywords = ['keyword1', 'keyword2', 'keyword3']; //tuki bi rabu �e en input field za keywords? noro bi blo tuki nardit en ai model da pregleda keywordse
+    article.keywords = this.keywords.split(',').map(keyword => keyword.trim()); //tuki bi rabu �e en input field za keywords? noro bi blo tuki nardit en ai model da pregleda keywordse
     article.ipfsLink = cid; //link do filea ki se ga download, nimam pojma kje je to shranjeno? probaj zvedet
     article.author = '0x123123123...' //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
     article.published = null; //ne da� se nic, to se spremeni potem
@@ -63,7 +64,7 @@ export class PublishArticleComponent {
     article.editor = '0x123123123...' //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
     article.reviews = []; //tuki se doda ko se nafila naslednji del
 
-    //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 3 reviewerjev
+    //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 4 reviewerjev
     //http://64.226.85.227:8000/get_random_wallets/?role=20&number=5 <- klic za pridobit 5 editorjev
 
     this.getRandomWallets("30","4");
