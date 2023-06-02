@@ -14,6 +14,8 @@ export class ArticleListingReviewComponent {
   articlesToReview! : ArticleDTO[];
   addressId! : string;
 
+  aritclesToReview = [];
+
   constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
