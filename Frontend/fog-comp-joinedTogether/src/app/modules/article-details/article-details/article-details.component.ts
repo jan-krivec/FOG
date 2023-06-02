@@ -3,7 +3,7 @@ import { Article } from '../../../interfaces/article';
 import { Review } from 'src/app/interfaces/review';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleContractService } from 'src/app/article.contract.service';
-import { ArticleDTO, ReviewData } from 'src/app/interfaces/article.model';
+import { ArticleDTO } from 'src/app/interfaces/article.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -246,7 +246,7 @@ export class ArticleDetailsComponent {
       imageUrl: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/38624091354_7a81f8bb87_k.jpg',
       summary: 'The universe is full of wonders that have fascinated humans for centuries. From the mysteries of black holes to the breathtaking beauty of distant galaxies, there is always something new and exciting to discover in the cosmos.',
       date: new Date('2010-10-10'),
-      id: 25,
+      id: 25,  
     },
     {
       title: 'The Origins of the Universe',
@@ -292,7 +292,7 @@ export class ArticleDetailsComponent {
       summary: 'Anglerfish are some of the most fascinating fish in the ocean. With their large mouths, bioluminescent lures, and ability to swallow prey much larger than themselves, these fish have captured the imaginations of scientists and the public alike.',
       date: new Date('2003-12-13'),
       id: 30,
-    },
+    }, 
     {
       title: 'The Colorful World of Coral Reef Fish',
       category: 'Fish',
@@ -300,7 +300,7 @@ export class ArticleDetailsComponent {
       imageUrl: 'https://cdn.britannica.com/21/118821-050-028C95EE/underwater-photography-Coral-reef-fishes-Sulawesi-Indonesia.jpg',
       summary: 'Coral reef fish are known for their bright colors and unique patterns. These fish not only add to the beauty of coral reefs but also play important roles in maintaining the health of these fragile ecosystems.',
       date: new Date('2004-01-14') ,
-      id: 31,
+      id: 31, 
     },
     {
       title: 'The Mysterious Lives of Deep-Sea Fish',
@@ -373,7 +373,7 @@ export class ArticleDetailsComponent {
       summary: "Dragonflies are agile and colorful insects that are excellent flyers. They inhabit various aquatic and terrestrial environments and are important predators, feeding on mosquitoes and other small insects.",
       date: new Date('2017-09-21'),
       id: 39,
-    }
+    }      
 ];
 
     reviews: Review[] = [
@@ -391,8 +391,9 @@ export class ArticleDetailsComponent {
     relatedArticles: Article[];
 
     currentArticle: any;
+    articleDescData = "This article very nice"
     //currentArticleReviewes: any;
-    articleReviews:ReviewData[] | null | undefined;
+
 
     currentArticleReviewes: any = this.reviews[0];
 
@@ -410,9 +411,8 @@ export class ArticleDetailsComponent {
 
       this.articleContractService.getArticle(this.authorId).then((article) => {
         this.articleObject = article;
-        console.log("Works!")
+        console.log("KURAC")
         console.log(this.articleObject)
-        this.articleReviews = this.articleObject.reviews
       }).catch((error) => {
         console.error("Error: ", error);
       });
