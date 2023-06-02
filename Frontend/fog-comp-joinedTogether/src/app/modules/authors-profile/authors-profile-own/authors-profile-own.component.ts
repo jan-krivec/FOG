@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Article } from '../../../interfaces/article';
 import { Author } from '../../../interfaces/author';
 import { Router } from '@angular/router';
-import { RoleService } from 'src/app/services/role.service';
 
 @Component({
   selector: 'app-authors-profile-own',
@@ -545,12 +544,9 @@ export class AuthorsProfileOwnComponent {
 
   associatedData: { author: Author, articles: Article[] }[] = [];
 
-  role! : string;
-
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private roleService: RoleService) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -559,33 +555,10 @@ export class AuthorsProfileOwnComponent {
     });
     console.log(this.articles.length)
 
-    this.getRoleOfAuthor(this.authorId.toString());
-    console.log("TRAALALALALALALALAL")
-    console.log(this.role);
-
     this.assignArticles();
 
     this.countRatings();
   }
-
-  getRoleOfAuthor(id: string) {
-    this.roleService.getRole(id).subscribe(
-      (response: any) => {
-        if (response.role) {
-          this.role = response.role;
-          console.log(response);
-        } else {
-          // Handle the case when the 'role' property is missing or not a string
-          console.error("Invalid response structure");
-        }
-      },
-      (error) => {
-        // Handle any errors
-        console.error(error);
-      }
-    );
-  }
-  
 
   loadAuthorData() {
     const foundAuthor = this.authors.find(author => author.id === this.authorId);

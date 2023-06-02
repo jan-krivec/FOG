@@ -26,7 +26,6 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { FormsModule } from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -60,7 +59,6 @@ import { HttpClientModule } from '@angular/common/http';
     RatingModule.forRoot(),
     MatProgressBarModule,
     NgxDropzoneModule,
-    HttpClientModule
   ],
   exports: [
     HeaderComponent,

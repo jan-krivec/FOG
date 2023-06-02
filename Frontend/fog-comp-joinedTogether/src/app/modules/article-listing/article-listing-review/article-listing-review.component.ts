@@ -24,7 +24,6 @@ export class ArticleListingReviewComponent {
 
     this.getReviewingArticles(this.addressId);
 
-    console.log("ASDASDAS")
     console.log(this.articlesToReview);
 
 
