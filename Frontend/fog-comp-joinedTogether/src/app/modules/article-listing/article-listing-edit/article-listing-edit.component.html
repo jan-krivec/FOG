@@ -1,27 +1,30 @@
 <body>
-    <app-header>Header content</app-header>
-    <main>
-      <section class="section">
-        <div class="section-header">
-          <h2 class="section__title">Articles that you need to edit</h2>
-        </div>
-        <div *ngIf="articlesToEdit?.length === 0 || articlesToEdit === undefined">
-          <h3>You have no articles to edit, good job! (or is it??)</h3>
-        </div>
-        <div class="article-box-container">
-            <div class="article-box" *ngFor="let article of articlesToEdit" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">              
+  <app-header>Header content</app-header>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section__title">Articles that you need to edit</h2>
+      </div>
+      <div *ngIf="articlesToEdit2?.length === 0 || articlesToEdit2 === undefined">
+        <h3>You have no articles to edit, good job! (or is it??)</h3>
+      </div>
+      <div class="article-box-container">
+          <div class="article-box" *ngFor="let article of articlesToEdit2">              
             <div class="article-details">
               <h3 class="article-title">{{ article.title }}</h3>
-              <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ 5 }}</p>
-              </div>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ 5 }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+              <button class="bottom-button" (click)="article.articleId && navigateToEditArticle(article.articleId)">Edit article</button>
             </div>
-          </div>
         </div>
-      </section>
-    </main>
-    <app-footer>Footer content</app-footer>
-  </body>
-  
-  
+      </div>
+    </section>
+  </main>
+  <app-footer>Footer content</app-footer>
+</body>
+

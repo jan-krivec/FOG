@@ -53,7 +53,6 @@ footer {
   min-width: 370px;
   min-height: 380px;
   margin-bottom: 10px; /* Add some space between the article boxes */
-  cursor: pointer;
 }
 
 .article-image {
@@ -82,6 +81,20 @@ footer {
   font-size: 1.2rem;
   margin-bottom: auto;
   padding-left: 0.5rem;
+}
+
+.article-author {
+  font-size: 1rem;
+  margin-bottom: auto;
+  padding-left: 0.5rem;
+}
+
+.bottom-button {
+  margin-top: 20px;
+}
+
+.select-article{
+  margin-top: 130px;
 }
 
 .article-category {
@@ -161,6 +174,8 @@ footer {
   font-weight: bold;
   display: inline-block;
   vertical-align: middle;
+  margin-top: 13px;
+  margin-left: 5px;
 }
 
 .section-header {

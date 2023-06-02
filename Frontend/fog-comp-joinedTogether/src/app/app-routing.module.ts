@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'authors-profile/:id', component: AuthorsProfileComponent },
   { path: 'authors-profile/articles/:id', component: AuthorsProfileArticlesComponent },
   { path: 'authors-profile/myprofile/:id', component: AuthorsProfileOwnComponent },
-  { path: 'edit-article', component: EditArticleComponent },
+  { path: 'edit-article/:id', component: EditArticleComponent },
   { path: 'publish-article', component: PublishArticleComponent }
 ];
 
