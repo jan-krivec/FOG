@@ -560,12 +560,8 @@ export class AuthorsProfileOwnComponent {
     console.log(this.articles.length)
 
     this.getRoleOfAuthor(this.authorId.toString());
-    console.log("TRAALALALALALALALAL")
-    console.log(this.role);
+    console.log(this.role); //!!! ta role potem moram preverjat v htmlju
 
-    this.assignArticles();
-
-    this.countRatings();
   }
 
   getRoleOfAuthor(id: string) {
@@ -575,12 +571,10 @@ export class AuthorsProfileOwnComponent {
           this.role = response.role;
           console.log(response);
         } else {
-          // Handle the case when the 'role' property is missing or not a string
           console.error("Invalid response structure");
         }
       },
       (error) => {
-        // Handle any errors
         console.error(error);
       }
     );
@@ -595,94 +589,6 @@ export class AuthorsProfileOwnComponent {
       // Handle the case when author is not found
       // For example, you can display an error message or redirect to a different page
       console.log('Author not found');
-    }
-  }
-
-  assignArticles() {
-    for (let i = 0; i < this.authors.length; i++) {
-      const author = this.authors[i];
-      const authorArticles: Article[] = [];
-
-      for (let j = i * 4; j < (i * 4) + 4; j++) {
-        if (j >= this.articles.length) {
-          break;
-        }
-
-        const article = this.articles[j];
-        authorArticles.push(article);
-      }
-
-      this.associatedData.push({ author, articles: authorArticles });
-    }
-
-    //iz tle nekako potem dobim članke ki jih prikažem
-    this.authorData = this.associatedData.find(data => data.author.id === this.authorId) as { author: Author; articles: Article[]; };
-
-
-    if (this.authorData) {
-      console.log("Author:", this.authorData.author);
-      console.log("Articles:", this.authorData.articles);
-    } else {
-      console.log("Author not found in associatedData.");
-    }
-    
-  }
-
-  countRatings() {
-    this.numbers = [0, 0, 0, 0, 0]; // Initialize the numbers array before counting ratings
-  
-    for (let i = 0; i < this.authorData.articles.length; i++) {
-      if (this.authorData.articles[i].rating > 4.5) {
-        this.numbers[4]++;
-      } else if (this.authorData.articles[i].rating > 3.5) {
-        this.numbers[3]++;
-      } else if (this.authorData.articles[i].rating > 2.5) {
-        this.numbers[2]++;
-      } else if (this.authorData.articles[i].rating > 1.5) {
-        this.numbers[1]++;
-      } else {
-        this.numbers[0]++;
-      }
-    }
-  
-    this.numbers = this.numbers.map((num) => (num / this.authorData.articles.length) * 100);
-  }
-
-  copyLink(linkButton: HTMLButtonElement) {
-    const linkText = linkButton.textContent;
-  
-    if (linkText) {
-      const input = document.createElement('input');
-      input.setAttribute('value', linkText);
-      document.body.appendChild(input);
-
-      input.select();
-      document.execCommand('copy');
-  
-      document.body.removeChild(input);
-  
-      alert('Link copied to clipboard!');
-    }
-  }
-
-  isFollowed(authorId: number): boolean {
-    const followedAuthors = JSON.parse(localStorage.getItem('followedAuthors') || '{}');
-    return followedAuthors[authorId] === true;
-  }
-  
-  followAuthor(authorId: number) {
-
-    const followedAuthors = JSON.parse(localStorage.getItem('followedAuthors') || '{}');
-    followedAuthors[authorId] = true;
-    localStorage.setItem('followedAuthors', JSON.stringify(followedAuthors));
-  
-    this.disableButton(authorId);
-  }
-  
-  disableButton(authorId: number) {
-    const button = document.querySelector(`.button1[data-author-id="${authorId}"]`);
-    if (button) {
-      button.setAttribute('disabled', 'true');
     }
   }
   
@@ -701,6 +607,5 @@ export class AuthorsProfileOwnComponent {
   openTextField() {
     alert("You can't send messages to this author!");
   }
-
 
 }
