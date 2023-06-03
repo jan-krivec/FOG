@@ -160,6 +160,8 @@ footer {
   font-weight: bold;
   display: inline-block;
   vertical-align: middle;
+  margin-top: 13px;
+  margin-left: 5px;
 }
 
 .section-header {
