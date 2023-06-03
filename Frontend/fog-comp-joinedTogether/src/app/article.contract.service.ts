@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0x938F403074E23e63978285A750e58bd695CB078f'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0xAc1FA82aD8cbDF908130e3D4cD799cE30B899d85'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -86,6 +86,7 @@ export class ArticleContractService {
   }
 
   // get all articles that are published
+  // !
   async getPublishedJournals() {
     const articles: ArticleDTO[] = [];
     try {
@@ -101,6 +102,7 @@ export class ArticleContractService {
   }
 
   // get articles by author adress -> s tem pokaži članke na author-profile!!!!!!
+  // !
   async getAuthorsJournals(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -162,6 +164,7 @@ export class ArticleContractService {
   }
 
   // editor approves or disaproves article
+  // !
   async editorReview(articleId: number, approve: boolean) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods

@@ -10,16 +10,17 @@
         </div>
         <div class="article-box-container">
             <div class="article-box" *ngFor="let article of articlesToReview2">              
-              <div class="article-details">
+              <div *ngIf="article.denied === null" class="article-details">
                 <h3 class="article-title">{{ article.title }}</h3>
                 <h6 class="article-author">{{ article.author }}</h6>
                   <div class="ratings">
                     <mat-icon class="star-style">star</mat-icon>
-                    <p class="article-rating">{{ 5 }}</p>
+                    <p class="article-rating">{{ calculateAverageScore(article) }}</p>
                   </div>
                 <div>{{article.description}}</div>
                 <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
-                <button class="bottom-button">Review article</button>
+                <button class="bottom-button" (click)="article.articleId && acceptArticle(article.articleId)">Accept article</button>
+                <button class="bottom-button" (click)="article.articleId && denyArticle(article.articleId)">Reject article</button>
               </div>
           </div>
         </div>

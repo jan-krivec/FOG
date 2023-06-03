@@ -3,6 +3,8 @@ import { ArticleDTO } from 'src/app/interfaces/article.model';
 import { ArticleContractService } from '../../../article.contract.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { ReviewData } from 'src/app/interfaces/article.model';
 
 @Component({
   selector: 'app-article-listing-review',
@@ -13,6 +15,13 @@ export class ArticleListingReviewComponent {
 
   articlesToReview! : ArticleDTO[];
   addressId! : string;
+  reviewer1 : ReviewData = {reviewer: "Reviewer1", score: 3, comment: "Comment1"};
+  reviewer2 : ReviewData = {reviewer: "Reviewer2", score: 4, comment: "Comment2"};
+  reviewer3 : ReviewData = {reviewer: "Reviewer3", score: 5, comment: "Comment3"};
+
+  krneka : ReviewData[] = [this.reviewer1, this.reviewer2, this.reviewer3];
+
+  averageScore: number | null = null;
 
   articlesToReview2 : ArticleDTO[] = [
     {
@@ -25,7 +34,7 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor1",
-      reviews: [] },
+      reviews: [this.reviewer1] },
     {
       articleId: 2,
       title: "Title2",
@@ -36,7 +45,7 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor2",
-      reviews: []
+      reviews: [this.reviewer1, this.reviewer2, this.reviewer3]
     },
     {
       articleId: 3,
@@ -48,7 +57,7 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor3",
-      reviews: []
+      reviews: [this.reviewer3, this.reviewer2]
     },
     {
       articleId: 4,
@@ -60,7 +69,7 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor4",
-      reviews: []
+      reviews: [this.reviewer1, this.reviewer2, this.reviewer3]
     },
     {
       articleId: 5,
@@ -72,7 +81,7 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor5",
-      reviews: []
+      reviews: [this.reviewer2, this.reviewer3]
     },
     {
       articleId: 6,
@@ -84,13 +93,14 @@ export class ArticleListingReviewComponent {
       published: null,
       denied: null,
       editor: "editor6",
-      reviews: []
+      reviews: [this.reviewer1, this.reviewer3]
     },
     
 
   ]
 
-  constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router) { }
+  constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router,
+              private location: Location) { }
 
   ngOnInit() {
 
@@ -98,19 +108,53 @@ export class ArticleListingReviewComponent {
       this.addressId = params['id'];
     });
 
-    this.getReviewingArticles(this.addressId);
+    this.getReviewingArticles(this.addressId); //!!!!potem uporabimo te
 
     console.log("ASDASDAS")
     console.log(this.articlesToReview);
 
   }
 
+  
+  //dobimo kere moramo reviewat s tem addressom
   async getReviewingArticles(id: string) {
-    this.articlesToReview = await this.articleContractService.getJournalsByReviewer(id);
+    this.articlesToReview = await this.articleContractService.getJournalsByReviewer(id); //!!!!potem uporabimo te
   }
 
+  //gremo na article-details za tega
   navigateToSelectedArticle(articleId: number) {
     this.router.navigate(['article-details', articleId]);
+  }
+
+  //s tem mu določimo denied na false; da je sprejet
+  acceptArticle(articleId: number) {
+
+    this.articleContractService.editorReview(articleId, false);
+
+    window.location.reload();
+  }
+
+
+  //obratno
+  denyArticle(articleId: number) {
+
+    this.articleContractService.editorReview(articleId, true);
+
+    window.location.reload();
+  }
+
+  //dobimo average score ReveiwData.score propertija
+  calculateAverageScore(article: ArticleDTO): number {
+    if (article.reviews && article.reviews.length > 0) {
+      const totalScore = article.reviews.reduce((sum, review) => {
+        if (review.score != null) {
+          return sum + review.score;
+        }
+        return sum;
+      }, 0);
+      return totalScore / article.reviews.length;
+    }
+    return 0; // or any default value if there are no reviews
   }
 
 }

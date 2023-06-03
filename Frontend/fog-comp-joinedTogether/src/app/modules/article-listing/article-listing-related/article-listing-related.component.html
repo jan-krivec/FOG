@@ -5,19 +5,23 @@
         <div class="section-header">
           <h2 class="section__title">All related articles</h2>
         </div>
-        <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of allRelatedArticles" (click)="navigateToSelectedArticle(article.id)">
-            <img [src]="article.imageUrl" alt="Article image" class="article-image">
-            <div class="article-details">
-              <p class="article-category">{{ article.category }}</p>
-              <h3 class="article-title">{{ article.title }}</h3>
-              <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ article.rating }}</p>
-              </div>
-            </div>
-          </div>
+        <div *ngIf="articles.length === 0 || articles === undefined">
+          <h3>There are no articles</h3>
         </div>
+        <div class="article-box-container">
+          <div class="article-box" *ngFor="let article of allRelatedArticles">              
+            <div *ngIf="article.denied === null" class="article-details">
+              <h3 class="article-title">{{ article.title }}</h3>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+            </div>
+        </div>
+      </div>
       </section>
     </main>
     <app-footer>Footer content</app-footer>

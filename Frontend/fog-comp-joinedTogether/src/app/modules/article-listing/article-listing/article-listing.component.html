@@ -9,31 +9,36 @@
           <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
       </div>
-      <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of recommendedArticles" (click)="navigateToSelectedArticle(article.id)">
-          <img [src]="article.imageUrl" alt="Article image" class="article-image">
-          <div class="article-details">
-            <p class="article-category">{{ article.category }}</p>
-            <h3 class="article-title">{{ article.title }}</h3>
-            <div class="ratings">
-              <mat-icon class="star-style">star</mat-icon>
-              <p class="article-rating">{{ article.rating }}</p>
-            </div>
-          </div>
-        </div>
+      <div *ngIf="articles.length === 0 || articles === undefined">
+        <h3>There are no articles</h3>
       </div>
+      <div class="article-box-container">
+        <div class="article-box" *ngFor="let article of recommendedArticles">              
+          <div *ngIf="article.denied === null" class="article-details">
+            <h3 class="article-title">{{ article.title }}</h3>
+            <h6 class="article-author">{{ article.author }}</h6>
+              <div class="ratings">
+                <mat-icon class="star-style">star</mat-icon>
+                <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+              </div>
+            <div>{{article.description}}</div>
+            <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+          </div>
+      </div>
+    </div>
     </section>
 
     <section class="sectionMiddle">
       <div class="left-side">
           <div class="left-sideCenter">
               <h1 class="middle-title">{{ currentArticle.title }}</h1>
-              <p class="middle-description"> {{currentArticle.summary}}</p>
-              <button class="middle-button" (click)="navigateToSelectedArticle(currentArticle.id)">Explore more</button>
+              <h6 class="article-author">{{ currentArticle.author }}</h6>
+              <p class="middle-description"> {{currentArticle.description}}</p>
+              <button class="middle-button" (click)="currentArticle.articleId && navigateToSelectedArticle(currentArticle.articleId)">Explore more</button>
           </div>
       </div>
       <div class="right-side">
-          <img [src]="currentArticle.imageUrl" alt="Article image" class="middle-image">
+
       </div>    
     </section>
 
@@ -41,23 +46,27 @@
       <div class="section-header">
         <h2 class="section__title">Popular articles</h2>
         <div class="linkic">
-          <a routerLink="/article-listing/popular"  class="view-all">View all</a>
+          <a routerLink="/article-listing/popular" class="view-all">View all</a>
           <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
       </div>
-      <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of popularArticles" (click)="navigateToSelectedArticle(article.id)">
-          <img [src]="article.imageUrl" alt="Article image" class="article-image">
-          <div class="article-details">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <p class="article-category">{{ article.category }}</p>
-            <div class="ratings">
-              <mat-icon class="star-style">star</mat-icon>
-              <p class="article-rating">{{ article.rating }}</p>
-            </div>
-          </div>
-        </div>
+      <div *ngIf="articles.length === 0 || articles === undefined">
+        <h3>There are no articles</h3>
       </div>
+      <div class="article-box-container">
+        <div class="article-box" *ngFor="let article of popularArticles">              
+          <div *ngIf="article.denied === null" class="article-details"> <!--zakaj tle dela čeprovv je null??-->
+            <h3 class="article-title">{{ article.title }}</h3>
+            <h6 class="article-author">{{ article.author }}</h6>
+              <div class="ratings">
+                <mat-icon class="star-style">star</mat-icon>
+                <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+              </div>
+            <div>{{article.description}}</div>
+            <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+          </div>
+      </div>
+    </div>
     </section>
   </main>
   <app-footer>Footer content</app-footer>
