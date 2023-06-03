@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ArticleContractService } from '../../../article.contract.service';
 
 @Component({
   selector: 'app-edit-article',
@@ -6,9 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-article.component.css']
 })
 export class EditArticleComponent {
+  constructor(
+    private articleContractService: ArticleContractService
+  ) {}
 
   isSelectedFirst = false;
   isSelectedSecond = false;
+
+  description!: string;
+
+  ipfs!:string;
+
+  async updateArticle(){
+    this.articleContractService.journalRevision(Math.floor(Math.random()*1000000), this.ipfs);
+  }
 
   toggleSelection(item: string) {
     if (item === 'first') {

@@ -1,17 +1,17 @@
 <body>
   <app-header>Header content</app-header>
   <main>
-    <section class="section">
+   <!-- <section class="section">
       <div>
-        <h1 class="middle-title">{{ currentArticle.title }}</h1>
+        <h1 class="middle-title">{{ articleObject.title }}</h1>
       </div>
       <div class="prva-vrstica">
         <div class="ratings">
-          <p class="article-rating">{{ currentArticle.rating }} | {{ articleObject.author }}</p>
+          <p class="article-rating">{{ currentArticleScore }} | {{ articleObject.author }}</p>
         </div>
         <div class="buttonRight">
 
-          <button class="middle-button" style="margin-left: 30px; float: right;">
+          <button class="middle-button" style="margin-left: 30px; float: right;" (click)="Neki()">
             <span class="align-icon">
               <mat-icon>download</mat-icon>
             </span>
@@ -30,58 +30,66 @@
     <section class="section">
       <h1 class="middle-title">Article Description</h1>
       <p>{{ articleObject.description }}</p>
-    </section>
+    </section> -->
 
-    <!--<section class="section" style="height:auto !important; margin-bottom:100px;">
+    <section class="section" style="height:auto !important; margin-bottom:100px;">
       <h1 class="middle-title">Reviews</h1>
       <div class="ratings">
-        <p class="article-rating">{{ currentArticle.rating }}</p>
+        <p class="article-rating">{{ currentArticleScore }}</p>
       </div>
       <div class="prva-vrstica">
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{articleReviews[0].author}}</b>
-              <p>{{articleReviews[0].score}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 0">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
+                <p>{{articlereview.score}}</p>
+              </div>
             </div>
+            <p *ngIf="i === 0">{{articlereview.comment}}</p>
           </div>
-          <p>{{articleReviews[0]].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{articleReviews[1].author}}</b>
-              <p>{{articleReviews[1].score}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 1">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
+                <p>{{articlereview.score}}</p>
+              </div>
             </div>
+            <p *ngIf="i === 1">{{articlereview.comment}}</p>
           </div>
-          <p>{{articleReviews[1].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
       <div class="prva-vrstica">
         <div class="square">
-          <div class="prva-vrstica">
+          <div  *ngFor="let articlereview of articleReviews; let i = index">
+          <div class="prva-vrstica" *ngIf="i === 2">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{articleReviews[2].author}}</b>
-              <p>{{articleReviews[2].score}}</p>
+              <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
+              <p>{{articlereview.score}}</p>
             </div>
           </div>
-          <p>{{articleReviews[2].comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p *ngIf="i === 2">{{articlereview.comment }}</p>
+        </div>
         </div>
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{articleReviews?.[3]?.author}}</b>
-              <p>{{articleReviews?.[3]?.score}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 3">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
+                <p>{{articlereview.score}}</p>
+              </div>
             </div>
+            <p *ngIf="i === 3">{{articlereview.comment}}</p>
           </div>
-          <p>{{articleReviews?.[3]?.comment | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
-    </section>-->
+    </section>
 
     <section class="section">
       <div class="section-header">

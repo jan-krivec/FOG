@@ -21,6 +21,8 @@ export class PublishArticleComponent {
   description!: string;
   keywords!: string;
 
+  articleReviewsID!: string[];
+
   files: File[] = [];
 
   onSelect(event: any) {
@@ -40,7 +42,7 @@ export class PublishArticleComponent {
   }
 
   getRandomWallets(numOfWallets: string, role: string){
-    return this.http.get<any[]>('http://64.226.85.227:8000/get_random_wallets/', { params: { role: role, number: numOfWallets } })
+    return this.http.get<any[]>('http://64.226.85.227/get_random_wallets/', { params: { role: role, number: numOfWallets } })
   }
 
   async submitArticle() {
@@ -50,6 +52,8 @@ export class PublishArticleComponent {
     }
 
     const cid = await this.ipfsService.addFileToIPFS(this.files[0] as File);
+
+    //this.articleReviewsID = this.getRandomWallets("30","4");
 
     const article = new ArticleDTO();
 
@@ -61,14 +65,14 @@ export class PublishArticleComponent {
     article.author = '0x123123123...' //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
     article.published = null; //ne da� se nic, to se spremeni potem
     article.denied = null; //isto
-    article.editor = '0x123123123...' //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
-    article.reviews = []; //tuki se doda ko se nafila naslednji del
+    article.editor = ""; //this.getRandomWallets("20","1"); //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
+    article.reviews = [ {reviewer: this.articleReviewsID[0], score: null, comment: null},
+                        {reviewer: this.articleReviewsID[1], score: null, comment: null},
+                        {reviewer: this.articleReviewsID[2], score: null, comment: null},
+                        {reviewer: this.articleReviewsID[3], score: null, comment: null},]; //tuki se doda ko se nafila naslednji del
 
     //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 4 reviewerjev
     //http://64.226.85.227:8000/get_random_wallets/?role=20&number=5 <- klic za pridobit 5 editorjev
-
-    this.getRandomWallets("30","4");
-    this.getRandomWallets("20","5");
 
     const review = new ReviewData();
     review.reviewer = '0x123123123...'; //tuki rabi� nek getReviewer funkcijo klicat da se doloci kdo bo reviewal

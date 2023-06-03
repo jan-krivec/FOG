@@ -385,6 +385,11 @@ export class ArticleDetailsComponent {
       }
     ];
 
+    reviewer1 : ReviewData = {reviewer: "Reviewer1", score: 3, comment: "Comment1"};
+    reviewer2 : ReviewData = {reviewer: "Reviewer2", score: 4, comment: "Comment2"};
+    reviewer3 : ReviewData = {reviewer: "Reviewer3", score: 5, comment: "Comment3"};
+    reviewer4 : ReviewData = {reviewer: "Reviewer4", score: 5, comment: "Comment3"};
+
     authorId! : number
     articleObject! : ArticleDTO;
 
@@ -393,6 +398,8 @@ export class ArticleDetailsComponent {
     currentArticle: any;
     //currentArticleReviewes: any;
     articleReviews:ReviewData[] | null | undefined;
+
+    currentArticleScore!: number;
 
     currentArticleReviewes: any = this.reviews[0];
 
@@ -412,13 +419,30 @@ export class ArticleDetailsComponent {
         this.articleObject = article;
         console.log("Works!")
         console.log(this.articleObject)
-        this.articleReviews = this.articleObject.reviews
+        //this.articleReviews = this.articleObject.reviews
+        if (this.articleReviews){
+        let sum = 0;
+        let count = 0;
+
+        this.articleReviews.forEach((review) => {
+          if(review.score){
+            sum += review.score;
+            count++;
+          }
+        });
+
+        this.currentArticleScore = sum / count;
+        }
       }).catch((error) => {
         console.error("Error: ", error);
       });
 
       console.log(this.articleObject)
+      this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
+    }
 
+    Neki(){
+      console.log(this.articleReviews);
     }
 
     //Poglej če je funkcija ki ti da random article
