@@ -155,4 +155,10 @@ getRandomArticles(numArticles: number): ArticleDTO[] {
     }
     return 0; // or any default value if there are no reviews
   }
+
+  //tuki gremo na edit-article da se mu dodeli use parametre ki jih rabi 
+  navigateToEditArticle(articleId: number) {
+    this.router.navigate(['edit-article', articleId]);
+    console.log(articleId)
+  }
 }

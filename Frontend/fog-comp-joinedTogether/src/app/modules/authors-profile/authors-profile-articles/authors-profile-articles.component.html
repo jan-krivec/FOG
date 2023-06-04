@@ -19,6 +19,7 @@
                 </div>
               <div>{{article.description}}</div>
               <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+              <button class="bottom-button" (click)="article.articleId && navigateToEditArticle(article.articleId)">Edit article</button>
             </div>
         </div>
       </div>

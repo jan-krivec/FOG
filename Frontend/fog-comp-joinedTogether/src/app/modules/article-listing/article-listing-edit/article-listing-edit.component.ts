@@ -119,10 +119,31 @@ export class ArticleListingEditComponent {
   }
 
 
-  //tuki gremo na edit-article da se mu dodeli use parametre ki jih rabi 
-  navigateToEditArticle(articleId: number) {
-    this.router.navigate(['edit-article', articleId]);
-    console.log(articleId)
+  //s tem mu določimo denied na false; da je sprejet
+  acceptArticle(articleId: number) {
+    let confirmed = window.confirm("Are you sure you want to accept this article?");
+    
+    if (confirmed) {
+      this.articleContractService.editorReview(articleId, false);
+      window.location.reload();
+    } else {
+      return;
+    }
+  }
+  
+
+  //obratno
+  denyArticle(articleId: number) {
+    let confirmed = window.confirm("Are you sure you want to deny this article?");
+
+    if(confirmed) {
+      this.articleContractService.editorReview(articleId, true);
+      window.location.reload();
+    }
+    else {
+      return;
+    }
+    
   }
 
   //dobimo average score ReveiwData.score propertija

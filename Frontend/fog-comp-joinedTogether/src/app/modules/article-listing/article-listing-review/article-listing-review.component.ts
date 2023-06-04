@@ -126,23 +126,6 @@ export class ArticleListingReviewComponent {
     this.router.navigate(['article-details', articleId]);
   }
 
-  //s tem mu določimo denied na false; da je sprejet
-  acceptArticle(articleId: number) {
-
-    this.articleContractService.editorReview(articleId, false);
-
-    window.location.reload();
-  }
-
-
-  //obratno
-  denyArticle(articleId: number) {
-
-    this.articleContractService.editorReview(articleId, true);
-
-    window.location.reload();
-  }
-
   //dobimo average score ReveiwData.score propertija
   calculateAverageScore(article: ArticleDTO): number {
     if (article.reviews && article.reviews.length > 0) {

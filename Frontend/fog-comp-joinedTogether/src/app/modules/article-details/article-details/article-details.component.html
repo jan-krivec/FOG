@@ -96,16 +96,21 @@
         <h2 class="section__title">Related articles</h2>
         <a routerLink="/article-listing/related" class="view-all">View all</a>
       </div>
+      <div *ngIf="relatedArticles?.length === 0 || relatedArticles === undefined">
+        <h3>You have no articles to review, good job! (or is it??)</h3>
+      </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of relatedArticles" (click)="navigateToSelectedArticle(article.id)">
-          <img [src]="article.imageUrl" alt="Article image" class="article-image">
-          <div class="article-details">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <p class="article-category">{{ article.category }}</p>
-            <div class="ratings">
-              <p class="article-rating">{{ article.rating }}</p>
+          <div class="article-box" *ngFor="let article of relatedArticles">              
+            <div *ngIf="article.denied === null" class="article-details">
+              <h3 class="article-title">{{ article.title }}</h3>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
             </div>
-          </div>
         </div>
       </div>
     </section>

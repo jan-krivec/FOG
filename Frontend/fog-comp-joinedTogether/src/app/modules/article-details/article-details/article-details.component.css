@@ -42,9 +42,10 @@ footer {
 
 .article-box-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 1rem;
-  height: calc(20vw - 5px);
+  margin-bottom: 1rem;
 }
 
 .article-box {
@@ -55,7 +56,9 @@ footer {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: white; /* Set the background color to white */
-  cursor: pointer;
+  min-width: 370px;
+  min-height: 380px;
+  margin-bottom: 10px; /* Add some space between the article boxes */
 }
 
 .article-image {
@@ -78,6 +81,7 @@ footer {
   background-color: white;
   margin-top: 10px;
   min-height: 68px; /* set a minimum height for the container */
+  align-items: center;
 }
 
 .article-title {
@@ -255,4 +259,34 @@ footer {
   max-width: 400px;
   width: 300px;
   max-height: 300px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.view-all {
+  font-size: 0.8rem;
+  color: blue;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.article-author {
+  font-size: 1rem;
+  margin-bottom: auto;
+  padding-left: 0.5rem;
+}
+
+.select-article{
+  margin-top: 80px;
+  width: 50%;
 }
