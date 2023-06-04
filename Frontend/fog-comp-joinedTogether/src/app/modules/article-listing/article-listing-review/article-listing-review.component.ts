@@ -144,7 +144,7 @@ export class ArticleListingReviewComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
-      width: '250px',
+      width: '255px',
       data: {}
     });
 

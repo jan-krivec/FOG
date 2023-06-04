@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ArticleContractService } from '../../../article.contract.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-article',
@@ -8,7 +9,8 @@ import { ArticleContractService } from '../../../article.contract.service';
 })
 export class EditArticleComponent {
   constructor(
-    private articleContractService: ArticleContractService
+    private articleContractService: ArticleContractService,
+    private route: ActivatedRoute,
   ) {}
 
   isSelectedFirst = false;
@@ -17,9 +19,16 @@ export class EditArticleComponent {
   description!: string;
 
   ipfs!:string;
+  adressId! : number;
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.adressId = params['id'];
+    });
+  }
 
   async updateArticle(){
-    this.articleContractService.journalRevision(Math.floor(Math.random()*1000000), this.ipfs);
+    this.articleContractService.journalRevision(this.adressId, this.ipfs);
   }
 
   toggleSelection(item: string) {
