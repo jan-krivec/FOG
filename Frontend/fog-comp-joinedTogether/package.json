@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.0.2",
     "@angular/platform-browser-dynamic": "^16.0.2",
     "@angular/router": "^16.0.2",
+    "@material/dialog": "^15.0.0-canary.3b5b55e31.0",
     "assert": "^2.0.0",
     "axios": "^1.4.0",
     "browserify-zlib": "^0.2.0",
