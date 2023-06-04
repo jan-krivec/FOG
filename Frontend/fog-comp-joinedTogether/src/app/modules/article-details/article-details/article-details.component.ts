@@ -197,4 +197,8 @@ export class ArticleDetailsComponent {
     }
     return 0; // or any default value if there are no reviews
   }
+
+  goToProfile(authorId: string) {
+    this.router.navigate(['authors-profile', authorId]);
+  }
 }

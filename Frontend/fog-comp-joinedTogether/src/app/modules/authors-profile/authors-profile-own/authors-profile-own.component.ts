@@ -604,6 +604,10 @@ export class AuthorsProfileOwnComponent {
     this.router.navigate(['article-listing', 'edit', this.authorId]);
   }
 
+  goToPublish() {
+    this.router.navigate(['publish-article'])
+  }
+
   openTextField() {
     alert("You can't send messages to this author!");
   }

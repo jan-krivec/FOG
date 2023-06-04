@@ -4,6 +4,7 @@ import { ArticleDTO } from '../../../interfaces/article.model';
 import { ReviewData } from '../../../interfaces/article.model';
 import { IpfsService } from 'src/app/services/ipfs.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publish-article',
@@ -14,7 +15,8 @@ export class PublishArticleComponent {
   constructor(
     private articleContractService: ArticleContractService,
     private ipfsService: IpfsService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   title!: string;
@@ -86,5 +88,9 @@ export class PublishArticleComponent {
     const editor = '0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE';
 
     this.articleContractService.submitArticle(article, reviewers, editor);
+
+    alert('Article submitted!');
+
+    this.router.navigate(['article-listing']);
   }
 }

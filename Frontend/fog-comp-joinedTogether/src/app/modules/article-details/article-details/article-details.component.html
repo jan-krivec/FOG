@@ -43,8 +43,11 @@
             <div class="prva-vrstica" *ngIf="i === 0">
               <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
               <div class="druga-vrstica">
-                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
-                <p>{{articlereview.score}}</p>
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
               </div>
             </div>
             <p *ngIf="i === 0">{{articlereview.comment}}</p>
@@ -55,8 +58,11 @@
             <div class="prva-vrstica" *ngIf="i === 1">
               <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
               <div class="druga-vrstica">
-                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
-                <p>{{articlereview.score}}</p>
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
               </div>
             </div>
             <p *ngIf="i === 1">{{articlereview.comment}}</p>
@@ -69,8 +75,11 @@
           <div class="prva-vrstica" *ngIf="i === 2">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
-              <p>{{articlereview.score}}</p>
+              <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+              <div class="ratings">
+                <mat-icon class="star-style">star</mat-icon>
+                <p class="article-rating">{{ articlereview.score }}</p>
+              </div>
             </div>
           </div>
           <p *ngIf="i === 2">{{articlereview.comment }}</p>
@@ -81,8 +90,11 @@
             <div class="prva-vrstica" *ngIf="i === 3">
               <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
               <div class="druga-vrstica">
-                <b style="margin-top:10px;">{{articlereview.reviewer}}</b>
-                <p>{{articlereview.score}}</p>
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
               </div>
             </div>
             <p *ngIf="i === 3">{{articlereview.comment}}</p>

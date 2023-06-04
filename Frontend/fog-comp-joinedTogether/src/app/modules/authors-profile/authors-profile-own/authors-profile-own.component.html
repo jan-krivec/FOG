@@ -23,6 +23,7 @@
               <button class="button1" (click)="goToArticles()">My articles</button>
               <button class="button2" (click)="goToReviews()" [disabled]="author.role === 'Author'">Articles to review</button>
               <button class="button1" (click)="goToEdits()" [disabled]="author.role === 'Author'">Articles to edit</button>
+              <button class="button2" (click)="goToPublish()">Publish article</button>
               <div *ngIf="author.role === 'Author'">You can't review or edit any articles as you are not an editor!</div>
             </div>
           </section>
