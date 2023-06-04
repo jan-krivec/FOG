@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Article } from '../../../interfaces/article';
 import { Router } from '@angular/router';
 import { ArticleDTO } from 'src/app/interfaces/article.model';

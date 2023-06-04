@@ -156,6 +156,7 @@ export class ArticleContractService {
   }
 
   // review article with articleId
+  //!
   async reviewJournal(articleId: number, score: number, comment: string) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods

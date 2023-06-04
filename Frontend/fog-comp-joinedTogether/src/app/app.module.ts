@@ -27,8 +27,8 @@ import { FormsModule } from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthorsProfileArticlesComponent,
     AuthorsProfileOwnComponent,
     PublishArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,8 @@ import { HttpClientModule } from '@angular/common/http';
     RatingModule.forRoot(),
     MatProgressBarModule,
     NgxDropzoneModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,

@@ -19,8 +19,7 @@
                   </div>
                 <div>{{article.description}}</div>
                 <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
-                <button class="bottom-button">Accept article</button>
-                <button class="bottom-button">Reject article</button>
+                <button class="bottom-button" (click)="openDialog()">Review article</button>
               </div>
           </div>
         </div>

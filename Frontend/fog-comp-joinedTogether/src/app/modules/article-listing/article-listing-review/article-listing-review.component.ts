@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ReviewData } from 'src/app/interfaces/article.model';
+import { PopupComponent } from 'src/app/popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-article-listing-review',
@@ -100,7 +102,7 @@ export class ArticleListingReviewComponent {
   ]
 
   constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router,
-              private location: Location) { }
+              private location: Location, public dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -138,6 +140,21 @@ export class ArticleListingReviewComponent {
       return totalScore / article.reviews.length;
     }
     return 0; // or any default value if there are no reviews
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.articleContractService.reviewJournal(parseInt(this.addressId), result.score, result.comment);
+        console.log('The dialog was closed');
+        console.log('Result:', result);
+      }
+    });
   }
 
 }
