@@ -1,36 +1,39 @@
 <body>
   <app-header>Header content</app-header>
   <main>
-   <!-- <section class="section">
-      <div>
+   <section class="section">
+    <!--  <div>
         <h1 class="middle-title">{{ articleObject.title }}</h1>
-      </div>
+      </div>-->
+
       <div class="prva-vrstica">
         <div class="ratings">
-          <p class="article-rating">{{ currentArticleScore }} | {{ articleObject.author }}</p>
+          <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+          <p class="article-rating">{{ calculateAverageScore(articleObject) }}</p>
         </div>
-        <div class="buttonRight">
+        <b style="margin-top:13px; margin-left:20px; cursor:pointer; color: #535BEA;" (click)="articleObject.author && goToProfile(articleObject.author)">{{articleObject.author}}</b>
+      </div>
 
-          <button class="middle-button" style="margin-left: 30px; float: right;" (click)="Neki()">
-            <span class="align-icon">
-              <mat-icon>download</mat-icon>
-            </span>
-            <span>Download</span>
-          </button>
-          <button class="middle-button" style="float: right; background-color:#f2f3fd!important; color:blue">
-            <span class="align-icon">
-              <mat-icon>share</mat-icon>
-            </span>
-            <span>Share</span>
-          </button>
-        </div>
+      <div class="buttonRight">
+        <button class="middle-button" style="margin-left: 30px; float: right;">
+          <span class="align-icon">
+            <mat-icon>download</mat-icon>
+          </span>
+          <span>Download</span>
+        </button>
+        <button class="middle-button" style="float: right; background-color:#f2f3fd!important; color:blue">
+          <span class="align-icon">
+            <mat-icon>share</mat-icon>
+          </span>
+          <span>Share</span>
+        </button>
       </div>
     </section>
 
     <section class="section">
       <h1 class="middle-title">Article Description</h1>
       <p>{{ articleObject.description }}</p>
-    </section> -->
+    </section>-->
 
     <section class="section" style="height:auto !important; margin-bottom:100px;">
       <h1 class="middle-title">Reviews</h1>
@@ -45,7 +48,7 @@
               <div class="druga-vrstica">
                 <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
                 <div class="ratings">
-                  <mat-icon class="star-style">star</mat-icon>
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
                   <p class="article-rating">{{ articlereview.score }}</p>
                 </div>
               </div>
@@ -60,7 +63,7 @@
               <div class="druga-vrstica">
                 <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
                 <div class="ratings">
-                  <mat-icon class="star-style">star</mat-icon>
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
                   <p class="article-rating">{{ articlereview.score }}</p>
                 </div>
               </div>
@@ -77,7 +80,7 @@
             <div class="druga-vrstica">
               <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
               <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
+                <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
                 <p class="article-rating">{{ articlereview.score }}</p>
               </div>
             </div>
@@ -92,7 +95,7 @@
               <div class="druga-vrstica">
                 <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
                 <div class="ratings">
-                  <mat-icon class="star-style">star</mat-icon>
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
                   <p class="article-rating">{{ articlereview.score }}</p>
                 </div>
               </div>
@@ -112,7 +115,7 @@
         <h3>You have no articles to review, good job! (or is it??)</h3>
       </div>
       <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of relatedArticles">              
+          <div class="article-box" *ngFor="let article of relatedArticles">
             <div *ngIf="article.denied === null" class="article-details">
               <h3 class="article-title">{{ article.title }}</h3>
               <h6 class="article-author">{{ article.author }}</h6>
