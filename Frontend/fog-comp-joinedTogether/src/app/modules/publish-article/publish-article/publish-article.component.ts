@@ -5,6 +5,8 @@ import { ReviewData } from '../../../interfaces/article.model';
 import { IpfsService } from 'src/app/services/ipfs.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RoleService } from 'src/app/services/role.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-publish-article',
@@ -16,14 +18,16 @@ export class PublishArticleComponent {
     private articleContractService: ArticleContractService,
     private ipfsService: IpfsService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private roleService: RoleService
   ) {}
 
   title!: string;
   description!: string;
   keywords!: string;
 
-  articleReviewsID!: string[];
+  articleReviewsID!: string;
+  articleReviewers!: string[];
 
   files: File[] = [];
 
@@ -43,9 +47,24 @@ export class PublishArticleComponent {
     console.log(articles);
   }
 
-  getRandomWallets(numOfWallets: string, role: string){
-    return this.http.get<any[]>('http://64.226.85.227/get_random_wallets/', { params: { role: role, number: numOfWallets } })
+  getRandomWallets(numOfWallets: number, role: string){
+
+    let walletIds: string[] = [];
+
+    this.roleService.getRandomWallet(numOfWallets,role).subscribe((data) => {
+      this.articleReviewsID = data;
+      console.log(this.articleReviewsID);
+
+      const regex = /"wallet_id": "([^"]+)"/g;
+      const matches = [...data.matchAll(regex)];
+      const walletIds = matches.map(match => match[1]);
+
+      console.log(walletIds);
+    });
+
+    return walletIds;
   }
+
 
   async submitArticle() {
     if (!this.files) {
@@ -55,7 +74,7 @@ export class PublishArticleComponent {
 
     const cid = await this.ipfsService.addFileToIPFS(this.files[0] as File);
 
-    //this.articleReviewsID = this.getRandomWallets("30","4");
+    this.articleReviewers= this.getRandomWallets(4,"30");
 
     const article = new ArticleDTO();
 
@@ -67,11 +86,11 @@ export class PublishArticleComponent {
     article.author = '0x123123123...' //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
     article.published = null; //ne da� se nic, to se spremeni potem
     article.denied = null; //isto
-    article.editor = ""; //this.getRandomWallets("20","1"); //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
-    article.reviews = [ {reviewer: this.articleReviewsID[0], score: null, comment: null},
-                        {reviewer: this.articleReviewsID[1], score: null, comment: null},
-                        {reviewer: this.articleReviewsID[2], score: null, comment: null},
-                        {reviewer: this.articleReviewsID[3], score: null, comment: null},]; //tuki se doda ko se nafila naslednji del
+    article.editor = this.getRandomWallets(1,"20")[0]; //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
+    article.reviews = [ {reviewer: this.articleReviewers[0], score: null, comment: null},
+                        {reviewer: this.articleReviewers[1], score: null, comment: null},
+                        {reviewer: this.articleReviewers[2], score: null, comment: null},
+                        {reviewer: this.articleReviewers[3], score: null, comment: null},]; //tuki se doda ko se nafila naslednji del
 
     //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 4 reviewerjev
     //http://64.226.85.227:8000/get_random_wallets/?role=20&number=5 <- klic za pridobit 5 editorjev
