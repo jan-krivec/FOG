@@ -5,12 +5,12 @@
       <div class="section-header">
         <h2 class="section__title">Articles that you need to edit</h2>
       </div>
-      <div *ngIf="articlesToEdit2?.length === 0 || articlesToEdit2 === undefined">
+      <div *ngIf="articlesToEdit?.length === 0 || articlesToEdit === undefined">
         <h3>You have no articles to edit, good job! (or is it??)</h3>
       </div>
       <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of articlesToEdit2">              
-            <div class="article-details"> <!--*ngIf="article.denied === false"-->
+          <div class="article-box" *ngFor="let article of articlesToEdit">              
+            <div class="article-details" *ngIf="article.denied === false">
               <h3 class="article-title">{{ article.title }}</h3>
               <h6 class="article-author">{{ article.author }}</h6>
                 <div class="ratings">

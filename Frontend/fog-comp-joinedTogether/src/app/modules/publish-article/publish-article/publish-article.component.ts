@@ -78,33 +78,25 @@ export class PublishArticleComponent {
 
     const article = new ArticleDTO();
 
-    article.articleId = Math.floor(Math.random()*1000000); //tukaj rabi nardit da daje neke random cifre drugace al je to kul?
-    article.title = this.title; //to je pomoje tisto ko ma� name tko da iz name fielda vzame� vrednost
-    article.description = this.description; //to je v description input fieldu tko da to iz tam uzame�
-    article.keywords = this.keywords.split(',').map(keyword => keyword.trim()); //tuki bi rabu �e en input field za keywords? noro bi blo tuki nardit en ai model da pregleda keywordse
-    article.ipfsLink = cid; //link do filea ki se ga download, nimam pojma kje je to shranjeno? probaj zvedet
+    article.articleId = Math.floor(Math.random()*1000000); 
+    article.title = this.title; 
+    article.description = this.description; 
+    article.keywords = this.keywords.split(',').map(keyword => keyword.trim()); 
+    article.ipfsLink = cid;
     article.author = '0x123123123...' //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
-    article.published = null; //ne da� se nic, to se spremeni potem
-    article.denied = null; //isto
-    article.editor = this.getRandomWallets(1,"20")[0]; //tuki rabi isto nek getEditor funkcijo klicat da se doloci kdo bo edital i guess?
-    article.reviews = [ {reviewer: this.articleReviewers[0], score: null, comment: null},
-                        {reviewer: this.articleReviewers[1], score: null, comment: null},
-                        {reviewer: this.articleReviewers[2], score: null, comment: null},
-                        {reviewer: this.articleReviewers[3], score: null, comment: null},]; //tuki se doda ko se nafila naslednji del
-
-    //http://64.226.85.227:8000/get_random_wallets/?role=30&number=4 <- klic za pridobit 4 reviewerjev
-    //http://64.226.85.227:8000/get_random_wallets/?role=20&number=5 <- klic za pridobit 5 editorjev
-
-    const review = new ReviewData();
-    review.reviewer = '0x123123123...'; //tuki rabi� nek getReviewer funkcijo klicat da se doloci kdo bo reviewal
-    review.score = null; //tuki da kasneje reviewer
-    review.comment = null; //tuki da kasneje reviewer
+    article.published = null; 
+    article.denied = null; 
+    //article.editor = this.getRandomWallets(1,"20")[0];
+    //article.reviews = [ {reviewer: this.articleReviewers[0], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[1], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[2], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[3], score: null, comment: null},];
 
     // Fetch them
-    const reviewers = ['0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE'];
+    const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2], this.articleReviewers[3]];
 
     // Fetch him
-    const editor = '0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE';
+    const editor = this.getRandomWallets(1,"20")[0];
 
     this.articleContractService.submitArticle(article, reviewers, editor);
 

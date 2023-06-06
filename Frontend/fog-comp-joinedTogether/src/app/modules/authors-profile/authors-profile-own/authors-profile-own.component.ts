@@ -200,6 +200,7 @@ export class AuthorsProfileOwnComponent {
 
     this.getRoleOfAuthor(this.authorId.toString());
 
+    //dejansko nimam avtorjev, ampak za id-je lhko samo menjam na une
   }
 
   

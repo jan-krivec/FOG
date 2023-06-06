@@ -13,10 +13,11 @@ import { ArticleListingRelatedComponent } from './modules/article-listing/articl
 import { AuthorsProfileOwnComponent } from './modules/authors-profile/authors-profile-own/authors-profile-own.component';
 import { ArticleListingEditComponent } from './modules/article-listing/article-listing-edit/article-listing-edit.component';
 import { ArticleListingReviewComponent } from './modules/article-listing/article-listing-review/article-listing-review.component'
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/article-listing', pathMatch: 'full' },
-  //{ path: '', component: ArticleDetailsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login',component: LoginComponent},
   { path: 'article-details/:id', component: ArticleDetailsComponent },
   { path: 'article-listing', component: ArticleListingComponent },
   { path: 'article-listing/recommended', component: ArticleListingRecommendedComponent },

@@ -594,7 +594,6 @@ export class AuthorsProfileComponent implements OnInit{
     //iz tle nekako potem dobim članke ki jih prikažem
     this.authorData = this.associatedData.find(data => data.author.id === this.authorId) as { author: Author; articles: Article[]; };
 
-
     if (this.authorData) {
       console.log("Author:", this.authorData.author);
       console.log("Articles:", this.authorData.articles);
@@ -652,8 +651,6 @@ export class AuthorsProfileComponent implements OnInit{
   }
   
   followAuthor(authorId: number) {
-    // Perform any necessary actions when the button is clicked
-    // For example, make an API request to update the follow status of the author
     
     // Mark the author as followed in local storage
     const followedAuthors = JSON.parse(localStorage.getItem('followedAuthors') || '{}');

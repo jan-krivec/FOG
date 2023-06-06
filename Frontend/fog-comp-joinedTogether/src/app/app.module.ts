@@ -29,6 +29,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PopupComponent } from './popup/popup.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PopupComponent } from './popup/popup.component';
     AuthorsProfileOwnComponent,
     PublishArticleComponent,
     EditArticleComponent,
-    PopupComponent
+    PopupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

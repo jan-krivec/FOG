@@ -135,7 +135,7 @@ export class ArticleDetailsComponent {
         this.articleObject = article;
         console.log("Works!")
         console.log(this.articleObject)
-        //this.articleReviews = this.articleObject.reviews
+        this.articleReviews = this.articleObject.reviews
         if (this.articleReviews){
         let sum = 0;
         let count = 0;
