@@ -19,7 +19,7 @@ popularArticles!: ArticleDTO[];
 
 allArticles!: ArticleDTO[];
 
-currentArticle: any = this.allArticles[0];
+currentArticle: any;
 currentIndex = 0;
 
 nrOfStars : number = 5;
@@ -30,9 +30,9 @@ constructor(private router: Router, private articleContractService: ArticleContr
   //recommended bi pomoje dalo glede na keywords popular pa z najvišjim ratingom??
 }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.loadData();  
+    await this.loadData();  
 
     setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.allArticles.length;
@@ -48,15 +48,21 @@ constructor(private router: Router, private articleContractService: ArticleContr
       return averageScoreB - averageScoreA;
     });
 
-    this.recommendedArticles = this.getRandomArticles(4);
-    this.popularArticles = this.allArticles.slice(0, 4);
+    
     //this.popularArticles = this.getRandomArticles(4);
-
+    if(this.allArticles.length > 0) {
+      this.currentArticle = this.allArticles[0];
+      this.recommendedArticles = this.getRandomArticles(4);
+    this.popularArticles = this.allArticles.slice(0, 4);
+    }
+    
   }
 
   async loadData(): Promise<void> {
     try {
       this.allArticles = await this.articleContractService.getPublishedJournals();
+      console.log("ASdasdasd")
+      console.log(this.allArticles);
     } catch (error) {
       // Handle any error that occurred during the data retrieval
       console.error(error);

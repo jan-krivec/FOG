@@ -66,6 +66,7 @@ export class ArticleContractService {
     } else {
       console.log('Metamask not detected. Please install Metamask extension.');
     }
+
   }
 
   // get all articles that are in the review process
@@ -188,16 +189,21 @@ export class ArticleContractService {
     reviewers: string[],
     editor: string
   ) {
-    this.web3.eth.getAccounts().then((accounts: any) => {
-      const account = accounts[0];
-      console.log(account);
+    const accounts = await this.web3.eth.getAccounts();
+    console.log("Ta:")
+    console.log(accounts)
+    
+    const account = accounts[0];
+      
+      console.log("Ta3:")
+      console.log(this.contract.methods);
       this.contract.methods
         .submitJournal(
           article.title,
           article.description,
           article.ipfsLink,
           article.keywords,
-          reviewers,
+          [...reviewers],
           editor
         )
         .send({ from: account })
@@ -210,7 +216,6 @@ export class ArticleContractService {
         .on('error', (error: any) => {
           console.error('Error:', error);
         });
-    });
   }
 
   // function for retrieving articcle by articleId -> ko klikneš na article!!!!!!!!!
