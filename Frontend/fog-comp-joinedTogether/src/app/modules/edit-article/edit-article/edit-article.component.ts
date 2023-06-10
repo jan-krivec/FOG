@@ -28,7 +28,7 @@ export class EditArticleComponent {
   }
 
   async updateArticle(){
-    this.articleContractService.journalRevision(this.adressId, this.ipfs);
+    await this.articleContractService.journalRevision(this.adressId, this.ipfs);
   }
 
   toggleSelection(item: string) {

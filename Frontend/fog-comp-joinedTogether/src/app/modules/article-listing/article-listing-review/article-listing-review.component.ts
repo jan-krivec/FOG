@@ -24,13 +24,13 @@ export class ArticleListingReviewComponent {
   constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router,
               private location: Location, public dialog: MatDialog) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.route.params.subscribe(params => {
       this.addressId = params['id'];
     });
 
-    this.getReviewingArticles(this.addressId); //!!!!potem uporabimo te
+    await this.getReviewingArticles(this.addressId); //!!!!potem uporabimo te
 
     console.log("ASDASDAS")
     console.log(this.articlesToReview);

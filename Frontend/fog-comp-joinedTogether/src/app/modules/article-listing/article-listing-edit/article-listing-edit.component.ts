@@ -33,17 +33,19 @@ export class ArticleListingEditComponent {
     this.articlesToEdit = await this.articleContractService.getJournalsByEditor(id);
   }
 
-  navigateToSelectedArticle(articleId: number) {
-    this.router.navigate(['article-details', articleId]);
+  navigateToSelectedArticle(articleId: number | null | undefined) {
+    if(articleId !== undefined && articleId !== null) {
+      this.router.navigate(['article-details', articleId]);
+    }
   }
 
 
   //s tem mu določimo denied na false; da je sprejet
-  acceptArticle(articleId: number) {
+  async acceptArticle(articleId: number |null | undefined) {
     let confirmed = window.confirm("Are you sure you want to accept this article?");
 
-    if (confirmed) {
-      this.articleContractService.editorReview(articleId, false);
+    if (confirmed && articleId !== undefined && articleId !== null) {
+      await this.articleContractService.editorReview(articleId, false);
       window.location.reload();
     } else {
       return;
@@ -52,11 +54,11 @@ export class ArticleListingEditComponent {
 
 
   //obratno
-  denyArticle(articleId: number) {
+  async denyArticle(articleId: number | null | undefined) {
     let confirmed = window.confirm("Are you sure you want to deny this article?");
 
-    if(confirmed) {
-      this.articleContractService.editorReview(articleId, true);
+    if(confirmed && articleId !== undefined && articleId !== null) {
+      await this.articleContractService.editorReview(articleId, true);
       window.location.reload();
     }
     else {

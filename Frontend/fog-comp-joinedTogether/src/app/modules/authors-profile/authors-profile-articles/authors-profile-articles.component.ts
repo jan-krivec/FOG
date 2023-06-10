@@ -28,20 +28,23 @@ constructor(private route: ActivatedRoute, private router: Router, private artic
   this.recommendedArticles = this.getRandomArticles(4);
 }
 
-ngOnInit() {
+async ngOnInit() {
   this.route.params.subscribe(params => {
     this.adressId = params['id'];
   });
 
+  await this.getTheJournal();
+}
+
+async getTheJournal() {
   //te al se da tiste articles ku so usi ker itk so fejk tej profili?
-  this.articleContractService.getAuthorsJournals(this.adressId)
+  await this.articleContractService.getAuthorsJournals(this.adressId)
   .then((articles: ArticleDTO[]) => {
     this.actualArticles = articles;
   })
   .catch((error: any) => {
     console.log("o ne napaka: " + error)
   });
-
 }
 
 getRandomArticles(numArticles: number): ArticleDTO[] {

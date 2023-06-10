@@ -123,7 +123,7 @@ export class ArticleDetailsComponent {
       this.relatedArticles = this.getRandomArticles(4);
     }
 
-    ngOnInit() {
+    async ngOnInit() {
       this.route.params.subscribe(params => {
         this.authorId = +params['id'];
       });
@@ -131,7 +131,15 @@ export class ArticleDetailsComponent {
       this.currentArticle = this.relatedArticles2[this.authorId];
       this.currentArticleReviewes = this.reviews[0];
 
-      this.articleContractService.getArticle(this.authorId).then((article) => {
+      //prov??
+      await this.getTheArticle();
+
+      console.log(this.articleObject)
+      this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
+    }
+
+    async getTheArticle() {
+      await this.articleContractService.getArticle(this.authorId).then((article) => {
         this.articleObject = article;
         console.log("Works!")
         console.log(this.articleObject)
@@ -152,9 +160,6 @@ export class ArticleDetailsComponent {
       }).catch((error) => {
         console.error("Error: ", error);
       });
-
-      console.log(this.articleObject)
-      this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
     }
 
     //Poglej če je funkcija ki ti da random article

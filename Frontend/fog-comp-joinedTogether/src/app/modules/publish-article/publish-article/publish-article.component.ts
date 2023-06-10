@@ -150,7 +150,7 @@ export class PublishArticleComponent {
     //let editor = editors[0];
     let editor = "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7";
 
-    this.articleContractService.submitArticle(article, reviewers, editor);
+    await this.articleContractService.submitArticle(article, reviewers, editor);
 
     alert('Article submitted!');
 
