@@ -18,13 +18,13 @@ allArticles!: ArticleDTO[];
 currentArticle: any = this.allArticles[0];
 
 constructor(private router: Router, private articleContractService: ArticleContractService) {
-  
+
 
 }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.loadData();
+    await this.loadData();
 
     this.allRelatedArticles = this.getRandomArticles(Math.floor(this.allArticles.length/5));
 

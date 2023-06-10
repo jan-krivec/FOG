@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0xAc1FA82aD8cbDF908130e3D4cD799cE30B899d85'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0xEF35da42EEebd2D6a3a40De70359e48DB850AAD2'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -192,9 +192,9 @@ export class ArticleContractService {
     const accounts = await this.web3.eth.getAccounts();
     console.log("Ta:")
     console.log(accounts)
-    
+
     const account = accounts[0];
-      
+
       console.log("Ta3:")
       console.log(this.contract.methods);
       this.contract.methods

@@ -17,13 +17,13 @@ export class ArticleListingEditComponent {
 
   constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.route.params.subscribe(params => {
       this.addressId = params['id'];
     });
 
-    this.getEditArticles(this.addressId); //potem uporabimo te valda
+    await this.getEditArticles(this.addressId); //potem uporabimo te valda
 
     console.log(this.articlesToEdit);
   }
@@ -41,7 +41,7 @@ export class ArticleListingEditComponent {
   //s tem mu določimo denied na false; da je sprejet
   acceptArticle(articleId: number) {
     let confirmed = window.confirm("Are you sure you want to accept this article?");
-    
+
     if (confirmed) {
       this.articleContractService.editorReview(articleId, false);
       window.location.reload();
@@ -49,7 +49,7 @@ export class ArticleListingEditComponent {
       return;
     }
   }
-  
+
 
   //obratno
   denyArticle(articleId: number) {
@@ -62,7 +62,7 @@ export class ArticleListingEditComponent {
     else {
       return;
     }
-    
+
   }
 
   //dobimo average score ReveiwData.score propertija

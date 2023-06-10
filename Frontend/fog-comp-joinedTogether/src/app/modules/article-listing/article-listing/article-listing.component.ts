@@ -12,7 +12,7 @@ import { ArticleContractService } from '../../../article.contract.service';
 })
 export class ArticleListingComponent {
 
-  
+
 
 recommendedArticles!: ArticleDTO[];
 popularArticles!: ArticleDTO[];
@@ -32,7 +32,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
 
   async ngOnInit() {
 
-    await this.loadData();  
+    await this.loadData();
 
     setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.allArticles.length;
@@ -43,19 +43,19 @@ constructor(private router: Router, private articleContractService: ArticleContr
       // Calculate the average score for each article
       const averageScoreA = this.calculateAverageScoreAll(a.reviews);
       const averageScoreB = this.calculateAverageScoreAll(b.reviews);
-      
+
       // Sort in descending order
       return averageScoreB - averageScoreA;
     });
 
-    
+
     //this.popularArticles = this.getRandomArticles(4);
     if(this.allArticles.length > 0) {
       this.currentArticle = this.allArticles[0];
       this.recommendedArticles = this.getRandomArticles(4);
     this.popularArticles = this.allArticles.slice(0, 4);
     }
-    
+
   }
 
   async loadData(): Promise<void> {
@@ -81,11 +81,14 @@ constructor(private router: Router, private articleContractService: ArticleContr
     return randomArticles;
   }
 
-  navigateToSelectedArticle(articleId: number) {
+  navigateToSelectedArticle(articleId: number | undefined | null) {
+  if (articleId != null) {
     this.router.navigate(['article-details', articleId]);
+  }
   }
 
   calculateAverageScore(article: ArticleDTO): number {
+  if (article != null) {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
@@ -95,6 +98,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
       }, 0);
       return totalScore / article.reviews.length;
     }
+  }
     return 0; // or any default value if there are no reviews
   }
 
@@ -102,7 +106,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
     if (!reviews || reviews.length === 0) {
       return 0;
     }
-    
+
     const sum = reviews.reduce((total, review) => total + (review.score || 0), 0);
     return sum / reviews.length;
   }

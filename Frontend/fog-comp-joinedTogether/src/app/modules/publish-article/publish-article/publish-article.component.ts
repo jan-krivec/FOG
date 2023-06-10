@@ -45,8 +45,8 @@ export class PublishArticleComponent {
 
   articleReviewsID!: string;
   articleReviewers!: string[];
-  
-  
+
+
   accounts: string[] = [];
   currentUser!: string;
 
@@ -82,26 +82,26 @@ export class PublishArticleComponent {
 
   getRandomWallets(numOfWallets: number, role: string): Promise<string[]>{
 
-    const myPromise = new Promise<string[]>((resolve, reject) => { 
+    const myPromise = new Promise<string[]>((resolve, reject) => {
       this.roleService.getRandomWallet(numOfWallets,role).subscribe((data) => {
 
         this.articleReviewsID = data;
         console.log(this.articleReviewsID);
-  
+
         const regex = /"wallet_id": "([^"]+)"/g;
         const matches = [...data.matchAll(regex)];
         const walletIds = matches.map(match => match[1]);
-  
+
         console.log(walletIds);
-  
+
         resolve (walletIds);
-        
+
       });
-    }); 
+    });
 
     return myPromise;
 
-    
+
   }
 
 
@@ -113,28 +113,28 @@ export class PublishArticleComponent {
 
     const cid = "asdasdasdss" //await this.ipfsService.addFileToIPFS(this.files[0] as File);
 
-    this.articleReviewers= await this.getRandomWallets(3,"30");
+    // this.articleReviewers= await this.getRandomWallets(3,"30");
 
     const article = new ArticleDTO();
 
-    article.articleId = Math.floor(Math.random()*1000000); 
-    article.title = this.title; 
+    article.articleId = Math.floor(Math.random()*1000000);
+    article.title = this.title;
     console.log(this.title);
-    article.description = this.description; 
-    article.keywords = this.keywords.split(',')//.map(keyword => keyword.trim()); 
+    article.description = this.description;
+    article.keywords = this.keywords.split(',')//.map(keyword => keyword.trim());
     article.ipfsLink = cid;
 
     //to get user:
 
-    this.accounts = await this.web3.eth.getAccounts();
+    // this.accounts = await this.web3.eth.getAccounts();
     this.currentUser = this.accounts[0];
     console.log("currentUser")
     console.log(this.currentUser)
 
 
     article.author = this.currentUser; //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
-    article.published = null; 
-    article.denied = null; 
+    article.published = null;
+    article.denied = null;
     //article.editor = this.getRandomWallets(1,"20")[0];
     //article.reviews = [ {reviewer: this.articleReviewers[0], score: null, comment: null},
     //                    {reviewer: this.articleReviewers[1], score: null, comment: null},
@@ -143,12 +143,12 @@ export class PublishArticleComponent {
 
     // Fetch them
     //const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2]];
-    const reviewers = ["0x08FdEC9ca567B85506f60Ea92eaa975516b2E997", "0x08FdEC9ca567B85506f60Ea92eaa975516b2E997", "0x08FdEC9ca567B85506f60Ea92eaa975516b2E997"];
+    const reviewers = ["0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7", "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7", "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7"];
 
     // Fetch him
-    let editors = await this.getRandomWallets(1,"20");
+    // let editors = await this.getRandomWallets(1,"20");
     //let editor = editors[0];
-    let editor = "0x08FdEC9ca567B85506f60Ea92eaa975516b2E997";
+    let editor = "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7";
 
     this.articleContractService.submitArticle(article, reviewers, editor);
 
