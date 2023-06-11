@@ -59,6 +59,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
   }
 
   async loadData(): Promise<void> {
+    console.log("LOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     try {
       this.allArticles = await this.articleContractService.getPublishedJournals();
       console.log("ASdasdasd")

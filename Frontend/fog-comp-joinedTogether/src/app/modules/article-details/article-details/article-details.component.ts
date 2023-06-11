@@ -125,7 +125,7 @@ export class ArticleDetailsComponent {
 
     async ngOnInit() {
       this.route.params.subscribe(params => {
-        this.authorId = +params['id'];
+        this.authorId = params['id'];
       });
 
       this.currentArticle = this.relatedArticles2[this.authorId];

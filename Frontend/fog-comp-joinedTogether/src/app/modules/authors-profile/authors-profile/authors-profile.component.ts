@@ -553,7 +553,7 @@ export class AuthorsProfileComponent implements OnInit{
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.authorId = +params['id'];
+      this.authorId = params['id'];
       this.loadAuthorData();
     });
     console.log(this.articles.length)

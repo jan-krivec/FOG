@@ -31,6 +31,13 @@ export class PublishArticleComponent {
     private roleService: RoleService
   ) {
 
+    if (typeof window.ethereum !== 'undefined') {
+      this.web3 = new Web3(window.ethereum);
+      this.retrieveWalletAddress();
+    } else {
+      console.log('Metamask not detected');
+    }
+
     this.contractAddress = '0xE7864df258a66e36180Fffd0515D04264Ec211Dd'; // Assign a valid contract address here
 
     if (typeof window.ethereum !== 'undefined') {
@@ -45,6 +52,7 @@ export class PublishArticleComponent {
 
   articleReviewsID!: string;
   articleReviewers!: string[];
+  walletAddress!: string;
 
 
   accounts: string[] = [];
@@ -124,15 +132,7 @@ export class PublishArticleComponent {
     article.keywords = this.keywords.split(',')//.map(keyword => keyword.trim());
     article.ipfsLink = cid;
 
-    //to get user:
-
-    // this.accounts = await this.web3.eth.getAccounts();
-    this.currentUser = this.accounts[0];
-    console.log("currentUser")
-    console.log(this.currentUser)
-
-
-    article.author = this.currentUser; //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
+    article.author = this.walletAddress; //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
     article.published = null;
     article.denied = null;
     //article.editor = this.getRandomWallets(1,"20")[0];
@@ -143,17 +143,35 @@ export class PublishArticleComponent {
 
     // Fetch them
     //const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2]];
-    const reviewers = ["0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7", "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7", "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7"];
+    const reviewers = ["0x4C962738B33CA5048603a996e421931a79Ba7eeA", "0xF75C86cD3E9b2f2Ec540c0392ec7EDDBd38a3D48", "0x598EB892c52f6C60a5C1e21DC7003E1a18a1cc36"];
 
     // Fetch him
     // let editors = await this.getRandomWallets(1,"20");
     //let editor = editors[0];
-    let editor = "0xD7AEfcDd35BeAa26FCAE5c31492e3bc57994cFe7";
+    let editor = "0x534b8781825b4410dae4738A76804287e073fb0B";
 
     await this.articleContractService.submitArticle(article, reviewers, editor);
 
     alert('Article submitted!');
 
     //this.router.navigate(['article-listing']);
+  }
+
+  async retrieveWalletAddress() {
+    try {
+      // Request access to the user's accounts
+      await window.ethereum.enable();
+  
+      // Get the array of accounts
+      const accounts = await this.web3.eth.getAccounts();
+  
+      // Get the first account from the array
+      this.walletAddress = accounts[0];
+      //this.articleId = accounts[0]; POTEM TO PODAŠ ZA ID
+  
+      console.log('Wallet Address:', this.walletAddress);
+    } catch (error) {
+      console.log('Error retrieving wallet address:', error);
+    }
   }
 }

@@ -194,9 +194,12 @@ export class AuthorsProfileOwnComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.authorId = +params['id'];
+      this.authorId = params['id'];
       this.loadAuthorData();
     });
+
+    console.log("ASDASDASDASDASDDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDAS")
+    console.log(this.authorId)
 
     this.getRoleOfAuthor(this.authorId.toString());
 

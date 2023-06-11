@@ -30,6 +30,8 @@ export class ArticleListingReviewComponent {
       this.addressId = params['id'];
     });
 
+    console.log(this.addressId)
+
     await this.getReviewingArticles(this.addressId); //!!!!potem uporabimo te
 
     console.log("ASDASDAS")
