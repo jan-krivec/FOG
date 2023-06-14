@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0xEF35da42EEebd2D6a3a40De70359e48DB850AAD2'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0xd27FEFa982294560476362cC9eaca21E62a5a7D4'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -122,7 +122,9 @@ export class ArticleContractService {
 
   // get articles by editor adress
   // !
-  async getJournalsByEditor(address: string) {
+  async getJournalsByEditor() {
+    const accounts = await this.web3.eth.getAccounts();
+    const address = accounts[0];
     const articles: ArticleDTO[] = [];
     try {
       const result = await this.contract.methods
@@ -140,7 +142,9 @@ export class ArticleContractService {
 
   // get articles by reviewer adress
   // !
-  async getJournalsByReviewer(address: string) {
+  async getJournalsByReviewer() {
+    const accounts = await this.web3.eth.getAccounts();
+    const address = accounts[0];
     const articles: ArticleDTO[] = [];
     try {
       const result = await this.contract.methods

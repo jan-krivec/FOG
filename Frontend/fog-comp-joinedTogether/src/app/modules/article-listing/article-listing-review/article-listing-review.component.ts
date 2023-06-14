@@ -30,19 +30,20 @@ export class ArticleListingReviewComponent {
       this.addressId = params['id'];
     });
 
-    console.log(this.addressId)
+    await this.getReviewingArticles123(); //!!!!potem uporabimo te
 
-    await this.getReviewingArticles(this.addressId); //!!!!potem uporabimo te
+    console.log(this.articlesToReview)
 
     console.log("ASDASDAS")
-    console.log(this.articlesToReview);
+    console.log(this.articlesToReview[0]);
+    console.log(this.articlesToReview[0].author)
 
   }
 
   
   //dobimo kere moramo reviewat s tem addressom
-  async getReviewingArticles(id: string) {
-    this.articlesToReview = await this.articleContractService.getJournalsByReviewer(id); //!!!!potem uporabimo te
+  async getReviewingArticles123() {
+    this.articlesToReview = await this.articleContractService.getJournalsByReviewer(); //!!!!potem uporabimo te
   }
 
   //gremo na article-details za tega
@@ -64,7 +65,7 @@ export class ArticleListingReviewComponent {
     return 0; // or any default value if there are no reviews
   }
 
-  openDialog(): void {
+  openDialog(articleId: number): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '255px',
       data: {}
@@ -72,7 +73,7 @@ export class ArticleListingReviewComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.articleContractService.reviewJournal(parseInt(this.addressId), result.score, result.comment);
+        this.articleContractService.reviewJournal(articleId, parseInt(result.score), result.comment);
         console.log('The dialog was closed');
         console.log('Result:', result);
       }

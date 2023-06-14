@@ -23,14 +23,14 @@ export class ArticleListingEditComponent {
       this.addressId = params['id'];
     });
 
-    await this.getEditArticles(this.addressId); //potem uporabimo te valda
+    await this.getEditArticles(); //potem uporabimo te valda
 
     console.log(this.articlesToEdit);
   }
 
   //dobimo tiste ki so za editat za ta address
-  async getEditArticles(id: string) {
-    this.articlesToEdit = await this.articleContractService.getJournalsByEditor(id);
+  async getEditArticles() {
+    this.articlesToEdit = await this.articleContractService.getJournalsByEditor();
   }
 
   navigateToSelectedArticle(articleId: number | null | undefined) {

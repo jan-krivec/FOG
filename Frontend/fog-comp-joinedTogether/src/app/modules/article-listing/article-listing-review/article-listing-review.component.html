@@ -1,4 +1,4 @@
-    <app-header>Header content</app-header>
+  <app-header>Header content</app-header>
     <main>
       <section class="section">
         <div class="section-header">
@@ -7,18 +7,18 @@
         <div *ngIf="articlesToReview?.length === 0 || articlesToReview === undefined">
           <h3>You have no articles to review, good job! (or is it??)</h3>
         </div>
-        <div class="article-box-container">
-            <div class="article-box" *ngFor="let article of articlesToReview">              
-              <div *ngIf="article.denied === null" class="article-details">
-                <h3 class="article-title">{{ article.title }}</h3>
-                <h6 class="article-author">{{ article.author }}</h6>
+        <div class="article-box-container" *ngFor="let article of articlesToReview">
+            <div class="article-box" *ngIf="article.reviews !== undefined || article.reviews !== null" >              
+              <div class="article-details"> <!--*ngIf="article.denied === null"-->
+                <h3 class="article-title">Title: {{ article.title }}</h3>
+                <h6 class="article-author">Author: {{ article.author }}</h6>
                   <div class="ratings">
                     <mat-icon class="star-style">star</mat-icon>
-                    <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                    <p class="article-rating">Score: {{ calculateAverageScore(article) }}</p>
                   </div>
-                <div>{{article.description}}</div>
+                <div>Description: {{article.description}}</div>
                 <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
-                <button class="bottom-button" (click)="openDialog()">Review article</button>
+                <button class="bottom-button" (click)="article.articleId && openDialog(article.articleId)">Review article</button>
               </div>
           </div>
         </div>

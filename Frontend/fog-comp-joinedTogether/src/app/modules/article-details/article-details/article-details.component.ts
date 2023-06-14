@@ -198,6 +198,10 @@ export class ArticleDetailsComponent {
         }
         return sum;
       }, 0);
+
+      console.log("ASSDASDASDASDASSDA")
+      console.log(totalScore);
+      console.log(article.reviews.length)
       return totalScore / article.reviews.length;
     }
     return 0; // or any default value if there are no reviews

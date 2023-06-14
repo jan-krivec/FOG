@@ -198,9 +198,6 @@ export class AuthorsProfileOwnComponent {
       this.loadAuthorData();
     });
 
-    console.log("ASDASDASDASDASDDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDASDAS")
-    console.log(this.authorId)
-
     this.getRoleOfAuthor(this.authorId.toString());
 
     //dejansko nimam avtorjev, ampak za id-je lhko samo menjam na une
@@ -237,11 +234,11 @@ export class AuthorsProfileOwnComponent {
   }
 
   goToReviews() {
-    this.router.navigate(['article-listing', 'review', this.authorId]);
+    this.router.navigate(['article-listing', 'review']);
   }
 
   goToEdits() {
-    this.router.navigate(['article-listing', 'edit', this.authorId]);
+    this.router.navigate(['article-listing', 'edit']);
   }
 
   goToPublish() {
