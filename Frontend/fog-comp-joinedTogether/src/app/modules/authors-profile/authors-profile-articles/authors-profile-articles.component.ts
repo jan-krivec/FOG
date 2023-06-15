@@ -17,7 +17,7 @@ export class AuthorsProfileArticlesComponent {
 
   averageScore: number | null = null;
 
-recommendedArticles: ArticleDTO[];
+recommendedArticles!: ArticleDTO[];
 actualArticles!: ArticleDTO[];
 
 nrOfStars : number = 5;
@@ -25,7 +25,7 @@ nrOfStars : number = 5;
 authorData: { author: Author; articles: Article[]; } | null = null;
 
 constructor(private route: ActivatedRoute, private router: Router, private articleContractService: ArticleContractService) {
-  this.recommendedArticles = this.getRandomArticles(4);
+  
 }
 
 async ngOnInit() {
@@ -34,6 +34,13 @@ async ngOnInit() {
   });
 
   await this.getTheJournal();
+
+  if (this.actualArticles.length >= 4) {
+    this.recommendedArticles = this.getRandomArticles(4);
+  }
+  else {
+    this.recommendedArticles = this.getRandomArticles(this.actualArticles.length);
+  }
 }
 
 async getTheJournal() {
@@ -49,6 +56,8 @@ async getTheJournal() {
 
 getRandomArticles(numArticles: number): ArticleDTO[] {
   const randomArticles: ArticleDTO[] = [];
+
+
   while (randomArticles.length < numArticles) {
     const randomIndex = Math.floor(Math.random() * this.actualArticles.length);
     const randomArticle = this.actualArticles[randomIndex];

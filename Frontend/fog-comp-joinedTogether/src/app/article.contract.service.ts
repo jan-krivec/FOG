@@ -174,7 +174,7 @@ export class ArticleContractService {
   async editorReview(articleId: number, approve: boolean) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
-      .reviewJournal(articleId, approve)
+      .editorReview(articleId, approve)
       .send({ from: accounts[0] });
   }
 
