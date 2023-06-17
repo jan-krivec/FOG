@@ -47,7 +47,7 @@ export class NftContractService {
           type: 'journal',
           origin: data.ipfsLink,
           author: data.author,
-          reviewers: data.reviewers,
+          reviewers: data.reviews?.map(x => x.reviewer),
           editor: data.editor,
         },
       });
