@@ -120,6 +120,7 @@ export class ArticleDetailsComponent {
     currentArticleReviewes: any = this.reviews[0];
 
     constructor(private route: ActivatedRoute, private articleContractService: ArticleContractService, private router: Router) {
+      
       this.relatedArticles = this.getRandomArticles(4);
     }
 

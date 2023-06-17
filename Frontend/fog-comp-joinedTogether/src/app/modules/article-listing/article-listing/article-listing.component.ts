@@ -50,10 +50,22 @@ constructor(private router: Router, private articleContractService: ArticleContr
 
 
     //this.popularArticles = this.getRandomArticles(4);
-    if(this.allArticles.length > 0) {
+    if(this.allArticles.length >= 4) {
       this.currentArticle = this.allArticles[0];
       this.recommendedArticles = this.getRandomArticles(4);
-    this.popularArticles = this.allArticles.slice(0, 4);
+      this.popularArticles = this.allArticles.slice(0, 4);
+    }
+
+    else if(this.allArticles.length == 0) {
+      this.currentArticle = null;
+      this.recommendedArticles = new Array<ArticleDTO>();
+      this.popularArticles = new Array<ArticleDTO>();
+    }
+
+    else {
+      this.currentArticle = this.allArticles[0];
+      this.recommendedArticles = this.getRandomArticles(this.allArticles.length);
+      this.popularArticles = this.allArticles;
     }
 
   }

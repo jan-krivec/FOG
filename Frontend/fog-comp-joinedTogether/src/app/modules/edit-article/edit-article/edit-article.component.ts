@@ -18,7 +18,7 @@ export class EditArticleComponent {
 
   description!: string;
 
-  ipfs!:string;
+  ipfs :string = "krnekafora";
   adressId! : number;
 
   ngOnInit() {
