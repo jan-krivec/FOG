@@ -9,6 +9,7 @@ import { RoleService } from 'src/app/services/role.service';
 import { map } from 'rxjs/operators';
 import { journalContract } from 'src/assets/contracts/journal/Journal';
 import Web3 from 'web3';
+import { Location } from '@angular/common';
 
 declare let window: any;
 
@@ -28,7 +29,8 @@ export class PublishArticleComponent {
     private ipfsService: IpfsService,
     private http: HttpClient,
     private router: Router,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private location: Location
   ) {
 
     if (typeof window.ethereum !== 'undefined') {
@@ -112,7 +114,6 @@ export class PublishArticleComponent {
 
   }
 
-
   async submitArticle() {
     if (!this.files) {
       alert('File not properly uploaded!');
@@ -153,6 +154,9 @@ export class PublishArticleComponent {
     await this.articleContractService.submitArticle(article, reviewers, editor);
 
     alert('Article submitted!');
+
+    window.scrollTo(0, 0);
+    window.location.reload();
 
     //this.router.navigate(['article-listing']);
   }

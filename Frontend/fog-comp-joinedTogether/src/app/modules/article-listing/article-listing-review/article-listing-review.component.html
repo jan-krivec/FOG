@@ -4,12 +4,12 @@
         <div class="section-header">
           <h2 class="section__title">Articles that you need to review</h2>
         </div>
-        <div *ngIf="articlesToReview?.length === 0 || articlesToReview === undefined">
+        <div *ngIf="articlesToReview === undefined || articlesToReview?.length === 0">
           <h3>You have no articles to review, good job! (or is it??)</h3>
         </div>
-        <div class="article-box-container" *ngFor="let article of articlesToReview">
-            <div class="article-box" *ngIf="article.reviews !== undefined || article.reviews !== null" >              
-              <div class="article-details"> <!--*ngIf="article.denied === null"-->
+        <div class="article-box-container">
+            <div class="article-box" *ngFor="let article of articlesToReview">              
+              <div class="article-details" *ngIf="article.reviews !== undefined || article.reviews !== null"> <!--*ngIf="article.denied === null"-->
                 <h3 class="article-title">Title: {{ article.title }}</h3>
                 <h6 class="article-author">Author: {{ article.author }}</h6>
                   <div class="ratings">
