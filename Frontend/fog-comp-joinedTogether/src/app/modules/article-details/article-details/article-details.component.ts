@@ -136,11 +136,11 @@ export class ArticleDetailsComponent {
       await this.getTheArticle();
 
       console.log(this.articleObject)
-      if(this.articleObject.reviews && this.articleObject.reviews.length >= 4){
+      if(this.articleObject.reviews && this.articleObject.reviews.length >= 3){
         this.articleReviews = [this.articleObject.reviews[0], this.articleObject.reviews[1], this.articleObject.reviews[2], this.articleObject.reviews[3]];
       }
       else{
-        this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
+        this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3];
       }
     }
 

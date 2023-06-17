@@ -88,21 +88,6 @@
           <p *ngIf="i === 2">{{articlereview.comment }}</p>
         </div>
         </div>
-        <div class="square">
-          <div *ngFor="let articlereview of articleReviews; let i = index">
-            <div class="prva-vrstica" *ngIf="i === 3">
-              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-              <div class="druga-vrstica">
-                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
-                <div class="ratings">
-                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
-                  <p class="article-rating">{{ articlereview.score }}</p>
-                </div>
-              </div>
-            </div>
-            <p *ngIf="i === 3">{{articlereview.comment}}</p>
-          </div>
-        </div>
       </div>
     </section>
 
