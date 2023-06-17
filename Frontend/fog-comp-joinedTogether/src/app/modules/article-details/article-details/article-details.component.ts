@@ -18,7 +18,7 @@ export class ArticleDetailsComponent {
   reviewer2 : ReviewData = {reviewer: "Reviewer2", score: 4, comment: "Comment2"};
   reviewer3 : ReviewData = {reviewer: "Reviewer3", score: 5, comment: "Comment3"};
   reviewer4 : ReviewData = {reviewer: "Reviewer4", score: 5, comment: "Comment3"};
-  
+
   relatedArticles2 : ArticleDTO[] = [
     {
       articleId: 1,
@@ -91,7 +91,7 @@ export class ArticleDetailsComponent {
       editor: "editor6",
       reviews: [this.reviewer1, this.reviewer3]
     },
-    
+
 
   ]
 
@@ -104,7 +104,7 @@ export class ArticleDetailsComponent {
       }
     ];
 
-    
+
 
     authorId! : number
     articleObject! : ArticleDTO;
@@ -120,7 +120,7 @@ export class ArticleDetailsComponent {
     currentArticleReviewes: any = this.reviews[0];
 
     constructor(private route: ActivatedRoute, private articleContractService: ArticleContractService, private router: Router) {
-      
+
       this.relatedArticles = this.getRandomArticles(4);
     }
 
@@ -136,7 +136,12 @@ export class ArticleDetailsComponent {
       await this.getTheArticle();
 
       console.log(this.articleObject)
-      this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
+      if(this.articleObject.reviews && this.articleObject.reviews.length >= 4){
+        this.articleReviews = [this.articleObject.reviews[0], this.articleObject.reviews[1], this.articleObject.reviews[2], this.articleObject.reviews[3]];
+      }
+      else{
+        this.articleReviews = [this.reviewer1, this.reviewer2, this.reviewer3, this.reviewer4];
+      }
     }
 
     async getTheArticle() {
