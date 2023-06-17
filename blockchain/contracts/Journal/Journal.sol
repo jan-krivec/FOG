@@ -49,6 +49,7 @@ contract JournalContract {
         address editor;
         mapping(address => int8) scores;
         mapping(address => string) comments;
+        bool editorVoted;
     }
 
     struct ReviewDataDisplay {
@@ -90,7 +91,12 @@ contract JournalContract {
 
         ReviewData storage reviewData = _reviewsData[journalId];
         reviewData.reviewers = _reviewers;
+        for (uint256 i = 0; i < _reviewers.length; i++) {
+            reviewData.scores[_reviewers[i]] = -1;
+            reviewData.comments[_reviewers[i]] = "";
+        }
         reviewData.editor = _editor;
+        reviewData.editorVoted = false;
 
         emit JournalSubmitted(journalId, msg.sender, _title);
     }
@@ -102,6 +108,7 @@ contract JournalContract {
         require(journalId < journalsCounter, "Journal does not exist");
 
         Journal storage journal = _journals[journalId];
+        ReviewData storage reviewData = _reviewsData[journalId];
 
         require(
             msg.sender == journal.author,
@@ -115,6 +122,11 @@ contract JournalContract {
 
         journal.denied = false;
         journal.ipfsLink = _ipfsLink;
+        reviewData.editorVoted = false;
+        for (uint256 i = 0; i < reviewData.reviewers.length; i++) {
+            reviewData.scores[reviewData.reviewers[i]] = -1;
+            reviewData.comments[reviewData.reviewers[i]] = "";
+        }
 
         emit JournalRevision(journalId, msg.sender, journal.title);
     }
@@ -133,6 +145,8 @@ contract JournalContract {
             "All reviewers must vote before editor can review journal"
         );
 
+        reviewData.editorVoted = true;
+
         if (approve) {
             journal.published = true;
             journal.denied = false;
@@ -140,14 +154,6 @@ contract JournalContract {
             emit JournalPublished(journalId, msg.sender, journal.title);
         } else {
             journal.denied = true;
-
-            for (uint256 i = 0; i < reviewData.reviewers.length; i++) {
-                delete reviewData.scores[reviewData.reviewers[i]];
-            }
-
-            for (uint256 i = 0; i < reviewData.reviewers.length; i++) {
-                delete reviewData.comments[reviewData.reviewers[i]];
-            }
 
             emit JournalDenied(journalId, msg.sender, journal.title);
         }
@@ -173,10 +179,17 @@ contract JournalContract {
         ReviewData storage reviewData = _reviewsData[journalId];
 
         require(
-            reviewData.scores[msg.sender] == 0,
+            reviewData.scores[msg.sender] == -1,
             "Vote from reviewer already given"
         );
-        require(score == 1 || score == -1, "Score can only be -1 or 1");
+
+
+        require(
+            keccak256(abi.encodePacked(comment)) != keccak256(abi.encodePacked("")),
+            "You have to add a comment"
+        );
+
+        require(score >= 0 && score <= 10, "Score has to be between 0 and 10");
 
         reviewData.scores[msg.sender] = score;
         reviewData.comments[msg.sender] = comment;
@@ -303,7 +316,7 @@ contract JournalContract {
         uint256 count = 0;
 
         for (uint256 i = 0; i < journalsCounter; i++) {
-            if (_reviewsData[i].editor == editor) {
+            if (_reviewsData[i].editor == editor && _reviewsData[i].editorVoted == false) {
                 count++;
             }
         }
@@ -312,7 +325,7 @@ contract JournalContract {
 
         uint256 currentIndex = 0;
         for (uint256 i = 0; i < journalsCounter; i++) {
-            if (_reviewsData[i].editor == editor) {
+            if (_reviewsData[i].editor == editor && _reviewsData[i].editorVoted == false) {
                 editorJournals[currentIndex] = _journals[i];
                 currentIndex++;
             }
@@ -357,7 +370,7 @@ contract JournalContract {
         address[] storage reviewers = reviewData.reviewers;
 
         for (uint256 i = 0; i < reviewers.length; i++) {
-            if (reviewers[i] == reviewer) {
+            if (reviewers[i] == reviewer && reviewData.scores[reviewer] == -1) {
                 return true;
             }
         }
