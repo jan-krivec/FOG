@@ -214,6 +214,11 @@ export const journalContract = {
             "internalType": "address",
             "name": "editor",
             "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "editorVoted",
+            "type": "bool"
           }
         ],
         "stateMutability": "view",
