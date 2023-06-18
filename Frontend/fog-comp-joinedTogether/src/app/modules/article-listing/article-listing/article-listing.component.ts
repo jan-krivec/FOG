@@ -105,7 +105,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);
@@ -120,7 +120,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
       return 0;
     }
 
-    const sum = reviews.reduce((total, review) => total + (review.score || 0), 0);
+    const sum = reviews.reduce((total, review) => Number(total) + (Number(review.score) || 0), 0);
     return sum / reviews.length;
   }
 }

@@ -148,21 +148,7 @@ export class ArticleDetailsComponent {
       await this.articleContractService.getArticle(this.authorId).then((article) => {
         this.articleObject = article;
         console.log("Works!")
-        console.log(this.articleObject)
-        this.articleReviews = this.articleObject.reviews
-        if (this.articleReviews){
-        let sum = 0;
-        let count = 0;
-
-        this.articleReviews.forEach((review) => {
-          if(review.score){
-            sum += review.score;
-            count++;
-          }
-        });
-
-        this.currentArticleScore = sum / count;
-        }
+        
       }).catch((error) => {
         console.error("Error: ", error);
       });
@@ -200,14 +186,11 @@ export class ArticleDetailsComponent {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);
 
-      console.log("ASSDASDASDASDASSDA")
-      console.log(totalScore);
-      console.log(article.reviews.length)
       return totalScore / article.reviews.length;
     }
     return 0; // or any default value if there are no reviews

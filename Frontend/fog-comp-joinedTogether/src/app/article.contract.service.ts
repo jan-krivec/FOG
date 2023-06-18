@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0xd27FEFa982294560476362cC9eaca21E62a5a7D4'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0x2F4d2556b514Aef8bA4e33A128197C5f5C975755'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {

@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthorsProfileOwnComponent {
 
-  authorId!: number;
+  authorId!: string;
   author!: Author;
   authorData!: { author: Author; articles: Article[]; };// | undefined;
   monthNames = ["January", "February", "March", "April", "May", "June",
@@ -27,6 +27,7 @@ export class AuthorsProfileOwnComponent {
   isReadonly = true;
 
   numbers: number[] = [0,0,0,0,0];
+  
 
   authors: Author[] = [
     {
@@ -42,7 +43,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'Adobe Photoshop, Adobe Illustrator, Adobe InDesign',
       profileLink: 'https://www.linkedin.com/in/klara-weaver-1a2b3c4d/',
-      id: 1
+      id: '0xE3BC6d953eCD62Ac8F13E32e8164648080BA6023'
     },
     {
       name: 'John Smith',
@@ -57,7 +58,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Ph.D. in Physics',
       profileLink: 'https://www.linkedin.com/in/john-smith-5e6f7g8h/',
-      id: 2
+      id: '0xA63F8C00d74214DDf920C23Cd3718cEe9A220afe'
     },
     {
       name: 'Emily Johnson',
@@ -72,7 +73,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/emily-johnson-9a8b7c6d/',
-      id: 3
+      id: '0xe9bC028b599824E7dE826dEDc76F91982e2E4e79'
     },
     {
       name: 'Michael Davis',
@@ -87,7 +88,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'badly responsive',
       certificates: 'M.Sc. in Environmental Science',
       profileLink: 'https://www.linkedin.com/in/michael-davis-3b2a1c9d/',
-      id: 4
+      id: '0x7C56e5de7D9E0E20d0b3BC72E3eBDf816849734e'
     },
     {
       name: 'Sophia Wilson',
@@ -102,7 +103,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'B.Sc. in Computer Science',
       profileLink: 'https://www.linkedin.com/in/sophia-wilson-7d6e5f4e/',
-      id: 5
+      id: '0x534b8781825b4410dae4738A76804287e073fb0B'
     },
     {
       name: 'Emma Thompson',
@@ -117,7 +118,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'M.Sc. in Marine Biology',
       profileLink: 'https://www.linkedin.com/in/emma-thompson-5a6b7c8d/',
-      id: 6
+      id: '0x598EB892c52f6C60a5C1e21DC7003E1a18a1cc36'
     },
     {
       name: 'Robert Anderson',
@@ -132,7 +133,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/robert-anderson-1b2c3d4e/',
-      id: 7
+      id: '0xF75C86cD3E9b2f2Ec540c0392ec7EDDBd38a3D48'
     },
     {
       name: 'Isabella Garcia',
@@ -147,7 +148,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'Ph.D. in Social Psychology',
       profileLink: 'https://www.linkedin.com/in/isabella-garcia-2c3d4e5f/',
-      id: 8
+      id: '0x4C962738B33CA5048603a996e421931a79Ba7eeA'
     },
     {
       name: 'Oliver Martinez',
@@ -162,7 +163,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'B.A. in History',
       profileLink: 'https://www.linkedin.com/in/oliver-martinez-3d4e5f6g/',
-      id: 9
+      id: '0x08FdEC9ca567B85506f60Ea92eaa975516b2E997'
     },
     {
       name: 'Sophie Thompson',
@@ -177,7 +178,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/sophie-thompson-5f6g7h8i/',
-      id: 10
+      id: '0x1A5bE9ec529210a3d20cCE344bF39f56E6BeF808'
     }
   ];
 

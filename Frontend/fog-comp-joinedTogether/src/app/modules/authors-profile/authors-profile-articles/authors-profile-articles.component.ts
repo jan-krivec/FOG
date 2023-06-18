@@ -76,7 +76,7 @@ getRandomArticles(numArticles: number): ArticleDTO[] {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);

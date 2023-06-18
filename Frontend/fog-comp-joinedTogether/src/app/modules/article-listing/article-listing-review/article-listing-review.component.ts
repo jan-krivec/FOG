@@ -32,12 +32,6 @@ export class ArticleListingReviewComponent {
 
     await this.getReviewingArticles123(); //!!!!potem uporabimo te
 
-    console.log(this.articlesToReview)
-
-    console.log("ASDASDAS")
-    console.log(this.articlesToReview[0]);
-    console.log(this.articlesToReview[0].author)
-
   }
 
   
@@ -56,7 +50,7 @@ export class ArticleListingReviewComponent {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);
@@ -78,6 +72,8 @@ export class ArticleListingReviewComponent {
         console.log('Result:', result);
       }
     });
+
+    
   }
 
 }

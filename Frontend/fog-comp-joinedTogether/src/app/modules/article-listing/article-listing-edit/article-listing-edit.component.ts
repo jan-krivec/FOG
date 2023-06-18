@@ -46,6 +46,8 @@ export class ArticleListingEditComponent {
 
     if (confirmed && articleId !== undefined && articleId !== null) {
       await this.articleContractService.editorReview(articleId, false);
+      window.scrollTo(0, 0);
+    
       window.location.reload();
     } else {
       return;
@@ -59,6 +61,7 @@ export class ArticleListingEditComponent {
 
     if(confirmed && articleId !== undefined && articleId !== null) {
       await this.articleContractService.editorReview(articleId, true);
+      window.scrollTo(0, 0);
       window.location.reload();
     }
     else {
@@ -72,7 +75,7 @@ export class ArticleListingEditComponent {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);

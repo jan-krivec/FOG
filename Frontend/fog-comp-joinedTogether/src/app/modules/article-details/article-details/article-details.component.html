@@ -2,9 +2,9 @@
   <app-header>Header content</app-header>
   <main>
    <section class="section">
-    <!--  <div>
+      <div>
         <h1 class="middle-title">{{ articleObject.title }}</h1>
-      </div>-->
+      </div>
 
       <div class="prva-vrstica">
         <div class="ratings">
@@ -37,9 +37,6 @@
 
     <section class="section" style="height:auto !important; margin-bottom:100px;">
       <h1 class="middle-title">Reviews</h1>
-      <div class="ratings">
-        <p class="article-rating">{{ currentArticleScore }}</p>
-      </div>
       <div class="prva-vrstica">
         <div class="square">
           <div *ngFor="let articlereview of articleReviews; let i = index">

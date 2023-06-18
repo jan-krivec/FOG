@@ -11,5 +11,5 @@ export interface Author {
     responseTime: string;
     certificates: string;
     profileLink: string;
-    id: number;
+    id: string;
 }
