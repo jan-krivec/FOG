@@ -298,12 +298,12 @@ export class PublishArticleComponent {
 
     // Fetch them
     //const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2]];
-    const reviewers = ["0x65B97D2ba4BD5F4eB6f010a4ECA056E2d20BFE93", "0xD66d94570443DA7252375bc1eb0e322A0a3fccCC", "0x4e45e81d104e3c7d16a6514dBcD5f9e11030888b"];
+    const reviewers = ["0xd9F6579D6C5899380c4D96fFfFA9F348D8A2dA9b", "0x256EC79de4fEC2453A146a1b80f7597A5c4F1170", "0x3C118bA70Bf57f6F6db68A93a9328cD64c57229d"];
 
     // Fetch him
     // let editors = await this.getRandomWallets(1,"20");
     //let editor = editors[0];
-    let editor = "0xC42aB325aDB10b29cb12cbc932f3B0dF07C9C089";
+    let editor = "0xA54CA2d4260cb2cfed92A5f6A5eb6E3D41FD1E98";
 
     await this.articleContractService.submitArticle(article, reviewers, editor);
 
@@ -319,14 +319,14 @@ export class PublishArticleComponent {
     try {
       // Request access to the user's accounts
       await window.ethereum.enable();
-  
+
       // Get the array of accounts
       const accounts = await this.web3.eth.getAccounts();
-  
+
       // Get the first account from the array
       this.walletAddress = accounts[0];
       //this.articleId = accounts[0]; POTEM TO PODAŠ ZA ID
-  
+
       console.log('Wallet Address:', this.walletAddress);
     } catch (error) {
       console.log('Error retrieving wallet address:', error);

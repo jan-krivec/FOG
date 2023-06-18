@@ -94,7 +94,8 @@ export class NftContractService {
       }
       const accounts = await this.web3.eth.getAccounts();
 
-      this.journalNftContract.methods.buyNFT(cid, data.author).send({ from: accounts[0] });
+      const etherValue = this.web3.utils.toWei('1', 'ether');
+      this.journalNftContract.methods.buyNFT(data.ipfsLink, data.author).send({ from: accounts[0], value: etherValue });
 
       return true;
     } catch (err) {

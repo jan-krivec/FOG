@@ -50,8 +50,6 @@ export class ArticleListingEditComponent {
       await this.nftContractService.mintJournalNft(article);
 
       window.scrollTo(0, 0);
-
-      window.location.reload();
     } else {
       return;
     }

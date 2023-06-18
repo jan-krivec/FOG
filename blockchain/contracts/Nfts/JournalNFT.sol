@@ -12,7 +12,9 @@ contract JournalNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     uint public constant mintPrice = 1 ether;
-    constructor() ERC721("JournalNFT", "JournalNFT") {}
+    constructor() payable ERC721("JournalNFT", "JournalNFT") {}
+
+    receive() external payable {}
 
     function mintNFT(string memory tokenURI, address author) public returns (uint256) {
         _tokenIds.increment();
@@ -23,7 +25,7 @@ contract JournalNFT is ERC721URIStorage, Ownable {
         return newItemId;
     }
 
-    function buyNFT(string memory tokenURI, address payable author) public payable returns (uint256) {
+    function buyNFT(string memory tokenURI, address payable author) public payable {
 
         (bool sent, ) = author.call{value: 1 ether}("");
         require(sent, "Failed to send Ether");
@@ -32,7 +34,5 @@ contract JournalNFT is ERC721URIStorage, Ownable {
         uint256 newItemId = _tokenIds.current();
         _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, tokenURI);
-
-        return newItemId;
     }
 }

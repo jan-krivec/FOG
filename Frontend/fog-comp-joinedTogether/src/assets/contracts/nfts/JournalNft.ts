@@ -2,7 +2,7 @@ export const JournalNFT = {
   abi: [
     {
       "inputs": [],
-      "stateMutability": "nonpayable",
+      "stateMutability": "payable",
       "type": "constructor"
     },
     {
@@ -150,13 +150,7 @@ export const JournalNFT = {
         }
       ],
       "name": "buyNFT",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "outputs": [],
       "stateMutability": "payable",
       "type": "function"
     },
@@ -447,6 +441,10 @@ export const JournalNFT = {
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
     }
   ]
 }
