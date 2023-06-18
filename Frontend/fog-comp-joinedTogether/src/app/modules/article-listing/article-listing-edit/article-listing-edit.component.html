@@ -18,7 +18,7 @@
                 </div>
               <div>Description: {{article?.description}}</div>
               <button class="select-article" (click)="article?.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
-              <button class="bottom-button" (click)="article?.articleId && acceptArticle(article.articleId)">Accept article</button>
+              <button class="bottom-button" (click)="article?.articleId && acceptArticle(article)">Accept article</button>
               <button class="bottom-button" (click)="article?.articleId && denyArticle(article.articleId)">Reject article</button>
             </div>
         </div>

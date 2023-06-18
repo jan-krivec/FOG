@@ -4,6 +4,7 @@ import { ArticleContractService } from '../../../article.contract.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ReviewData } from 'src/app/interfaces/article.model';
+import {NftContractService} from "../../../services/nft.contract.service";
 
 @Component({
   selector: 'app-article-listing-edit',
@@ -15,7 +16,7 @@ export class ArticleListingEditComponent {
   articlesToEdit! : ArticleDTO[];
   addressId! : string;
 
-  constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router) { }
+  constructor(private articleContractService : ArticleContractService, private route: ActivatedRoute, private router : Router, private nftContractService: NftContractService) { }
 
   async ngOnInit() {
 
@@ -41,12 +42,14 @@ export class ArticleListingEditComponent {
 
 
   //s tem mu določimo denied na false; da je sprejet
-  async acceptArticle(articleId: number |null | undefined) {
+  async acceptArticle(article: ArticleDTO) {
     let confirmed = window.confirm("Are you sure you want to accept this article?");
 
-    if (confirmed && articleId !== undefined && articleId !== null) {
-      await this.articleContractService.editorReview(articleId, true);
+    if (confirmed && article.articleId !== undefined && article.articleId !== null) {
+      await this.articleContractService.editorReview(article.articleId, true);
       window.scrollTo(0, 0);
+
+      await this.nftContractService.mintJournalNft(article);
 
       window.location.reload();
     } else {
