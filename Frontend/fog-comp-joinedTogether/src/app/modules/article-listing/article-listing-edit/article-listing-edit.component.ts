@@ -47,9 +47,9 @@ export class ArticleListingEditComponent {
 
     if (confirmed && article.articleId !== undefined && article.articleId !== null) {
       await this.articleContractService.editorReview(article.articleId, true);
-      window.scrollTo(0, 0);
-
       await this.nftContractService.mintJournalNft(article);
+
+      window.scrollTo(0, 0);
 
       window.location.reload();
     } else {
