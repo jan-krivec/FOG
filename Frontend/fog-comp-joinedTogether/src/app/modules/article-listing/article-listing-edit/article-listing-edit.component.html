@@ -1,0 +1,30 @@
+<body>
+  <app-header>Header content</app-header>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section__title">Articles that you need to edit</h2>
+      </div>
+      <div *ngIf="articlesToEdit?.length === 0 || articlesToEdit === undefined">
+        <h3>You have no articles to edit, good job! (or is it??)</h3>
+      </div>
+      <div class="article-box-container">
+          <div class="article-box" *ngFor="let article of articlesToEdit">              
+            <div class="article-details" *ngIf="article.denied === false">
+              <h3 class="article-title">{{ article.title }}</h3>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+              <button class="bottom-button" (click)="article.articleId && acceptArticle(article.articleId)">Accept article</button>
+              <button class="bottom-button" (click)="article.articleId && denyArticle(article.articleId)">Reject article</button>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer>Footer content</app-footer>
+</body>

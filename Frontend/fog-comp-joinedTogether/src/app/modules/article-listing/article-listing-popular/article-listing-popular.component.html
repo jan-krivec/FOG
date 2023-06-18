@@ -1,24 +1,30 @@
 <body>
-    <app-header>Header content</app-header>
-    <main>
-      <section class="section">
-        <div class="section-header">
-          <h2 class="section__title">All the popular articles</h2>
-        </div>
-        <div class="article-box-container">
-          <div class="article-box" *ngFor="let article of allPopularArticles">
-            <img [src]="article.imageUrl" alt="Article image" class="article-image">
-            <div class="article-details">
-              <p class="article-category">{{ article.category }}</p>
+  <app-header>Header content</app-header>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section__title">All the popular articles</h2>
+      </div>
+      <div *ngIf="allPopularArticles?.length === 0 || allPopularArticles === undefined">
+        <h3>There are no popular articles</h3>
+      </div>
+      <div class="article-box-container">
+          <div class="article-box" *ngFor="let article of allPopularArticles">              
+            <div *ngIf="article.denied === null" class="article-details">
               <h3 class="article-title">{{ article.title }}</h3>
-              <div class="ratings">
-                <mat-icon class="star-style">star</mat-icon>
-                <p class="article-rating">{{ article.rating }}</p>
-              </div>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
             </div>
-          </div>
         </div>
-      </section>
-    </main>
-    <app-footer>Footer content</app-footer>
-  </body>
+      </div>
+    </section>
+  </main>
+  <app-footer>Footer content</app-footer>
+</body>
+
+

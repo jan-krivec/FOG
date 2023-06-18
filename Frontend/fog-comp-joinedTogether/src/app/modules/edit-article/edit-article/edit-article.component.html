@@ -1,74 +1,12 @@
 <body>
-    <app-header>Header content</app-header>
-    <main>
-      <section class="section" style="height: auto !important;">
-        <h1 class="section__title">Create new edit</h1>
-      </section>
-      <section class="section" style="height: auto !important;">
-        <b>Upload Edited Article</b>
-        <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
-
-      <div class="drop-zone" ngx-dropzone (change)="onSelect($event)">
-          <ngx-dropzone-label>
-            <img src="../../assets/images/wallet.png"  alt="Image" style="height:100px;" />
-            <p>Drag & drop your files here</p>
-            <p>OR</p>
-            <p>Click here to select files</p>
-          </ngx-dropzone-label>
-          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
-      </div>
-
-      </section>
-      <section class="section" style="margin-top: 50px;">
-          <b>Description</b>
-          <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
-          <textarea placeholder="Input decription" class="description"></textarea>
-          <hr class="separator">
-      </section>
-
-      <section class="section" style="height:27vh">
-        <div>
-          <b>Blockchain</b>
-          <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
-
-          <div class="radio-container">
-            <div class="radio-item" [class.selected]="isSelectedFirst">
-              <input type="radio" name="option" value="diamond" id="option1" (click)="toggleSelection('first')">
-              <label for="option1" [class.selected]="isSelectedFirst" (click)="toggleSelection('first')">
-                <img src="../../assets/images/wallet.png"  alt="Image" />
-                <span>Diamond</span>
-              </label>
-            </div>
-
-            <div class="radio-item" [class.selected]="isSelectedSecond">
-              <input type="radio" name="option" value="triangle" id="option2" (click)="toggleSelection('second')">
-              <label for="option2" (click)="toggleSelection('second')">
-                <span class="checkmark"></span>
-                <img src="../../assets/images/wallet.png"  alt="Image" />
-                <span>Triangle</span>
-              </label>
-            </div>
-          </div>
-          <hr class="separator">
-        </div>
-      </section>
-      <section class="section" style="height:auto; margin-bottom:50px;">
-        <button class="middle-button">Create</button>
-      </section>
-    </main>
-    <app-footer>Footer content</app-footer>
-</body>
-<body>
   <app-header>Header content</app-header>
   <main>
     <section class="section" style="height: auto !important;">
-      <h1 class="section__title">Create new edit</h1>
+      <h1 class="section__title" style="margin-top: 50px;">Create new edit</h1>
     </section>
     <section class="section" style="height: auto !important;">
       <b>Upload Edited Article</b>
-      <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
+      <p>Upload your edited article here</p>
 
     <div class="drop-zone" ngx-dropzone (change)="onSelect($event)">
         <ngx-dropzone-label>
@@ -85,39 +23,13 @@
     </section>
     <section class="section" style="margin-top: 50px;">
         <b>Description</b>
-        <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
-        <textarea placeholder="Input decription" class="description"></textarea>
+        <p>Write a short description of the article</p>
+        <textarea [(ngModel)]="description" placeholder="Input decription" class="description"></textarea>
         <hr class="separator">
     </section>
 
-    <section class="section" style="height:27vh">
-      <div>
-        <b>Blockchain</b>
-        <p>Some text Some text Some textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome textSome text</p>
-
-        <div class="radio-container">
-          <div class="radio-item" [class.selected]="isSelectedFirst">
-            <input type="radio" name="option" value="diamond" id="option1" (click)="toggleSelection('first')">
-            <label for="option1" [class.selected]="isSelectedFirst" (click)="toggleSelection('first')">
-              <mat-icon style="margin-right: 8px;">diamond</mat-icon>
-              <span>Diamond</span>
-            </label>
-          </div>
-
-          <div class="radio-item" [class.selected]="isSelectedSecond">
-            <input type="radio" name="option" value="triangle" id="option2" (click)="toggleSelection('second')">
-            <label for="option2" (click)="toggleSelection('second')">
-              <span class="checkmark"></span>
-              <mat-icon style="margin-right: 8px;">change_history</mat-icon>
-              <span>Triangle</span>
-            </label>
-          </div>
-        </div>
-        <hr class="separator">
-      </div>
-    </section>
     <section class="section" style="height:auto; margin-bottom:50px;">
-      <button class="middle-button">Create</button>
+      <button class="middle-button" (click)="this.updateArticle()">Create</button>
     </section>
   </main>
   <app-footer>Footer content</app-footer>

@@ -2,6 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%; /*min-height: 100vh; Set the minimum height of the container to 100% of the viewport height */
+  min-height: 100vh;
 }
 
 main {
@@ -35,9 +36,10 @@ footer {
 
 .article-box-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 1rem;
-  height: calc(20vw - 5px);
+  margin-bottom: 1rem;
 }
 
 .article-box {
@@ -50,6 +52,7 @@ footer {
   background-color: white; /* Set the background color to white */
   min-width: 370px;
   min-height: 380px;
+  margin-bottom: 10px; /* Add some space between the article boxes */
 }
 
 .article-image {
@@ -72,12 +75,29 @@ footer {
   background-color: white;
   margin-top: 10px;
   min-height: 68px; /* set a minimum height for the container */
+  align-items: center;
 }
 
 .article-title {
   font-size: 1.2rem;
   margin-bottom: auto;
   padding-left: 0.5rem;
+}
+
+.article-author {
+  font-size: 1rem;
+  margin-bottom: auto;
+  padding-left: 0.5rem;
+}
+
+.bottom-button {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.select-article{
+  margin-top: 80px;
+  width: 50%;
 }
 
 .article-category {
@@ -116,6 +136,7 @@ footer {
 
 .left-sideCenter {
   margin: 100px;
+  
 }
 
 
@@ -157,6 +178,8 @@ footer {
   font-weight: bold;
   display: inline-block;
   vertical-align: middle;
+  margin-top: 13px;
+  margin-left: 5px;
 }
 
 .section-header {

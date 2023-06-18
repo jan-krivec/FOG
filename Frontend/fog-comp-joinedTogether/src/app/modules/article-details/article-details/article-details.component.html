@@ -1,100 +1,107 @@
 <body>
   <app-header>Header content</app-header>
   <main>
-    <section class="section">
-      <div>
-        <h1 class="middle-title">{{ currentArticle.title }}</h1>
-      </div>
+   <section class="section">
+    <!--  <div>
+        <h1 class="middle-title">{{ articleObject.title }}</h1>
+      </div>-->
+
       <div class="prva-vrstica">
         <div class="ratings">
-          <p class="article-rating">{{ currentArticle.rating }} | {{ currentArticle.author }}</p>
+          <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+          <p class="article-rating">{{ calculateAverageScore(articleObject) }}</p>
         </div>
-        <div class="buttonRight">
-
-          <button class="middle-button" style="margin-left: 30px; float: right;">
-            <span class="align-icon">
-              <mat-icon>download</mat-icon>
-            </span>
-            <span>Download</span>
-          </button>
-          <button class="middle-button" style="float: right; background-color:#f2f3fd!important; color:blue">
-            <span class="align-icon">
-              <mat-icon>share</mat-icon>
-            </span>
-            <span>Share</span>
-          </button>
-        </div>
+        <b style="margin-top:13px; margin-left:20px; cursor:pointer; color: #535BEA;" (click)="articleObject.author && goToProfile(articleObject.author)">{{articleObject.author}}</b>
       </div>
 
-    </section>
-    <section class="sectionMiddle">
-      <div class="left-side">
-        <img [src]="currentArticle.imageUrl" alt="Article image" class="middle-image">
-      </div>
-      <div class="right-side">
-          <div class="slikice">
-            <div style="margin-bottom: 35px;">
-              <img src="../../assets/images/wallet.png"  alt="Image" />
-            </div>
-            <div>
-              <img src="../../assets/images/wallet.png"  alt="Image" />
-            </div>
-        </div>
+      <div class="buttonRight">
+        <button class="middle-button" style="margin-left: 30px; float: right;">
+          <span class="align-icon">
+            <mat-icon>download</mat-icon>
+          </span>
+          <span>Download</span>
+        </button>
+        <button class="middle-button" style="float: right; background-color:#f2f3fd!important; color:blue">
+          <span class="align-icon">
+            <mat-icon>share</mat-icon>
+          </span>
+          <span>Share</span>
+        </button>
       </div>
     </section>
 
     <section class="section">
       <h1 class="middle-title">Article Description</h1>
-      <!--<p>{{ articleDescData }}</p>-->
-    </section>
+      <p>{{ articleObject.description }}</p>
+    </section>-->
 
     <section class="section" style="height:auto !important; margin-bottom:100px;">
       <h1 class="middle-title">Reviews</h1>
       <div class="ratings">
-        <p class="article-rating">{{ currentArticle.rating }}</p>
+        <p class="article-rating">{{ currentArticleScore }}</p>
       </div>
       <div class="prva-vrstica">
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 0">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
+              </div>
             </div>
+            <p *ngIf="i === 0">{{articlereview.comment}}</p>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 1">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
+              </div>
             </div>
+            <p *ngIf="i === 1">{{articlereview.comment}}</p>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
       <div class="prva-vrstica">
         <div class="square">
-          <div class="prva-vrstica">
+          <div  *ngFor="let articlereview of articleReviews; let i = index">
+          <div class="prva-vrstica" *ngIf="i === 2">
             <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
             <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+              <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+              <div class="ratings">
+                <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+                <p class="article-rating">{{ articlereview.score }}</p>
+              </div>
             </div>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
+          <p *ngIf="i === 2">{{articlereview.comment }}</p>
+        </div>
         </div>
         <div class="square">
-          <div class="prva-vrstica">
-            <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
-            <div class="druga-vrstica">
-              <b style="margin-top:10px;">{{currentArticleReviewes.author}}</b>
-              <p>{{currentArticleReviewes.rating}}</p>
+          <div *ngFor="let articlereview of articleReviews; let i = index">
+            <div class="prva-vrstica" *ngIf="i === 3">
+              <img style="width:70px" [src]="currentArticleReviewes.authorImage" alt="Article image" class="middle-image">
+              <div class="druga-vrstica">
+                <b style="margin-top:10px; cursor:pointer; color: #535BEA;" (click)="articlereview.reviewer && goToProfile(articlereview.reviewer)">{{articlereview.reviewer}}</b>
+                <div class="ratings">
+                  <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
+                  <p class="article-rating">{{ articlereview.score }}</p>
+                </div>
+              </div>
             </div>
+            <p *ngIf="i === 3">{{articlereview.comment}}</p>
           </div>
-          <p>{{currentArticleReviewes.review | slice:0:200}}<span *ngIf="currentArticleReviewes.review.length > 200">...</span></p>
         </div>
       </div>
     </section>
@@ -102,18 +109,23 @@
     <section class="section">
       <div class="section-header">
         <h2 class="section__title">Related articles</h2>
-        <a href="#" class="view-all">View all</a>
+        <a routerLink="/article-listing/related" class="view-all">View all</a>
+      </div>
+      <div *ngIf="relatedArticles?.length === 0 || relatedArticles === undefined">
+        <h3>You have no articles to review, good job! (or is it??)</h3>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of relatedArticles">
-          <img [src]="article.imageUrl" alt="Article image" class="article-image">
-          <div class="article-details">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <p class="article-category">{{ article.category }}</p>
-            <div class="ratings">
-              <p class="article-rating">{{ article.rating }}</p>
+          <div class="article-box" *ngFor="let article of relatedArticles">
+            <div *ngIf="article.denied === null" class="article-details">
+              <h3 class="article-title">{{ article.title }}</h3>
+              <h6 class="article-author">{{ article.author }}</h6>
+                <div class="ratings">
+                  <mat-icon class="star-style">star</mat-icon>
+                  <p class="article-rating">{{ calculateAverageScore(article) }}</p>
+                </div>
+              <div>{{article.description}}</div>
+              <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
             </div>
-          </div>
         </div>
       </div>
     </section>

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import { journalContract } from '../assets/contracts/journal/Journal';
 import { ArticleDTO } from './interfaces/article.model';
-import { environment } from 'environment';
+import { environment } from '../../environment.example';
+
 
 declare let window: any;
 
@@ -12,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = '0xAc1FA82aD8cbDF908130e3D4cD799cE30B899d85'; //environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -67,6 +68,7 @@ export class ArticleContractService {
     }
   }
 
+  // get all articles that are in the review process
   async getAllReviewingArticles() {
     const articles: ArticleDTO[] = [];
     try {
@@ -83,6 +85,8 @@ export class ArticleContractService {
     }
   }
 
+  // get all articles that are published
+  // !
   async getPublishedJournals() {
     const articles: ArticleDTO[] = [];
     try {
@@ -97,6 +101,8 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by author adress -> s tem pokaži članke na author-profile!!!!!!
+  // !
   async getAuthorsJournals(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -113,6 +119,8 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by editor adress
+  // !
   async getJournalsByEditor(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -129,6 +137,8 @@ export class ArticleContractService {
     }
   }
 
+  // get articles by reviewer adress
+  // !
   async getJournalsByReviewer(address: string) {
     const articles: ArticleDTO[] = [];
     try {
@@ -145,6 +155,8 @@ export class ArticleContractService {
     }
   }
 
+  // review article with articleId
+  //!
   async reviewJournal(articleId: number, score: number, comment: string) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -152,6 +164,8 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // editor approves or disaproves article
+  // !
   async editorReview(articleId: number, approve: boolean) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -159,6 +173,7 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // author updates the article (new ipfs link)
   async journalRevision(articleId: number, ipfsLink: string) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
@@ -166,6 +181,8 @@ export class ArticleContractService {
       .send({ from: accounts[0] });
   }
 
+  // function for submiting the article by author
+  //!
   async submitArticle(
     article: ArticleDTO,
     reviewers: string[],
@@ -196,6 +213,8 @@ export class ArticleContractService {
     });
   }
 
+  // function for retrieving articcle by articleId -> ko klikneš na article!!!!!!!!!
+  //!
   async getArticle(articleId: number): Promise<ArticleDTO> {
     let article = new ArticleDTO();
     try {

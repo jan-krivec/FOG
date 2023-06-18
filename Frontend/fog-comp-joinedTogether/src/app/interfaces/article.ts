@@ -5,4 +5,5 @@ export interface Article {
     imageUrl: string;
     summary: string;
     date: Date;
+    id: number;
   }

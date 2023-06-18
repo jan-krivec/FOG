@@ -1,0 +1,33 @@
+<body>
+    <app-header>Header content</app-header>
+    <main>
+        <div class ="leftOnes">
+          <section class="section1">
+              <div class="author-info">
+                  <div class="profile-picture">
+                      <mat-icon class="large-icon">account_circle</mat-icon>
+                  </div>
+                  <div class="author-details">
+                      <h2 class="author-name">{{ author.name }}</h2>
+                      <p class="author-role">{{ author.role }}</p>
+                      <p class="location-time"> <mat-icon class="location-time1"> location_on</mat-icon> {{ author.location }}, {{ author.time }}</p>
+                      <div class="author-buttons">
+                          <button *ngIf="author.role === 'Author/Editor' || author.role === 'Author'" class="author-button">Author</button>
+                          <button *ngIf="author.role === 'Author/Editor' || author.role === 'Editor'" class="editor-button">Editor</button>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <section class="section2">         
+            <div class="first-article">
+              <button class="button1" (click)="goToArticles()">My articles</button>
+              <button class="button2" (click)="goToReviews()" [disabled]="author.role === 'Author'">Articles to review</button>
+              <button class="button1" (click)="goToEdits()" [disabled]="author.role === 'Author'">Articles to edit</button>
+              <button class="button2" (click)="goToPublish()">Publish article</button>
+              <div *ngIf="author.role === 'Author'">You can't review or edit any articles as you are not an editor!</div>
+            </div>
+          </section>
+        </div>
+    </main>
+    <app-footer>Footer content</app-footer>
+</body>

@@ -9,7 +9,11 @@ import { ArticleDetailsComponent } from './modules/article-details/article-detai
 import { ArticleListingComponent } from './modules/article-listing/article-listing/article-listing.component';
 import { ArticleListingPopularComponent } from './modules/article-listing/article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './modules/article-listing/article-listing-recommended/article-listing-recommended.component';
+import { ArticleListingRelatedComponent } from './modules/article-listing/article-listing-related/article-listing-related.component';
+import { ArticleListingEditComponent } from './modules/article-listing/article-listing-edit/article-listing-edit.component';
+import { ArticleListingReviewComponent } from './modules/article-listing/article-listing-review/article-listing-review.component';
 import { AuthorsProfileComponent } from './modules/authors-profile/authors-profile/authors-profile.component';
+import { AuthorsProfileOwnComponent } from './modules/authors-profile/authors-profile-own/authors-profile-own.component';
 import { AuthorsProfileArticlesComponent } from './modules/authors-profile/authors-profile-articles/authors-profile-articles.component';
 import { EditArticleComponent } from './modules/edit-article/edit-article/edit-article.component';
 import { PublishArticleComponent } from './modules/publish-article/publish-article/publish-article.component';
@@ -22,8 +26,10 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { FormsModule } from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupComponent } from './popup/popup.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +39,17 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ArticleListingComponent,
     ArticleListingPopularComponent,
     ArticleListingRecommendedComponent,
+    ArticleListingRelatedComponent,
+    ArticleListingEditComponent,
+    ArticleListingReviewComponent,
     ArticleDetailsComponent,
     AuthorsProfileComponent,
     AuthorsProfileArticlesComponent,
+    AuthorsProfileOwnComponent,
     PublishArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    PopupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +62,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     RatingModule.forRoot(),
     MatProgressBarModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    HttpClientModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,

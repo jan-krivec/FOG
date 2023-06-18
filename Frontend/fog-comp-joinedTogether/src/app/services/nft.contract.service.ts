@@ -36,6 +36,7 @@ export class NftContractService {
     }
   }
 
+  // mint NFT to author after Journal is approved
   async mintJournalNft(data: ArticleDTO): Promise<boolean> {
     try {
       const metadata = JSON.stringify({
@@ -68,6 +69,7 @@ export class NftContractService {
     }
   }
 
+  //mint NFT for the role to user
   async mintRoleNft(
     name: string,
     desc: string,

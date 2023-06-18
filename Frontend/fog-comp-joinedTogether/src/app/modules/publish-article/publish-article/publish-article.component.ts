@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { ArticleContractService } from '../../../article.contract.service';
 import { ArticleDTO } from '../../../interfaces/article.model';
+import { ReviewData } from '../../../interfaces/article.model';
 import { IpfsService } from 'src/app/services/ipfs.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { RoleService } from 'src/app/services/role.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-publish-article',
@@ -9,36 +14,20 @@ import { IpfsService } from 'src/app/services/ipfs.service';
   styleUrls: ['./publish-article.component.css'],
 })
 export class PublishArticleComponent {
-  isSelectedFirst = false;
-  isSelectedSecond = false;
-
-  checked = false;
-
-  changed() {
-    console.log(this.checked);
-  }
-
   constructor(
     private articleContractService: ArticleContractService,
-    private ipfsService: IpfsService
+    private ipfsService: IpfsService,
+    private http: HttpClient,
+    private router: Router,
+    private roleService: RoleService
   ) {}
 
-  toggleSelection(item: string) {
-    if (item === 'first') {
-      this.clearSelection();
-      this.isSelectedFirst = !this.isSelectedFirst;
-    } else if (item === 'second') {
-      this.clearSelection();
-      this.isSelectedSecond = !this.isSelectedSecond;
-    }
-  }
+  title!: string;
+  description!: string;
+  keywords!: string;
 
-  clearSelection() {
-    this.isSelectedFirst = false;
-    this.isSelectedSecond = false;
-  }
-
-  collection = ['USA', 'Canada', 'UK'];
+  articleReviewsID!: string;
+  articleReviewers!: string[];
 
   files: File[] = [];
 
@@ -58,6 +47,25 @@ export class PublishArticleComponent {
     console.log(articles);
   }
 
+  getRandomWallets(numOfWallets: number, role: string){
+
+    let walletIds: string[] = [];
+
+    this.roleService.getRandomWallet(numOfWallets,role).subscribe((data) => {
+      this.articleReviewsID = data;
+      console.log(this.articleReviewsID);
+
+      const regex = /"wallet_id": "([^"]+)"/g;
+      const matches = [...data.matchAll(regex)];
+      const walletIds = matches.map(match => match[1]);
+
+      console.log(walletIds);
+    });
+
+    return walletIds;
+  }
+
+
   async submitArticle() {
     if (!this.files) {
       alert('File not properly uploaded!');
@@ -66,18 +74,34 @@ export class PublishArticleComponent {
 
     const cid = await this.ipfsService.addFileToIPFS(this.files[0] as File);
 
+    this.articleReviewers= this.getRandomWallets(4,"30");
+
     const article = new ArticleDTO();
-    article.title = this.files[0].name;
-    article.description = 'Desc';
+
+    article.articleId = Math.floor(Math.random()*1000000); 
+    article.title = this.title; 
+    article.description = this.description; 
+    article.keywords = this.keywords.split(',').map(keyword => keyword.trim()); 
     article.ipfsLink = cid;
-    article.keywords = ['keyword1', 'keyword2', 'keyword3'];
+    article.author = '0x123123123...' //tuki uporabi� verjetno neko getaccount funkcijo iz web3 da dobi� trenutnega userja?
+    article.published = null; 
+    article.denied = null; 
+    //article.editor = this.getRandomWallets(1,"20")[0];
+    //article.reviews = [ {reviewer: this.articleReviewers[0], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[1], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[2], score: null, comment: null},
+    //                    {reviewer: this.articleReviewers[3], score: null, comment: null},];
 
     // Fetch them
-    const reviewers = ['0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE'];
+    const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2], this.articleReviewers[3]];
 
     // Fetch him
-    const editor = '0x79e2BEc427C0Cc9c5C2B4525680E163A15eE7fdE';
+    const editor = this.getRandomWallets(1,"20")[0];
 
     this.articleContractService.submitArticle(article, reviewers, editor);
+
+    alert('Article submitted!');
+
+    this.router.navigate(['article-listing']);
   }
 }

@@ -9,22 +9,27 @@ import { EditArticleComponent } from './modules/edit-article/edit-article/edit-a
 import { PublishArticleComponent } from './modules/publish-article/publish-article/publish-article.component'
 import { ArticleListingPopularComponent } from './modules/article-listing/article-listing-popular/article-listing-popular.component';
 import { ArticleListingRecommendedComponent } from './modules/article-listing/article-listing-recommended/article-listing-recommended.component';
-import { AuthorsProfileRoutingModule } from './modules/authors-profile/authors-profile-routing.module';
-
-
+import { ArticleListingRelatedComponent } from './modules/article-listing/article-listing-related/article-listing-related.component';
+import { AuthorsProfileOwnComponent } from './modules/authors-profile/authors-profile-own/authors-profile-own.component';
+import { ArticleListingEditComponent } from './modules/article-listing/article-listing-edit/article-listing-edit.component';
+import { ArticleListingReviewComponent } from './modules/article-listing/article-listing-review/article-listing-review.component'
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/article-listing', pathMatch: 'full' },
-  //{ path: '', component: ArticleDetailsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login',component: LoginComponent},
   { path: 'article-details/:id', component: ArticleDetailsComponent },
   { path: 'article-listing', component: ArticleListingComponent },
   { path: 'article-listing/recommended', component: ArticleListingRecommendedComponent },
   { path: 'article-listing/popular', component: ArticleListingPopularComponent },
+  { path: 'article-listing/related', component: ArticleListingRelatedComponent},
+  { path: 'article-listing/edit/:id', component: ArticleListingEditComponent },
+  { path: 'article-listing/review/:id', component: ArticleListingReviewComponent},
   { path: 'authors-profile/:id', component: AuthorsProfileComponent },
-  { path: 'edit-article', component: EditArticleComponent },
-  { path: 'publish-article', component: PublishArticleComponent },
   { path: 'authors-profile/articles/:id', component: AuthorsProfileArticlesComponent },
-  
+  { path: 'authors-profile/myprofile/:id', component: AuthorsProfileOwnComponent },
+  { path: 'edit-article/:id', component: EditArticleComponent },
+  { path: 'publish-article', component: PublishArticleComponent }
 ];
 
 @NgModule({

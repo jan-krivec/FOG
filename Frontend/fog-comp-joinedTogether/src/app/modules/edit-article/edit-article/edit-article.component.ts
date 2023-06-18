@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ArticleContractService } from '../../../article.contract.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-article',
@@ -6,9 +8,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-article.component.css']
 })
 export class EditArticleComponent {
+  constructor(
+    private articleContractService: ArticleContractService,
+    private route: ActivatedRoute,
+  ) {}
 
   isSelectedFirst = false;
   isSelectedSecond = false;
+
+  description!: string;
+
+  ipfs!:string;
+  adressId! : number;
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.adressId = params['id'];
+    });
+  }
+
+  async updateArticle(){
+    this.articleContractService.journalRevision(this.adressId, this.ipfs);
+  }
 
   toggleSelection(item: string) {
     if (item === 'first') {
