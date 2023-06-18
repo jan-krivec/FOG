@@ -45,9 +45,9 @@ export class ArticleListingEditComponent {
     let confirmed = window.confirm("Are you sure you want to accept this article?");
 
     if (confirmed && articleId !== undefined && articleId !== null) {
-      await this.articleContractService.editorReview(articleId, false);
+      await this.articleContractService.editorReview(articleId, true);
       window.scrollTo(0, 0);
-    
+
       window.location.reload();
     } else {
       return;
@@ -60,7 +60,7 @@ export class ArticleListingEditComponent {
     let confirmed = window.confirm("Are you sure you want to deny this article?");
 
     if(confirmed && articleId !== undefined && articleId !== null) {
-      await this.articleContractService.editorReview(articleId, true);
+      await this.articleContractService.editorReview(articleId, false);
       window.scrollTo(0, 0);
       window.location.reload();
     }

@@ -60,7 +60,41 @@ export class NftContractService {
       }
       const accounts = await this.web3.eth.getAccounts();
 
-      this.journalNftContract.methods.mintNFT(cid).send({ from: accounts[0] });
+      this.journalNftContract.methods.mintNFT(cid, data.author).send({ from: accounts[0] });
+
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
+
+
+  // mint NFT to author after Journal is approved
+  async buyJournalNft(data: ArticleDTO): Promise<boolean> {
+    try {
+      const metadata = JSON.stringify({
+        description: data.description,
+        image: environment.JOURNAL_NFT_IMAGE,
+        name: data.title,
+        properties: {
+          type: 'journal',
+          origin: data.ipfsLink,
+          author: data.author,
+          reviewers: data.reviews?.map(x => x.reviewer),
+          editor: data.editor,
+        },
+      });
+
+      const cid = await this.ipfsService.addJSONtoIPFS(metadata);
+
+      if (cid == null || cid == undefined || cid == '') {
+        alert('Failed creating NFT!');
+        return false;
+      }
+      const accounts = await this.web3.eth.getAccounts();
+
+      this.journalNftContract.methods.buyNFT(cid, data.author).send({ from: accounts[0] });
 
       return true;
     } catch (err) {
