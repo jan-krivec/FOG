@@ -4,7 +4,7 @@ import { JournalNFT } from '../../assets/contracts/nfts/JournalNft';
 import { RoleNft } from '../../assets/contracts/nfts/RoleNft';
 import { ArticleDTO } from '../interfaces/article.model';
 import { IpfsService } from './ipfs.service';
-import { environment } from 'environment';
+import { environment } from '../../../environment.example';
 
 declare let window: any;
 

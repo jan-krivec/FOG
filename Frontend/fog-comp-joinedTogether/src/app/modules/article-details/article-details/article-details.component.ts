@@ -6,6 +6,7 @@ import { ArticleContractService } from 'src/app/article.contract.service';
 import { ArticleDTO, ReviewData } from 'src/app/interfaces/article.model';
 import { Router } from '@angular/router';
 import { Author } from 'src/app/interfaces/author';
+import { NftContractService } from 'src/app/services/nft.contract.service';
 
 @Component({
   selector: 'app-article-details',
@@ -273,7 +274,7 @@ export class ArticleDetailsComponent {
 
     currentArticleReviewes: any = this.reviews[0];
 
-    constructor(private route: ActivatedRoute, private articleContractService: ArticleContractService, private router: Router) {
+    constructor(private route: ActivatedRoute, private articleContractService: ArticleContractService, private router: Router, private nftContractService: NftContractService) {
 
       this.relatedArticles = this.getRandomArticles(4);
     }
@@ -301,7 +302,6 @@ export class ArticleDetailsComponent {
     async getTheArticle() {
       await this.articleContractService.getArticle(this.authorId).then((article) => {
         this.articleObject = article;
-        console.log("Works!")
         
       }).catch((error) => {
         console.error("Error: ", error);
@@ -358,9 +358,12 @@ export class ArticleDetailsComponent {
     if (!authorId) {
       return '';
     }
-  
     const author = this.authors.find((author) => author.id === authorId);
     return author ? author.name : '';
+  }
+
+  async buyJournal(article: ArticleDTO) {
+    await this.nftContractService.buyJournalNft(article);
   }
   
 }
