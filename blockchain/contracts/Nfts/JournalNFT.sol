@@ -23,9 +23,9 @@ contract JournalNFT is ERC721URIStorage, Ownable {
         return newItemId;
     }
 
-    function buyNFT(string memory tokenURI, address payable author) public returns (uint256) {
+    function buyNFT(string memory tokenURI, address payable author) public payable returns (uint256) {
 
-        bool sent = author.send(mintPrice);
+        (bool sent, ) = author.call{value: 1 ether}("");
         require(sent, "Failed to send Ether");
 
         _tokenIds.increment();

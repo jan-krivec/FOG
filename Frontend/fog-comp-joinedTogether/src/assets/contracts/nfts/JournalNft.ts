@@ -100,19 +100,6 @@ export const JournalNFT = {
       "type": "event"
     },
     {
-      "inputs": [],
-      "name": "ETH",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -170,7 +157,7 @@ export const JournalNFT = {
           "type": "uint256"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "payable",
       "type": "function"
     },
     {
