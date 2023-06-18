@@ -12,10 +12,6 @@ const config: HardhatUserConfig = {
     },
     ganache: {
       url: "http://127.0.0.1:8545",
-    },
-    sepolia: {
-      url: `${process.env.API_URL}`,
-      accounts: [`${process.env.ACCOUNT_PRIVATE_KEY}`]
     }
   },
 };
