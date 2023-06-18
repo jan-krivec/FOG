@@ -210,6 +210,7 @@ export class AuthorsProfileOwnComponent {
     
     this.roleService.getRole1(id)
   .then(role => {
+    console.log("ASDSADASDASD")
     console.log(role); // Use the role value
   })
   .catch(error => {

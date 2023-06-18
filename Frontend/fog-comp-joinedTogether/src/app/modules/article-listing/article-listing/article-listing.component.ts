@@ -31,7 +31,6 @@ constructor(private router: Router, private articleContractService: ArticleContr
 }
 
   async ngOnInit() {
-
     await this.loadData();
 
     setInterval(() => {

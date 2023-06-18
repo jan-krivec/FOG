@@ -298,12 +298,12 @@ export class PublishArticleComponent {
 
     // Fetch them
     //const reviewers = [this.articleReviewers[0], this.articleReviewers[1], this.articleReviewers[2]];
-    const reviewers = ["0x1A5bE9ec529210a3d20cCE344bF39f56E6BeF808", "0x08FdEC9ca567B85506f60Ea92eaa975516b2E997", "0x4C962738B33CA5048603a996e421931a79Ba7eeA"];
+    const reviewers = ["0x65B97D2ba4BD5F4eB6f010a4ECA056E2d20BFE93", "0xD66d94570443DA7252375bc1eb0e322A0a3fccCC", "0x4e45e81d104e3c7d16a6514dBcD5f9e11030888b"];
 
     // Fetch him
     // let editors = await this.getRandomWallets(1,"20");
     //let editor = editors[0];
-    let editor = "0xF75C86cD3E9b2f2Ec540c0392ec7EDDBd38a3D48";
+    let editor = "0xC42aB325aDB10b29cb12cbc932f3B0dF07C9C089";
 
     await this.articleContractService.submitArticle(article, reviewers, editor);
 

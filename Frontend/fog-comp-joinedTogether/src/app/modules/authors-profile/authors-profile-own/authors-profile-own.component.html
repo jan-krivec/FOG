@@ -9,7 +9,7 @@
                   </div>
                   <div class="author-details">
                       <h2 class="author-name">{{ author.name }}</h2>
-                      <p class="author-role">{{ 8 }}</p>
+                      <p class="author-role">{{ author.role }}</p>
                       <p class="location-time"> <mat-icon class="location-time1"> location_on</mat-icon> {{ author.location }}, {{ author.time }}</p>
                       <div class="author-buttons">
                           <button *ngIf="author.role === 'Author/Editor' || author.role === 'Author'" class="author-button">Author</button>
