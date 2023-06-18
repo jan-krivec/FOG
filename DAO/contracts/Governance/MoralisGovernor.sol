@@ -1,10 +1,3 @@
-// The voting delay is the time between the proposal being created and the voting starts
-// Voting Period is the time between the voting starting and the voting ending
-// Proposal Treshold is the minimum amount of votes an account must have to be able to create a proposal
-// Quorum is the minimum amount of votes a proposal must have to be able to be executed in percentage
-// Updatable Settings allows to change the settings of the contract such as delay, period, treshold.
-// Bravo Compatible allows to use the Bravo compatible functions such as getVotes and getReceipts
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
@@ -138,6 +131,10 @@ contract MoralisGovernor is
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
+    }
+
+       function rewardForProposal(address recipient, uint256 amount) external onlyOwner {
+        _mint(recipient, amount);
     }
 
     function getNumberOfProposals() public view returns (uint256) {

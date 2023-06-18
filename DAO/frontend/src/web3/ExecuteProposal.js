@@ -8,6 +8,33 @@ import axios from 'axios';
 
 
 export function useExecuteProposal() {
+
+    async function rewardForProposal() {
+        // provider and signer should be set up correctly to connect to the Ethereum network and sign transactions
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        await window.ethereum.enable();  // Request user's MetaMask
+        let signer = provider.getSigner();
+
+        // The contract ABI and deployed address
+        const contractABI = contractAddresses["5"]["Box"][0]; // Contract ABI
+        const contractAddress = contractAddresses["5"]["MoralisGovernor"][0];
+
+        // Create a new contract instance
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        // Call the rewardForProposal function
+        const recipient = "0xYourRecipientAddress";
+        const amount = ethers.utils.parseUnits("10", 18);  // Change 10 to the number of tokens you want to mint
+
+        const tx = await contract.rewardForProposal(recipient, amount);
+        console.log("Transaction sent:", tx.hash);
+
+        // Wait for the transaction to be confirmed
+        const receipt = await tx.wait();
+        console.log("Transaction confirmed:", receipt.transactionHash);
+    }
+
+
     async function queueProposal(signer,value) {
         try {
             console.log(Number(value));

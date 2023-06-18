@@ -8,6 +8,7 @@ from .models import Proposal
 from .models import Wallet
 from django.views.decorators.csrf import csrf_exempt
 import json
+from web3 import Web3, HTTPProvider
 from django.http import JsonResponse
 import random
 from django.core import serializers
@@ -55,22 +56,6 @@ def get_role(request):
         return JsonResponse({'message': 'Invalid request method'}, status=405)
     
 
-@csrf_exempt 
-def update_wallet(request):
-    data = json.loads(request.body.decode('utf-8'))
-    wallet_id = data.get('wallet_id')
-    role = data.get('role')
-
-    if wallet_id is None or role is None:
-        return JsonResponse({'message': 'wallet_id and role are required fields'}, status=400)
-
-    # Try to get the Wallet object
-    wallet, created = Wallet.objects.update_or_create(wallet_id=wallet_id, defaults={'role': role})
-
-    if created:
-        return JsonResponse({'message': 'Wallet created'}, status=200)
-    else:
-        return JsonResponse({'message': 'Wallet updated'}, status=200)
 
 # Create your views here.
 def get_balance(requests):
@@ -94,3 +79,9 @@ def verify_challenge(requests):
     verify_json = json.dumps(verify_result)
     return HttpResponse(verify_json, content_type="application/json")
 
+
+def get_user_role(requests, user_address):
+    address = requests.GET.get("address")
+    result = get_addr_role(address)
+    result_json = json.dumps(result)
+    return HttpResponse(result_json, content_type="application/json")

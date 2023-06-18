@@ -22,13 +22,28 @@ def get_token_balance(address):
     return result
 
 
+def get_token_balance(address):
+    params = {
+        "address": address,
+        "chain": "0x5",
+        "token_addresses": ["0xCd8a4296C7829cC23E8C04426bAf45311f407d6C"],
+        "user" : user
+    }
+
+    result = evm_api.token.getUserRole(
+        api_key=api_key,
+        params=params,
+    )
+
+    return result
+
 def authenticate_challenge(chain, address):
     body = {
         "domain": "andraz.org",
         "chainId": chain,
         "address": address,
-        "statement": "Please Confirm Login",
-        "uri": "https://my.dapp/",
+        "statement": "",
+        "uri": "",
         "expirationTIme": "2024-02-28T00:00:00.000Z",
         "notBefore": "2021-02-28T00:00:00.000Z",
         "resources": ["https://docs.moralis.io"],
