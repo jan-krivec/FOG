@@ -16,7 +16,7 @@
         <div class="article-box" *ngFor="let article of this.recommendedArticles">
           <div  class="article-details">
             <h3 class="article-title">{{ article?.title }}</h3>
-            <h6 class="article-author">{{ article?.author }}</h6>
+            <h6 class="article-author">{{ getAuthorNameById(article?.author) }}</h6>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
                 <p class="article-rating">{{ calculateAverageScore(article) }}</p>
@@ -32,7 +32,7 @@
       <div class="left-side">
           <div class="left-sideCenter">
               <h1 class="middle-title">{{ currentArticle?.title }}</h1>
-              <h6 class="article-author">{{ currentArticle?.author }}</h6>
+              <h6 class="article-author">{{ getAuthorNameById(currentArticle?.author) }}</h6>
               <p class="middle-description"> {{currentArticle?.description}}</p>
               <button class="middle-button" (click)="currentArticle.articleId && navigateToSelectedArticle(currentArticle.articleId)">Explore more</button>
           </div>
@@ -55,9 +55,9 @@
       </div>
       <div class="article-box-container">
         <div class="article-box" *ngFor="let article of popularArticles">
-          <div *ngIf="article?.denied === null" class="article-details"> <!--zakaj tle dela čeprovv je null??-->
+          <div class="article-details"> <!--zakaj tle dela čeprovv je null??-->
             <h3 class="article-title">{{ article?.title }}</h3>
-            <h6 class="article-author">{{ article?.author }}</h6>
+            <h6 class="article-author">{{ getAuthorNameById(article?.author) }}</h6>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
                 <p class="article-rating">{{ calculateAverageScore(article) }}</p>

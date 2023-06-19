@@ -11,7 +11,7 @@
           <div class="article-box" *ngFor="let article of articlesToEdit">
             <div class="article-details" *ngIf="article?.denied === false">
               <h3 class="article-title">Title: {{ article?.title }}</h3>
-              <h6 class="article-author">Author: {{ article?.author }}</h6>
+              <h6 class="article-author">Author: {{ getAuthorNameById(article?.author) }}</h6>
                 <div class="ratings">
                   <mat-icon class="star-style">star</mat-icon>
                   <p class="article-rating">Score: {{ calculateAverageScore(article) }}</p>

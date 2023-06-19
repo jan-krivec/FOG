@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import { journalContract } from '../assets/contracts/journal/Journal';
 import { ArticleDTO } from './interfaces/article.model';
-import { environment } from '../../environment.example';
+import { environment } from '../../environment';
 
 
 declare let window: any;
@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0xC98b51B316Db52f8d51f19923475e840D296130E'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {

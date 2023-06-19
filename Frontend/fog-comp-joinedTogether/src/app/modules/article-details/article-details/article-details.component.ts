@@ -366,4 +366,13 @@ export class ArticleDetailsComponent {
     await this.nftContractService.buyJournalNft(article);
   }
   
+  downloadArticle(ipfsLink: string | null | undefined): void {
+    if (ipfsLink) {
+      // Perform the download action using the ipfsLink
+      window.open(ipfsLink, '_blank');
+    } else {
+      // Handle the case when ipfsLink is undefined
+      console.log('No IPFS link available for download.');
+    }
+  }
 }

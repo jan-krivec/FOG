@@ -6,6 +6,10 @@
         <h1 class="middle-title">{{ articleObject.title }}</h1>
       </div>
 
+      <div *ngIf="articleObject.published != true">
+        <h5 style="color:red" >Article is not yet published!</h5>
+      </div>
+
       <div class="prva-vrstica">
         <div class="ratings">
           <mat-icon class="star-style" style="margin-bottom: 5px;">star</mat-icon>
@@ -18,7 +22,7 @@
       </div>
 
       <div class="buttonRight">
-        <button class="middle-button" style="margin-left: 30px; float: right;">
+        <button class="middle-button" style="margin-left: 30px; float: right;" (click)="downloadArticle(articleObject.ipfsLink)">
           <span class="align-icon">
             <mat-icon>download</mat-icon>
           </span>
