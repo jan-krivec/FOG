@@ -92,7 +92,7 @@ export class AuthorsProfileOwnComponent {
     },
     {
       name: 'Sophia Wilson',
-      role: 'Author',
+      role: 'Author/Editor',
       location: 'Tokyo',
       time: '4:30 PM',
       overview: 'I am a computer scientist specializing in artificial intelligence and machine learning. My research focuses on developing intelligent algorithms and systems to tackle complex real-world problems.',
@@ -107,7 +107,7 @@ export class AuthorsProfileOwnComponent {
     },
     {
       name: 'Emma Thompson',
-      role: 'Author',
+      role: 'Author/Editor',
       location: 'Sydney',
       time: '8:00 AM',
       overview: 'I am a marine biologist with a focus on coral reef conservation. My research aims to understand the impacts of climate change on coral ecosystems and develop strategies for their protection.',

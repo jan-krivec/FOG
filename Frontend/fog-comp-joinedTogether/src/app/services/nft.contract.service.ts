@@ -17,8 +17,8 @@ export class NftContractService {
   journalNftContract: any;
   roleNftContract: any;
 
-  journalNftAddress: string = environment.JOURNAL_NFT_CONTRACT_ADDRESS;
-  roleNftAddress: string = environment.ROLE_NFT_CONTRACT_ADDRESS;
+  journalNftAddress: string = '0x0551caF4Bd5A2754E2a64F4c1b8dE4a3Fc7B90aF' //environment.JOURNAL_NFT_CONTRACT_ADDRESS;
+  roleNftAddress: string = '0xe22925676b5BE7450239EF0C7A55b60DeaC2c4dA' //environment.ROLE_NFT_CONTRACT_ADDRESS;
 
   constructor(private ipfsService: IpfsService) {
     if (typeof window.ethereum !== 'undefined') {
