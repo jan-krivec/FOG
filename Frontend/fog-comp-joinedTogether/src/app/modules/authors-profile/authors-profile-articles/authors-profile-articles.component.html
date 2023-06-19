@@ -1,4 +1,4 @@
-<body>
+
     <app-header>Header content</app-header>
     <main>
       <section class="section">
@@ -10,7 +10,7 @@
         </div>
         <div class="article-box-container">
           <div class="article-box" *ngFor="let article of actualArticles">              
-            <div *ngIf="article.denied === null" class="article-details">
+            <div class="article-details"> <!--*ngIf="article.denied === null"-->
               <h3 class="article-title">{{ article.title }}</h3>
               <h6 class="article-author">{{ article.author }}</h6>
                 <div class="ratings">
@@ -26,4 +26,3 @@
       </section>
     </main>
     <app-footer>Footer content</app-footer>
-  </body>

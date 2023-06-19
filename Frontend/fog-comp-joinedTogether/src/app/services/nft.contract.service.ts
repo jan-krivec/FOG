@@ -4,7 +4,7 @@ import { JournalNFT } from '../../assets/contracts/nfts/JournalNft';
 import { RoleNft } from '../../assets/contracts/nfts/RoleNft';
 import { ArticleDTO } from '../interfaces/article.model';
 import { IpfsService } from './ipfs.service';
-import { environment } from 'environment';
+import { environment } from '../../../environment';
 
 declare let window: any;
 
@@ -47,7 +47,7 @@ export class NftContractService {
           type: 'journal',
           origin: data.ipfsLink,
           author: data.author,
-          reviewers: data.reviewers,
+          reviewers: data.reviews?.map(x => x.reviewer),
           editor: data.editor,
         },
       });
@@ -60,7 +60,42 @@ export class NftContractService {
       }
       const accounts = await this.web3.eth.getAccounts();
 
-      this.journalNftContract.methods.mintNFT(cid).send({ from: accounts[0] });
+      this.journalNftContract.methods.mintNFT(cid, data.author).send({ from: accounts[0] });
+
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
+
+
+  // mint NFT to author after Journal is approved
+  async buyJournalNft(data: ArticleDTO): Promise<boolean> {
+    try {
+      const metadata = JSON.stringify({
+        description: data.description,
+        image: environment.JOURNAL_NFT_IMAGE,
+        name: data.title,
+        properties: {
+          type: 'journal',
+          origin: data.ipfsLink,
+          author: data.author,
+          reviewers: data.reviews?.map(x => x.reviewer),
+          editor: data.editor,
+        },
+      });
+
+      const cid = await this.ipfsService.addJSONtoIPFS(metadata);
+
+      if (cid == null || cid == undefined || cid == '') {
+        alert('Failed creating NFT!');
+        return false;
+      }
+      const accounts = await this.web3.eth.getAccounts();
+
+      const etherValue = this.web3.utils.toWei('1', 'ether');
+      this.journalNftContract.methods.buyNFT(data.ipfsLink, data.author).send({ from: accounts[0], value: etherValue });
 
       return true;
     } catch (err) {

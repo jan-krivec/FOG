@@ -1,29 +1,27 @@
-<body>
+
   <app-header>Header content</app-header>
   <main>
     <section class="section">
       <div class="section-header">
         <h2 class="section__title">All recommended articles</h2>
       </div>
-      <div *ngIf="allRecommendedArticles.length === 0 || allRecommendedArticles === undefined">
+      <div *ngIf="allRecommendedArticles === undefined || allRecommendedArticles.length === 0">
         <h3>There are no articles</h3>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of allRecommendedArticles">              
-          <div *ngIf="article.denied === null" class="article-details">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <h6 class="article-author">{{ article.author }}</h6>
+        <div class="article-box" *ngFor="let article of allRecommendedArticles">
+          <div *ngIf="article?.denied === null" class="article-details">
+            <h3 class="article-title">{{ article?.title }}</h3>
+            <h6 class="article-author">{{ article?.author }}</h6>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
                 <p class="article-rating">{{ calculateAverageScore(article) }}</p>
               </div>
-            <div>{{article.description}}</div>
-            <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+            <div>{{article?.description}}</div>
+            <button class="select-article" (click)="article?.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
           </div>
       </div>
     </div>
     </section>
   </main>
   <app-footer>Footer content</app-footer>
-</body>
-

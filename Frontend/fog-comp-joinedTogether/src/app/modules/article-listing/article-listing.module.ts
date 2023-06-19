@@ -11,12 +11,6 @@ import { ArticleListingReviewComponent } from './article-listing-review/article-
 
 @NgModule({
   declarations: [
-    ArticleListingComponent,
-    ArticleListingRecommendedComponent,
-    ArticleListingPopularComponent,
-    ArticleListingRelatedComponent,
-    ArticleListingEditComponent,
-    ArticleListingReviewComponent
   ],
   imports: [
     CommonModule,

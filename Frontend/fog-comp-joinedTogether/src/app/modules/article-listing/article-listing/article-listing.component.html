@@ -1,4 +1,4 @@
-<body>
+
   <app-header>Header content</app-header>
   <main>
     <section class="section">
@@ -9,20 +9,20 @@
           <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
       </div>
-      <div *ngIf="allArticles.length === 0 || allArticles === undefined">
+      <div *ngIf="this.allArticles === undefined || allArticles.length === 0">
         <h3>There are no articles</h3>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of recommendedArticles">              
-          <div *ngIf="article.denied === null" class="article-details">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <h6 class="article-author">{{ article.author }}</h6>
+        <div class="article-box" *ngFor="let article of this.recommendedArticles">
+          <div  class="article-details">
+            <h3 class="article-title">{{ article?.title }}</h3>
+            <h6 class="article-author">{{ getAuthorNameById(article?.author) }}</h6>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
                 <p class="article-rating">{{ calculateAverageScore(article) }}</p>
               </div>
-            <div>{{article.description}}</div>
-            <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+            <div>{{article?.description}}</div>
+            <button class="select-article" (click)="article?.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
           </div>
       </div>
     </div>
@@ -31,15 +31,15 @@
     <section class="sectionMiddle">
       <div class="left-side">
           <div class="left-sideCenter">
-              <h1 class="middle-title">{{ currentArticle.title }}</h1>
-              <h6 class="article-author">{{ currentArticle.author }}</h6>
-              <p class="middle-description"> {{currentArticle.description}}</p>
+              <h1 class="middle-title">{{ currentArticle?.title }}</h1>
+              <h6 class="article-author">{{ getAuthorNameById(currentArticle?.author) }}</h6>
+              <p class="middle-description"> {{currentArticle?.description}}</p>
               <button class="middle-button" (click)="currentArticle.articleId && navigateToSelectedArticle(currentArticle.articleId)">Explore more</button>
           </div>
       </div>
       <div class="right-side">
 
-      </div>    
+      </div>
     </section>
 
     <section class="section">
@@ -50,24 +50,23 @@
           <mat-icon class="view-arrow">keyboard_arrow_right</mat-icon>
         </div>
       </div>
-      <div *ngIf="allArticles.length === 0 || allArticles === undefined">
+      <div *ngIf="allArticles === undefined || allArticles.length === 0">
         <h3>There are no articles</h3>
       </div>
       <div class="article-box-container">
-        <div class="article-box" *ngFor="let article of popularArticles">              
-          <div *ngIf="article.denied === null" class="article-details"> <!--zakaj tle dela čeprovv je null??-->
-            <h3 class="article-title">{{ article.title }}</h3>
-            <h6 class="article-author">{{ article.author }}</h6>
+        <div class="article-box" *ngFor="let article of popularArticles">
+          <div class="article-details"> <!--zakaj tle dela čeprovv je null??-->
+            <h3 class="article-title">{{ article?.title }}</h3>
+            <h6 class="article-author">{{ getAuthorNameById(article?.author) }}</h6>
               <div class="ratings">
                 <mat-icon class="star-style">star</mat-icon>
                 <p class="article-rating">{{ calculateAverageScore(article) }}</p>
               </div>
-            <div>{{article.description}}</div>
-            <button class="select-article" (click)="article.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
+            <div>{{article?.description}}</div>
+            <button class="select-article" (click)="article?.articleId && navigateToSelectedArticle(article.articleId)">View article</button>
           </div>
       </div>
     </div>
     </section>
   </main>
   <app-footer>Footer content</app-footer>
-</body>

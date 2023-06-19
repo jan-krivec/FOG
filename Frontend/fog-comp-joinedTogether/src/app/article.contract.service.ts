@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import { journalContract } from '../assets/contracts/journal/Journal';
 import { ArticleDTO } from './interfaces/article.model';
-import { environment } from '../../environment.example';
+import { environment } from '../../environment';
 
 
 declare let window: any;
@@ -13,7 +13,7 @@ declare let window: any;
 export class ArticleContractService {
   web3: any;
   contract: any;
-  contractAddress: string = '0xAc1FA82aD8cbDF908130e3D4cD799cE30B899d85'; //environment.JOURNAL_CONTRACT_ADDRESS;
+  contractAddress: string = environment.JOURNAL_CONTRACT_ADDRESS;
 
   constructor() {
     if (typeof window.ethereum !== 'undefined') {
@@ -66,6 +66,7 @@ export class ArticleContractService {
     } else {
       console.log('Metamask not detected. Please install Metamask extension.');
     }
+
   }
 
   // get all articles that are in the review process
@@ -121,7 +122,9 @@ export class ArticleContractService {
 
   // get articles by editor adress
   // !
-  async getJournalsByEditor(address: string) {
+  async getJournalsByEditor() {
+    const accounts = await this.web3.eth.getAccounts();
+    const address = accounts[0];
     const articles: ArticleDTO[] = [];
     try {
       const result = await this.contract.methods
@@ -139,7 +142,9 @@ export class ArticleContractService {
 
   // get articles by reviewer adress
   // !
-  async getJournalsByReviewer(address: string) {
+  async getJournalsByReviewer() {
+    const accounts = await this.web3.eth.getAccounts();
+    const address = accounts[0];
     const articles: ArticleDTO[] = [];
     try {
       const result = await this.contract.methods
@@ -169,7 +174,7 @@ export class ArticleContractService {
   async editorReview(articleId: number, approve: boolean) {
     const accounts = await this.web3.eth.getAccounts();
     await this.contract.methods
-      .reviewJournal(articleId, approve)
+      .editorReview(articleId, approve)
       .send({ from: accounts[0] });
   }
 
@@ -188,16 +193,21 @@ export class ArticleContractService {
     reviewers: string[],
     editor: string
   ) {
-    this.web3.eth.getAccounts().then((accounts: any) => {
-      const account = accounts[0];
-      console.log(account);
+    const accounts = await this.web3.eth.getAccounts();
+    console.log("Ta:")
+    console.log(accounts)
+
+    const account = accounts[0];
+
+      console.log("Ta3:")
+      console.log(this.contract.methods);
       this.contract.methods
         .submitJournal(
           article.title,
           article.description,
           article.ipfsLink,
           article.keywords,
-          reviewers,
+          [...reviewers],
           editor
         )
         .send({ from: account })
@@ -210,7 +220,6 @@ export class ArticleContractService {
         .on('error', (error: any) => {
           console.error('Error:', error);
         });
-    });
   }
 
   // function for retrieving articcle by articleId -> ko klikneš na article!!!!!!!!!

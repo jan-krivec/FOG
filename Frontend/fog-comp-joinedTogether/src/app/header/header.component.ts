@@ -71,7 +71,11 @@ export class HeaderComponent {
  
   goToAuthorsProfile() {
     //TUKI NARDIMO PREVERJANJE ČE JE USER S TEM ADDRESSOM V BAZI
-    this.router.navigate(['authors-profile/myprofile', this.articleId]);;
+    this.router.navigate(['authors-profile/myprofile', this.walletAddress]);
+  }
+
+  goToListing() {
+    this.router.navigate(['article-listing']);
   }
 
 }

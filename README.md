@@ -10,6 +10,9 @@ This is the repository for the Decentralized Atonomous Publishing Organization. 
 
 - Smart contracts: Solidity
 - UI: Angular/JavaScript
-- API: NodeJs
 - Storage: IPFS
 
+## Setting up environment
+- Run **npm install** and **npm start** to start the application
+- If you want run blockchain locally, follow the instructions in README inside blockchain folder
+- Appropriately set environment variables as displayed [here](https://github.com/jan-krivec/FOG/blob/testing/Frontend/fog-comp-joinedTogether/environment.example.ts)

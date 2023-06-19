@@ -24,8 +24,8 @@ constructor(private router: Router, private articleContractService: ArticleContr
   //recommended bi pomoje dalo glede na keywords popular pa z najvišjim ratingom??
 }
 
-  ngOnInit() {
-    this.loadData(); 
+  async ngOnInit() {
+    await this.loadData(); 
 
     this.allArticles.sort((a, b) => {
       // Calculate the average score for each article
@@ -61,15 +61,17 @@ constructor(private router: Router, private articleContractService: ArticleContr
     return randomArticles;
   }
 
-  navigateToSelectedArticle(articleId: number) {
-    this.router.navigate(['article-details', articleId]);
+  navigateToSelectedArticle(articleId: number | null | undefined) {
+    if (articleId == null && articleId == undefined) {
+      this.router.navigate(['article-details', articleId]);
+    }  
   }
 
   calculateAverageScore(article: ArticleDTO): number {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);
@@ -83,7 +85,7 @@ constructor(private router: Router, private articleContractService: ArticleContr
       return 0;
     }
     
-    const sum = reviews.reduce((total, review) => total + (review.score || 0), 0);
+    const sum = reviews.reduce((total, review) => Number(total) + (Number(review.score) || 0), 0);
     return sum / reviews.length;
   }
 }

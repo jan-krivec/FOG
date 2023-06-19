@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthorsProfileOwnComponent {
 
-  authorId!: number;
+  authorId!: string;
   author!: Author;
   authorData!: { author: Author; articles: Article[]; };// | undefined;
   monthNames = ["January", "February", "March", "April", "May", "June",
@@ -27,11 +27,12 @@ export class AuthorsProfileOwnComponent {
   isReadonly = true;
 
   numbers: number[] = [0,0,0,0,0];
+  
 
   authors: Author[] = [
     {
       name: 'Klara Weaver',
-      role: 'Author/Editor',
+      role: 'Author',
       location: 'New York',
       time: '9:30 AM',
       overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus.',
@@ -42,11 +43,11 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'Adobe Photoshop, Adobe Illustrator, Adobe InDesign',
       profileLink: 'https://www.linkedin.com/in/klara-weaver-1a2b3c4d/',
-      id: 1
+      id: '0xafed43358989Ddc1A44076f0Ecbd433F1E13c9fA'
     },
     {
       name: 'John Smith',
-      role: 'Author',
+      role: 'Editor',
       location: 'London',
       time: '2:00 PM',
       overview: 'I am a physicist specializing in quantum mechanics and theoretical physics. My research focuses on understanding the fundamental principles of the universe and exploring the possibilities of quantum computing.',
@@ -57,7 +58,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Ph.D. in Physics',
       profileLink: 'https://www.linkedin.com/in/john-smith-5e6f7g8h/',
-      id: 2
+      id: '0xC42aB325aDB10b29cb12cbc932f3B0dF07C9C089'
     },
     {
       name: 'Emily Johnson',
@@ -72,7 +73,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/emily-johnson-9a8b7c6d/',
-      id: 3
+      id: '0x4e45e81d104e3c7d16a6514dBcD5f9e11030888b'
     },
     {
       name: 'Michael Davis',
@@ -87,11 +88,11 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'badly responsive',
       certificates: 'M.Sc. in Environmental Science',
       profileLink: 'https://www.linkedin.com/in/michael-davis-3b2a1c9d/',
-      id: 4
+      id: '0xD66d94570443DA7252375bc1eb0e322A0a3fccCC'
     },
     {
       name: 'Sophia Wilson',
-      role: 'Author',
+      role: 'Author/Editor',
       location: 'Tokyo',
       time: '4:30 PM',
       overview: 'I am a computer scientist specializing in artificial intelligence and machine learning. My research focuses on developing intelligent algorithms and systems to tackle complex real-world problems.',
@@ -102,11 +103,11 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'B.Sc. in Computer Science',
       profileLink: 'https://www.linkedin.com/in/sophia-wilson-7d6e5f4e/',
-      id: 5
+      id: '0x65B97D2ba4BD5F4eB6f010a4ECA056E2d20BFE93'
     },
     {
       name: 'Emma Thompson',
-      role: 'Author',
+      role: 'Author/Editor',
       location: 'Sydney',
       time: '8:00 AM',
       overview: 'I am a marine biologist with a focus on coral reef conservation. My research aims to understand the impacts of climate change on coral ecosystems and develop strategies for their protection.',
@@ -117,7 +118,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'M.Sc. in Marine Biology',
       profileLink: 'https://www.linkedin.com/in/emma-thompson-5a6b7c8d/',
-      id: 6
+      id: '1'
     },
     {
       name: 'Robert Anderson',
@@ -132,7 +133,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/robert-anderson-1b2c3d4e/',
-      id: 7
+      id: '2'
     },
     {
       name: 'Isabella Garcia',
@@ -147,7 +148,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'very responsive',
       certificates: 'Ph.D. in Social Psychology',
       profileLink: 'https://www.linkedin.com/in/isabella-garcia-2c3d4e5f/',
-      id: 8
+      id: '3'
     },
     {
       name: 'Oliver Martinez',
@@ -162,7 +163,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'B.A. in History',
       profileLink: 'https://www.linkedin.com/in/oliver-martinez-3d4e5f6g/',
-      id: 9
+      id: '4'
     },
     {
       name: 'Sophie Thompson',
@@ -177,7 +178,7 @@ export class AuthorsProfileOwnComponent {
       responseTime: 'responsive',
       certificates: 'Editing Certificate',
       profileLink: 'https://www.linkedin.com/in/sophie-thompson-5f6g7h8i/',
-      id: 10
+      id: '5'
     }
   ];
 
@@ -194,7 +195,7 @@ export class AuthorsProfileOwnComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.authorId = +params['id'];
+      this.authorId = params['id'];
       this.loadAuthorData();
     });
 
@@ -209,6 +210,7 @@ export class AuthorsProfileOwnComponent {
     
     this.roleService.getRole1(id)
   .then(role => {
+    console.log("ASDSADASDASD")
     console.log(role); // Use the role value
   })
   .catch(error => {
@@ -234,11 +236,11 @@ export class AuthorsProfileOwnComponent {
   }
 
   goToReviews() {
-    this.router.navigate(['article-listing', 'review', this.authorId]);
+    this.router.navigate(['article-listing', 'review']);
   }
 
   goToEdits() {
-    this.router.navigate(['article-listing', 'edit', this.authorId]);
+    this.router.navigate(['article-listing', 'edit']);
   }
 
   goToPublish() {

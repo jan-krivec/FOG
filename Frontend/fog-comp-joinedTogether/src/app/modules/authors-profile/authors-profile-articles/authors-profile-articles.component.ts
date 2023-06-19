@@ -17,7 +17,7 @@ export class AuthorsProfileArticlesComponent {
 
   averageScore: number | null = null;
 
-recommendedArticles: ArticleDTO[];
+recommendedArticles!: ArticleDTO[];
 actualArticles!: ArticleDTO[];
 
 nrOfStars : number = 5;
@@ -25,27 +25,39 @@ nrOfStars : number = 5;
 authorData: { author: Author; articles: Article[]; } | null = null;
 
 constructor(private route: ActivatedRoute, private router: Router, private articleContractService: ArticleContractService) {
-  this.recommendedArticles = this.getRandomArticles(4);
+  
 }
 
-ngOnInit() {
+async ngOnInit() {
   this.route.params.subscribe(params => {
     this.adressId = params['id'];
   });
 
+  await this.getTheJournal();
+
+  if (this.actualArticles.length >= 4) {
+    this.recommendedArticles = this.getRandomArticles(4);
+  }
+  else {
+    this.recommendedArticles = this.getRandomArticles(this.actualArticles.length);
+  }
+}
+
+async getTheJournal() {
   //te al se da tiste articles ku so usi ker itk so fejk tej profili?
-  this.articleContractService.getAuthorsJournals(this.adressId)
+  await this.articleContractService.getAuthorsJournals(this.adressId)
   .then((articles: ArticleDTO[]) => {
     this.actualArticles = articles;
   })
   .catch((error: any) => {
     console.log("o ne napaka: " + error)
   });
-
 }
 
 getRandomArticles(numArticles: number): ArticleDTO[] {
   const randomArticles: ArticleDTO[] = [];
+
+
   while (randomArticles.length < numArticles) {
     const randomIndex = Math.floor(Math.random() * this.actualArticles.length);
     const randomArticle = this.actualArticles[randomIndex];
@@ -64,7 +76,7 @@ getRandomArticles(numArticles: number): ArticleDTO[] {
     if (article.reviews && article.reviews.length > 0) {
       const totalScore = article.reviews.reduce((sum, review) => {
         if (review.score != null) {
-          return sum + review.score;
+          return Number(sum) + Number(review.score);
         }
         return sum;
       }, 0);
