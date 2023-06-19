@@ -22,12 +22,11 @@ def get_token_balance(address):
     return result
 
 
-def get_token_balance(address):
+def get_user_role(address):
     params = {
         "address": address,
         "chain": "0x5",
         "token_addresses": ["0xCd8a4296C7829cC23E8C04426bAf45311f407d6C"],
-        "user" : user
     }
 
     result = evm_api.token.getUserRole(

@@ -1,3 +1,7 @@
+pragma solidity ^0.8.9;
+
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+
 contract UserRoles is Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
 
